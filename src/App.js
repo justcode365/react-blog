@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import logo from './logo.svg'
-import './App.css'
 import Article from './components/Article'
+import './App.css'
 
 class App extends Component {
   state = { text: '', tags: [], articles: [], articlesCount: 0 }
@@ -19,7 +18,7 @@ class App extends Component {
   }
 
   handleClick = async () => {
-    const { moduleA } = await import('./components/Button')
+    const { moduleA } = await import('./components/ModuleA')
     this.setState({ text: moduleA })
   }
   render() {
@@ -27,7 +26,7 @@ class App extends Component {
     const { tags, articles, articlesCount } = this.state
     return (
       <Fragment>
-        <header className="App-header">
+        <header className="App-header container">
           <h2>React Blog</h2>
           <nav>
             <ul>
@@ -42,22 +41,22 @@ class App extends Component {
           <h3>A place to share your knowledge.</h3>
         </section>
 
-        <div className="App-blog">
+        <div className="App-blog container">
           <main>
             <h3>Global Feed</h3>
             {articles.map((post, i) => <Article key={i} post={post} />)}
             <p>
-              <a href="">{'<'}</a>
+              <a href=""> {'<'} </a>
               1
-              <a href="">{'>'}</a>
-              共 {articlesCount}
+              <a href=""> {'>'} </a>
+               共 {articlesCount}
             </p>
           </main>
           <aside>
             <p>Popular Tags</p>
             {tags.map(tag => <a key={tag}>{tag}</a>)}
             <hr />
-            <button onClick={this.handleClick}>Load</button>
+            <button onClick={this.handleClick}>dynamic import</button>
             Text : {this.state.text}
           </aside>
         </div>

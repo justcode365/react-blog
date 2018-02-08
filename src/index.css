@@ -8,3 +8,16 @@ body {
 ul {
   list-style: none;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: underline;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+}
