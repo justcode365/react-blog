@@ -1,0 +1,14 @@
+.article {
+  border-top: 1px solid #ddd;
+}
+
+.article .date {
+  color: #bbb;
+  font-size : 10px;
+}
+
+.article img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
