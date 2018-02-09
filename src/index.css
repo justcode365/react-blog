@@ -17,6 +17,11 @@ a:focus {
   text-decoration: underline;
 }
 
+/* 
+容器
+1. 居中
+2. max-width 的 内边距 
+*/
 .container {
   margin: 0 auto;
   padding: 0 15px;

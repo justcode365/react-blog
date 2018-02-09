@@ -1,11 +1,14 @@
 import React, { Fragment } from 'react'
-import { HashRouter, Route, Link } from 'react-router-dom'
+import { HashRouter, BrowserRouter, Route, Link } from 'react-router-dom'
 import Home from './components/Home'
 import asyncload from './utils/asyncload'
 import './App.css'
 
+const Router =
+  process.env.NODE_ENV === 'development' ? BrowserRouter : HashRouter
+
 export default () => (
-  <HashRouter>
+  <Router>
     <Fragment>
       <header className="App-header container">
         <h2>React Blog</h2>
@@ -33,6 +36,10 @@ export default () => (
         path="/register"
         component={asyncload(() => import('./components/SignUp'))}
       />
+      <Route
+        path="/@:username"
+        component={asyncload(() => import('./components/Profile'))}
+      />
     </Fragment>
-  </HashRouter>
+  </Router>
 )

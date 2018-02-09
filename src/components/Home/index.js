@@ -4,7 +4,7 @@ import Article from '../Article'
 const API = 'https://conduit.productionready.io/api'
 
 class Home extends Component {
-  state = { text: '', tags: [], articles: [], articlesCount: 0, page_no: 0 }
+  state = { tags: [], articles: [], articlesCount: 0, page_no: 0 }
 
   async componentDidMount() {
     // 并行请求
@@ -34,11 +34,6 @@ class Home extends Component {
     this.setState({ articles, articlesCount, page_no: 0 })
   }
 
-  handleClick = async () => {
-    const { moduleA } = await import('../ModuleA')
-    console.warn(moduleA)
-    this.setState({ text: moduleA })
-  }
   render() {
     const { tags, articles, articlesCount, page_no } = this.state
 
@@ -92,9 +87,6 @@ class Home extends Component {
                 {tag}
               </a>
             ))}
-            <hr />
-            <button onClick={this.handleClick}>dynamic import</button>
-            Text : {this.state.text}
           </aside>
         </div>
       </Fragment>
