@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { HashRouter, BrowserRouter, Route, Link } from 'react-router-dom'
+import Home from './pages/Home'
 import asyncload from './utils/asyncload'
 import './App.css'
 
@@ -29,19 +30,23 @@ export default () => (
       <Route
         path="/"
         exact
-        component={asyncload(() => import('./components/Home'))}
+        component={asyncload(() => import('./pages/Home'))}
       />
       <Route
         path="/login"
-        component={asyncload(() => import('./components/SignIn'))}
+        component={asyncload(() => import('./pages/SignIn'))}
       />
       <Route
         path="/register"
-        component={asyncload(() => import('./components/SignUp'))}
+        component={asyncload(() => import('./pages/SignUp'))}
       />
       <Route
         path="/@:username"
-        component={asyncload(() => import('./components/Profile'))}
+        component={asyncload(() => import('./pages/Profile'))}
+      />
+      <Route
+        path="/article/:title"
+        component={asyncload(() => import('./pages/Article'))}
       />
     </Fragment>
   </Router>

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Article from '../Article'
+import Item from '../../components/Item'
 
 const API = 'https://conduit.productionready.io/api'
 
@@ -49,7 +49,7 @@ class Home extends Component {
             <h3>
               <a href="#">Global Feed</a>
             </h3>
-            {articles.map((post, i) => <Article key={i} post={post} />)}
+            {articles.map((post, i) => <Item key={i} post={post} />)}
             <p>
               <a
                 href=""

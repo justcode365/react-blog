@@ -13,12 +13,12 @@ export default ({ post }) => (
       </div>
       <Like />
     </div>
-    <a href="">
+    <Link to={'/article/' + post.slug}>
       <h2>{post.title}</h2>
       <p>{post.description}</p>
-    </a>
+    </Link>
     <div>
-      <a href="">Read more...</a>
+      <Link to={'/article/' + post.slug}>Read more...</Link>
       <div className="tagList">
         {post.tagList.map((tag, i) => <span key={i}>{tag}</span>)}
       </div>
