@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { HashRouter, BrowserRouter, Route, Link } from 'react-router-dom'
-import Home from './components/Home'
 import asyncload from './utils/asyncload'
 import './App.css'
 
@@ -27,7 +26,11 @@ export default () => (
         </nav>
       </header>
 
-      <Route path="/" exact component={Home} />
+      <Route
+        path="/"
+        exact
+        component={asyncload(() => import('./components/Home'))}
+      />
       <Route
         path="/login"
         component={asyncload(() => import('./components/SignIn'))}
