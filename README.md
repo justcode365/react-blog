@@ -1,1 +1,1 @@
-- [ ] [real world](https://github.com/gothinkster/realworld)
+- [real world](https://github.com/gothinkster/realworld)
