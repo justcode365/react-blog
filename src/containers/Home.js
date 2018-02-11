@@ -2,16 +2,14 @@ import React, { Component, Fragment } from 'react'
 import Item from 'components/Item'
 import { connect } from 'react-redux'
 
-const API = 'https://conduit.productionready.io/api'
-
 class Home extends Component {
   state = { tags: [], articles: [], articlesCount: 0, page_no: 0 }
 
   async componentDidMount() {
     // 并行请求
     const [tagsResponse, articlesPromise] = await Promise.all([
-      fetch(`${API}/tags`),
-      fetch(`${API}/articles?limit=5&offset=0`)
+      fetch(`${process.env.REACT_APP_API}/tags`),
+      fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
     ])
 
     const { tags } = await tagsResponse.json()
@@ -21,14 +19,16 @@ class Home extends Component {
 
   setPage = async index => {
     const { page_no } = this.state
-    const res = await fetch(`${API}/articles?limit=5&offset=${page_no + index * 10}`)
+    const res = await fetch(
+      `${process.env.REACT_APP_API}/articles?limit=5&offset=${page_no + index * 10}`
+    )
 
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page_no: page_no + index })
   }
 
   getTagArticles = async tag => {
-    const res = await fetch(`${API}/articles?tag=${tag}&limit=5&offset=0`)
+    const res = await fetch(`${process.env.REACT_APP_API}/articles?tag=${tag}&limit=5&offset=0`)
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page_no: 0 })
   }

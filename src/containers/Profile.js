@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import { API } from 'utils/constants'
 import './Profile.css'
 
 class Profile extends Component {
@@ -8,8 +7,8 @@ class Profile extends Component {
     const { username } = this.props.match.params
 
     const [profilePromise, articlesPromise] = await Promise.all([
-      fetch(`${API}//profiles/${username}`),
-      fetch(`${API}/articles?author=${username}&limit=5&offset=0`)
+      fetch(`${process.env.REACT_APP_API}/profiles/${username}`),
+      fetch(`${process.env.REACT_APP_API}/articles?author=${username}&limit=5&offset=0`)
     ])
 
     const { profile } = await profilePromise.json()
