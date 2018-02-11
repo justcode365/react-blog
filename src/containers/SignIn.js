@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import './style.css'
+import { connect } from 'react-redux'
+import './SignIn.css'
 
 class SignIn extends Component {
   state = { email: '', password: '', redirectToHome: false }
-  handleSubmit = async e => {
-    e.preventDefault()
+  handleSubmit = async event => {
+    event.preventDefault()
     const { email, password } = this.state
 
     const url = 'https://conduit.productionready.io/api/users/login'
@@ -17,11 +18,13 @@ class SignIn extends Component {
 
     const res = await fetch(url, options)
     const data = await res.json()
+
+    this.props.dispatch({ type: '@login', data })
     this.setState({ email: '', password: '', redirectToHome: true })
   }
 
-  handleChange = e => {
-    const { name, value } = e.target
+  handleChange = event => {
+    const { name, value } = event.target
     this.setState({ [name]: value })
   }
 
@@ -60,4 +63,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn
+export default connect()(SignIn)

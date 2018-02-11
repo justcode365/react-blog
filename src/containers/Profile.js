@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import { API } from '../../utils/constants'
-import './style.css'
+import { API } from 'utils/constants'
+import './Profile.css'
 
 class Profile extends Component {
   state = { profile: {}, articles: [], articlesCount: 0 }

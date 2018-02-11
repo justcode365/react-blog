@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
-import Item from '../../components/Item'
+import Item from 'components/Item'
+import { connect } from 'react-redux'
 
 const API = 'https://conduit.productionready.io/api'
 
@@ -20,9 +21,7 @@ class Home extends Component {
 
   setPage = async index => {
     const { page_no } = this.state
-    const res = await fetch(
-      `${API}/articles?limit=5&offset=${page_no + index * 10}`
-    )
+    const res = await fetch(`${API}/articles?limit=5&offset=${page_no + index * 10}`)
 
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page_no: page_no + index })
@@ -94,4 +93,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default connect(state => state)(Home)

@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react'
 import { HashRouter, BrowserRouter, Route, Link } from 'react-router-dom'
-import Home from './pages/Home'
-import asyncload from './utils/asyncload'
-import './App.css'
+import asyncload from 'utils/asyncload'
+import 'App.css'
 
-const Router =
-  process.env.NODE_ENV === 'development' ? BrowserRouter : HashRouter
+const Router = process.env.NODE_ENV === 'development' ? BrowserRouter : HashRouter
 
 export default () => (
   <Router>
@@ -27,27 +25,11 @@ export default () => (
         </nav>
       </header>
 
-      <Route
-        path="/"
-        exact
-        component={asyncload(() => import('./pages/Home'))}
-      />
-      <Route
-        path="/login"
-        component={asyncload(() => import('./pages/SignIn'))}
-      />
-      <Route
-        path="/register"
-        component={asyncload(() => import('./pages/SignUp'))}
-      />
-      <Route
-        path="/@:username"
-        component={asyncload(() => import('./pages/Profile'))}
-      />
-      <Route
-        path="/article/:title"
-        component={asyncload(() => import('./pages/Article'))}
-      />
+      <Route path="/" exact component={asyncload(() => import('containers/Home'))} />
+      <Route path="/login" component={asyncload(() => import('containers/SignIn'))} />
+      <Route path="/register" component={asyncload(() => import('containers/SignUp'))} />
+      <Route path="/@:username" component={asyncload(() => import('containers/Profile'))} />
+      <Route path="/article/:title" component={asyncload(() => import('containers/Article'))} />
     </Fragment>
   </Router>
 )

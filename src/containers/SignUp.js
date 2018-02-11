@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import '../SignIn/style.css'
+import './SignIn.css'
 
 class SignIn extends Component {
   render() {
