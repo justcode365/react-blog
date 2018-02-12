@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './SignIn.css'
+import { Form } from './SignIn'
 
-class SignIn extends Component {
+class SignUp extends Component {
   render() {
     return (
-      <form action="" className="blog-form">
+      <Form>
         <h1>Sign Up</h1>
         <Link to="login">Have an account?</Link>
         <p>
@@ -21,9 +21,9 @@ class SignIn extends Component {
         <p>
           <input type="submit" value="Sign up" />
         </p>
-      </form>
+      </Form>
     )
   }
 }
 
-export default SignIn
+export default SignUp
