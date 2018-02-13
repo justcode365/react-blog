@@ -6,7 +6,9 @@ import styled from "styled-components";
 const Router =
   process.env.NODE_ENV === "development" ? BrowserRouter : HashRouter;
 
-const Header = styled.header`
+const Header = styled.header.attrs({
+  className: "container"
+})`
     display: flex;
     align-items: center;
     padding: 20px;

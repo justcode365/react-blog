@@ -1,17 +1,22 @@
-const initialState = {
-  user: {},
-  tags: []
-}
+// const initialState = {
+//   user: {},
+//   tags: []
+// }
+//
+// export default (state = initialState, action) => {
+//   switch (action.type) {
+//     case '@login': {
+//       localStorage.setItem('token', action.data.user.token)
+//       return { ...state, ...action.data }
+//     }
+//
+//
+//     default:
+//       return state
+//   }
+// }
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case '@login': {
-      localStorage.setItem('token', action.data.user.token)
-      return { ...state, ...action.data }
-    }
+import { combineReducers } from "redux";
+import tags from "./tags";
 
-
-    default:
-      return state
-  }
-}
+export default combineReducers({ tags });

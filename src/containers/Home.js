@@ -19,7 +19,9 @@ const Banner = styled.section`
   }
 `;
 
-const Blog = styled.div`
+const Blog = styled.div.attrs({
+  className: "container"
+})`
   display: flex;
   margin-top: 30px;
   max-width: 1000px;
