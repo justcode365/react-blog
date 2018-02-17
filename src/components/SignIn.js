@@ -1,36 +1,8 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { Link, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import './SignIn.css'
 
-export const Form = styled.form`
-  width: 600px;
-  margin: 0 auto;
-  text-align: center;
-
-  input[type='text'] {
-    box-sizing: border-box;
-    width: 100%;
-    height: 50px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 20px;
-    padding: 5px 20px;
-  }
-
-  input[type='submit'] {
-    float: right;
-    border: none;
-    color: #fff;
-    padding: 15px 23px;
-    border-radius: 5px;
-    font-size: 18px;
-    background-color: #5cb85c;
-    cursor: pointer;
-  }
-`
-
-class SignIn extends Component {
+export default class SignIn extends Component {
   state = { email: '', password: '', redirectToHome: false }
   handleSubmit = async event => {
     event.preventDefault()
@@ -60,7 +32,7 @@ class SignIn extends Component {
 
     if (redirectToHome) return <Redirect to="/" />
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <form className="SignIn" onSubmit={this.handleSubmit}>
         <h1>Sign In</h1>
         <Link to="register">Need an account?</Link>
         <p>
@@ -85,9 +57,7 @@ class SignIn extends Component {
         <p>
           <input type="submit" value="Sign in" />
         </p>
-      </Form>
+      </form>
     )
   }
 }
-
-export default connect()(SignIn)
