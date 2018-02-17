@@ -8,7 +8,7 @@ const Router = process.env.NODE_ENV === 'development' ? BrowserRouter : HashRout
 export default () => (
   <Router>
     <Fragment>
-      <header className="App container">
+      <header className="container App-header">
         <h2>React Blog</h2>
         <nav>
           <ul>

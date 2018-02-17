@@ -16,7 +16,7 @@ export default class Profile extends Component {
   }
 
   render() {
-    const { profile, articles, articlesCount } = this.state
+    const { profile } = this.state
     return (
       <Fragment>
         <section className="Profile">

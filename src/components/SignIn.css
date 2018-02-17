@@ -21,6 +21,6 @@
   padding: 15px 23px;
   border-radius: 5px;
   font-size: 18px;
-  background-color: #5cb85c;
+  background-color: var(--main-color);
   cursor: pointer;
 }

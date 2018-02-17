@@ -16,10 +16,11 @@ export default class SignIn extends Component {
     }
 
     const res = await fetch(url, options)
-    const data = await res.json()
+    const { user } = await res.json()
 
-    this.props.dispatch({ type: '@login', data })
-    this.setState({ email: '', password: '', redirectToHome: true })
+    localStorage.setItem('token', user.token)
+
+    this.setState({ redirectToHome: true })
   }
 
   handleChange = event => {

@@ -1,30 +1,65 @@
 .Like {
-  background-color: red;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.Like:hover {
+  background-color: var(--main-color);
+}
+
+.Like > i {
+  --size: 6px;
+  height: var(--size);
+  width: var(--size);
+  background-color: var(--main-color);
   display: inline-block;
-  height: 15px;
   margin: 0 10px;
-  position: relative;
-  top: 6px;
   transform: rotate(-45deg);
-  width: 15px;
+  position: relative;
+  top: 1px;
+  left: -1px;
 }
 
-.Like:before,
-:after {
+.Like:hover > i {
+  background-color: #fff;
+}
+
+.Like > i:before,
+.Like > i:after {
+  height: var(--size);
+  background-color: var(--main-color);
+  width: var(--size);
   content: '';
-  background-color: red;
   border-radius: 50%;
-  height: 15px;
   position: absolute;
-  width: 15px;
 }
 
-.Like:before {
-  top: -9px;
+.Like:hover > i:before,
+.Like:hover > i:after {
+  background-color: #fff;
+}
+
+.Like > i:before {
+  top: -4px;
   left: 0;
 }
 
-.Like:after {
-  left: 9px;
+.Like > i:after {
+  left: 4px;
   top: 0;
+}
+
+.Like > div {
+  color: var(--main-color);
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.Like:hover > div {
+  color: #fff;
 }

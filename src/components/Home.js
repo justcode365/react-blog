@@ -1,20 +1,33 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import Item from 'components/Item'
+import Tabs from 'components/Tabs'
 import './Home.css'
 
 export default class Home extends Component {
   state = { tags: [], articles: [], articlesCount: 0, page_no: 0 }
 
   async componentDidMount() {
-    // 并行请求
-    const [tagsResponse, articlesPromise] = await Promise.all([
-      fetch(`${process.env.REACT_APP_API}/tags`),
-      fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
-    ])
+    const token = localStorage.getItem('token')
+    if (token) {
+      const [tagsResponse, userPromise, feedPromise] = await Promise.all([
+        fetch(`${process.env.REACT_APP_API}/tags`),
+        fetch(`${process.env.REACT_APP_API}/user`, {
+          header: { authorization: token }
+        }),
+        fetch(`${process.env.REACT_APP_API}/articles/feed?limit=10&offset=0`, {
+          header: { authorization: token }
+        })
+      ])
+    } else {
+      const [tagsResponse, articlesPromise] = await Promise.all([
+        fetch(`${process.env.REACT_APP_API}/tags`),
+        fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
+      ])
 
-    const { tags } = await tagsResponse.json()
-    const { articles, articlesCount } = await articlesPromise.json()
-    this.setState({ tags, articles, articlesCount })
+      const { tags } = await tagsResponse.json()
+      const { articles, articlesCount } = await articlesPromise.json()
+      this.setState({ tags, articles, articlesCount })
+    }
   }
 
   setPage = async index => {
@@ -38,16 +51,16 @@ export default class Home extends Component {
 
     return (
       <div className="Home">
-        <section className="Banner">
-          <h1>React Blog</h1>
-          <h3>A place to share your knowledge.</h3>
-        </section>
+        {!localStorage.getItem('token') && (
+          <section className="Banner">
+            <h1>React Blog</h1>
+            <h3>A place to share your knowledge.</h3>
+          </section>
+        )}
 
         <section className="Blog container">
           <main>
-            <h3>
-              <a href="#">Global Feed</a>
-            </h3>
+            <Tabs tabs={['Your Feed', 'Global Feed']} activeIndex={0} />
             {articles.map((post, i) => <Item key={i} post={post} />)}
             <p>
               <a

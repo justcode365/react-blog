@@ -25,6 +25,10 @@
   flex: 1;
 }
 
+.Item .username a {
+  color: var(--main-color);
+}
+
 .Item .tagList > span {
   display: inline-block;
   height: 20px;

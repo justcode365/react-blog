@@ -1,0 +1,11 @@
+.Tabs {
+  margin: 0;
+  margin-bottom: -1px;
+  padding: 0;
+}
+
+.Tabs li {
+  padding: 10px 20px;
+  display: inline-block;
+  cursor: pointer;
+}

@@ -11,7 +11,7 @@ export default ({ post }) => (
         <Link to={'@' + post.author.username}>{post.author.username}</Link>
         <p className="date">{new Date(post.createdAt).toDateString()}</p>
       </div>
-      <Like />
+      <Like liked={post.favorited} count={post.favoritesCount} />
     </div>
     <Link to={'/article/' + post.slug}>
       <h2>{post.title}</h2>
