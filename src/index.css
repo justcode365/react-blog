@@ -1,6 +1,7 @@
 /* base css */
 :root {
   --main-color: #5cb85c;
+  --gray: #aaa;
 }
 
 body {
@@ -26,4 +27,19 @@ a:focus {
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  padding: 5px 20px;
+  color: #55595c;
+}
+
+.input:focus {
+  border-color: #66afe9;
+  outline: none;
 }

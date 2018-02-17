@@ -4,21 +4,35 @@ import Tabs from 'components/Tabs'
 import './Home.css'
 
 export default class Home extends Component {
-  state = { tags: [], articles: [], articlesCount: 0, page_no: 0 }
+  state = {
+    tags: [],
+    articles: [],
+    articlesCount: 0,
+    page_no: 0,
+    tabs: [],
+    activeTabIndex: 0
+  }
 
   async componentDidMount() {
     const token = localStorage.getItem('token')
     if (token) {
-      const [tagsResponse, userPromise, feedPromise] = await Promise.all([
+      const tabs = ['Your Feed', 'Global Feed']
+      const [tagsResponse, userPromise, articlesPromise] = await Promise.all([
         fetch(`${process.env.REACT_APP_API}/tags`),
-        fetch(`${process.env.REACT_APP_API}/user`, {
-          header: { authorization: token }
-        }),
+        fetch(`${process.env.REACT_APP_API}/user`, { headers: { authorization: token } }),
         fetch(`${process.env.REACT_APP_API}/articles/feed?limit=10&offset=0`, {
-          header: { authorization: token }
+          headers: { authorization: token }
         })
       ])
+
+      const { tags } = await tagsResponse.json()
+      const { user } = await userPromise.json()
+      const { articles, articlesCount } = await articlesPromise.json()
+      this.props.setUser(user)
+      this.setState({ tags, articles, articlesCount, tabs })
     } else {
+      const tabs = ['Global Feed']
+
       const [tagsResponse, articlesPromise] = await Promise.all([
         fetch(`${process.env.REACT_APP_API}/tags`),
         fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
@@ -26,8 +40,24 @@ export default class Home extends Component {
 
       const { tags } = await tagsResponse.json()
       const { articles, articlesCount } = await articlesPromise.json()
-      this.setState({ tags, articles, articlesCount })
+
+      this.setState({ tags, articles, articlesCount, tabs })
     }
+  }
+
+  changeTab = async index => {
+    const { tabs } = this.state
+    const tabName = tabs[index]
+
+    const articlesPromise =
+      tabName === 'Global Feed'
+        ? await fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
+        : await fetch(`${process.env.REACT_APP_API}/articles/feed?limit=10&offset=0`, {
+            headers: { authorization: localStorage.getItem('token') }
+          })
+    const { articles, articlesCount } = await articlesPromise.json()
+
+    this.setState({ articles, articlesCount })
   }
 
   setPage = async index => {
@@ -47,7 +77,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { tags, articles, articlesCount, page_no } = this.state
+    const { tags, articles, tabs, activeTabIndex, articlesCount, page_no } = this.state
 
     return (
       <div className="Home">
@@ -60,7 +90,7 @@ export default class Home extends Component {
 
         <section className="Blog container">
           <main>
-            <Tabs tabs={['Your Feed', 'Global Feed']} activeIndex={0} />
+            <Tabs onClick={this.changeTab} tabs={tabs} activeIndex={activeTabIndex} />
             {articles.map((post, i) => <Item key={i} post={post} />)}
             <p>
               <a

@@ -1,4 +1,4 @@
-.App-header {
+.Header {
   display: flex;
   align-items: center;
   padding: 20px;
@@ -6,12 +6,13 @@
   max-width: 1000px;
 }
 
-.App-header li {
+.Header li {
   display: inline-block;
   margin-right: 10px;
   color: #999;
 }
 
-.App-header h2 {
+.Header h2 {
   flex: 1;
+  color: var(--main-color);
 }

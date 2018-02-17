@@ -18,7 +18,7 @@ export default class SignIn extends Component {
     const res = await fetch(url, options)
     const { user } = await res.json()
 
-    localStorage.setItem('token', user.token)
+    localStorage.setItem('token', 'Token ' + user.token)
 
     this.setState({ redirectToHome: true })
   }
@@ -38,6 +38,7 @@ export default class SignIn extends Component {
         <Link to="register">Need an account?</Link>
         <p>
           <input
+            className="input"
             type="text"
             value={email}
             placeholder="Email"
@@ -47,6 +48,7 @@ export default class SignIn extends Component {
         </p>
         <p>
           <input
+            className="input"
             type="text"
             value={password}
             placeholder="Password"
