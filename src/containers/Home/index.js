@@ -20,7 +20,6 @@ class Home extends Component {
 
   render() {
     const { tags, items, tabs, activeTabIndex, count, page_no } = this.props.article
-    console.warn(11111)
 
     return (
       <Fragment>

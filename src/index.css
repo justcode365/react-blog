@@ -30,18 +30,3 @@ a:focus {
   padding-left: 15px;
   padding-right: 15px;
 }
-
-.input {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  height: 40px;
-  width: 100%;
-  font-size: 20px;
-  padding: 5px 20px;
-  color: #55595c;
-}
-
-.input:focus {
-  border-color: #66afe9;
-  outline: none;
-}

@@ -7,7 +7,6 @@ import './Header.css'
 
 const Header = ({ user }) => (
   <header className="container Header">
-    {console.info(user)}
     <h2>conduit</h2>
     <nav>
       {user ? (
