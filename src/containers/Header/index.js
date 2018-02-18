@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Settings, Edit } from 'react-feather'
 
 import './Header.css'
 
-export default ({ user }) => (
+const Header = ({ user }) => (
   <header className="container Header">
+    {console.info(user)}
     <h2>conduit</h2>
     <nav>
       {user ? (
@@ -43,3 +45,5 @@ export default ({ user }) => (
     </nav>
   </header>
 )
+
+export default connect(state => state)(Header)

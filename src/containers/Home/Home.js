@@ -15,34 +15,34 @@ export default class Home extends Component {
 
   async componentDidMount() {
     const token = localStorage.getItem('token')
-    if (token) {
-      const tabs = ['Your Feed', 'Global Feed']
-      const [tagsResponse, userPromise, articlesPromise] = await Promise.all([
-        fetch(`${process.env.REACT_APP_API}/tags`),
-        fetch(`${process.env.REACT_APP_API}/user`, { headers: { authorization: token } }),
-        fetch(`${process.env.REACT_APP_API}/articles/feed?limit=10&offset=0`, {
-          headers: { authorization: token }
-        })
-      ])
+    // if (token) {
+    //   const tabs = ['Your Feed', 'Global Feed']
+    //   const [tagsResponse, userPromise, articlesPromise] = await Promise.all([
+    //     fetch(`${process.env.REACT_APP_API}/tags`),
+    //     fetch(`${process.env.REACT_APP_API}/user`, { headers: { authorization: token } }),
+    //     fetch(`${process.env.REACT_APP_API}/articles/feed?limit=10&offset=0`, {
+    //       headers: { authorization: token }
+    //     })
+    //   ])
 
-      const { tags } = await tagsResponse.json()
-      const { user } = await userPromise.json()
-      const { articles, articlesCount } = await articlesPromise.json()
-      this.props.setUser(user)
-      this.setState({ tags, articles, articlesCount, tabs })
-    } else {
-      const tabs = ['Global Feed']
+    //   const { tags } = await tagsResponse.json()
+    //   const { user } = await userPromise.json()
+    //   const { articles, articlesCount } = await articlesPromise.json()
+    //   this.props.setUser(user)
+    //   this.setState({ tags, articles, articlesCount, tabs })
+    // } else {
+    //   const tabs = ['Global Feed']
 
-      const [tagsResponse, articlesPromise] = await Promise.all([
-        fetch(`${process.env.REACT_APP_API}/tags`),
-        fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
-      ])
+    //   const [tagsResponse, articlesPromise] = await Promise.all([
+    //     fetch(`${process.env.REACT_APP_API}/tags`),
+    //     fetch(`${process.env.REACT_APP_API}/articles?limit=5&offset=0`)
+    //   ])
 
-      const { tags } = await tagsResponse.json()
-      const { articles, articlesCount } = await articlesPromise.json()
+    //   const { tags } = await tagsResponse.json()
+    //   const { articles, articlesCount } = await articlesPromise.json()
 
-      this.setState({ tags, articles, articlesCount, tabs })
-    }
+    //   this.setState({ tags, articles, articlesCount, tabs })
+    // }
   }
 
   changeTab = async index => {

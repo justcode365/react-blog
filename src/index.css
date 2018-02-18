@@ -2,6 +2,8 @@
 :root {
   --main-color: #5cb85c;
   --gray: #aaa;
+  --center: 0 auto;
+  --container-padding: 0 15px;
 }
 
 body {

@@ -1,29 +1,20 @@
 import React, { Component } from 'react'
 import { HashRouter, BrowserRouter, Route } from 'react-router-dom'
 import asyncload from 'utils/asyncload'
-import Header from './components/Header'
-import Home from './components/Home'
+import Header from 'containers/Header'
 
 const Router = process.env.NODE_ENV === 'development' ? BrowserRouter : HashRouter
 
-export default class App extends Component {
-  state = { user: null }
-
-  setUser = user => this.setState({ user })
-  render() {
-    const { user } = this.state
-    return (
-      <Router>
-        <div>
-          <Header user={user} />
-          <Route path="/" exact render={() => <Home setUser={this.setUser} user={user} />} />
-          <Route path="/login" component={asyncload(() => import('components/SignIn'))} />
-          <Route path="/register" component={asyncload(() => import('components/SignUp'))} />
-          <Route path="/@:username" component={asyncload(() => import('components/Profile'))} />
-          <Route path="/article/:title" component={asyncload(() => import('components/Article'))} />
-          <Route path="/settings" component={asyncload(() => import('components/Settings'))} />
-        </div>
-      </Router>
-    )
-  }
-}
+export default () => (
+  <Router>
+    <div>
+      <Header />
+      <Route path="/" exact component={asyncload(() => import('containers/Home'))} />
+      <Route path="/login" component={asyncload(() => import('containers/Login'))} />
+      <Route path="/register" component={asyncload(() => import('components/SignUp'))} />
+      <Route path="/@:username" component={asyncload(() => import('components/Profile'))} />
+      <Route path="/article/:title" component={asyncload(() => import('components/Article'))} />
+      <Route path="/settings" component={asyncload(() => import('containers/Settings'))} />
+    </div>
+  </Router>
+)
