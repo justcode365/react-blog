@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Item from 'components/Item'
+import Item from 'components/shared/Item'
 import Tabs from 'components/Tabs'
 import './Home.css'
 
