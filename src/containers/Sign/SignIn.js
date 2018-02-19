@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import './SignIn.css'
+import Button from 'components/Button'
+import Input from 'components/Input'
+import Section from './Style.js'
 
 export default class SignIn extends Component {
   state = { email: '', password: '', redirectToHome: false }
@@ -33,34 +35,21 @@ export default class SignIn extends Component {
 
     if (redirectToHome) return <Redirect to="/" />
     return (
-      <form className="SignIn" onSubmit={this.handleSubmit}>
-        <h1>Sign In</h1>
-        <Link to="register">Need an account?</Link>
-        <p>
-          <input
-            className="input"
-            type="text"
-            value={email}
-            placeholder="Email"
-            onChange={this.handleChange}
-            name="email"
-          />
-        </p>
-        <p>
-          <input
-            className="input"
-            type="text"
-            value={password}
-            placeholder="Password"
-            onChange={this.handleChange}
-            name="password"
-          />
-        </p>
-
-        <p>
-          <input type="submit" value="Sign in" />
-        </p>
-      </form>
+      <Section>
+        <form className="SignIn" onSubmit={this.handleSubmit}>
+          <h1>Sign In</h1>
+          <Link to="register">Need an account?</Link>
+          <p>
+            <Input placeholder="Email" name="email" onChange={this.handleChange} />
+          </p>
+          <p>
+            <Input placeholder="Password" name="password" onChange={this.handleChange} />
+          </p>
+          <p className="signin">
+            <Button type="submit">Sign in</Button>
+          </p>
+        </form>
+      </Section>
     )
   }
 }

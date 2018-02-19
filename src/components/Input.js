@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 
 const inputStyle = css`
+  box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
-  height: 40px;
+  height: 60px;
   width: 100%;
   padding: 5px 20px;
   color: #55595c;
 
-  font-size: 20px;
+  font-size: 22px;
   &:focus {
     border-color: #66afe9;
     outline: none;

@@ -16,7 +16,7 @@ const Button = styled.button`
   }
 
   ${props =>
-    props.type &&
+    props.danger &&
     css`
       background-color: #fff;
       color: var(--red);

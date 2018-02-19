@@ -10,8 +10,8 @@ export default () => (
     <div>
       <Header />
       <Route path="/" exact component={asyncload(() => import('containers/Home'))} />
-      <Route path="/login" component={asyncload(() => import('containers/Login'))} />
-      <Route path="/register" component={asyncload(() => import('components/SignUp'))} />
+      <Route path="/login" component={asyncload(() => import('containers/Sign/SignIn'))} />
+      <Route path="/register" component={asyncload(() => import('containers/Sign/SignUp'))} />
       <Route path="/@:username" component={asyncload(() => import('components/Profile'))} />
       <Route path="/article/:title" component={asyncload(() => import('components/Article'))} />
       <Route path="/settings" component={asyncload(() => import('containers/Settings'))} />

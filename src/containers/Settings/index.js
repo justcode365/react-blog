@@ -10,16 +10,22 @@ class Settings extends Component {
   state = { image: '', username: '', bio: '', email: '', password: '', redirectToHome: false }
 
   componentDidMount() {
-    this.props.dispatch(fetchUser())
+    this.props.dispatch(fetchUser(5))
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
+    if (nextProps.user) {
       this.setState({ ...nextProps.user })
+      return
     }
 
-    if (this.props.user) {
-      console.warn(1111)
+    if (this.props.user && nextProps.user) {
+      for (let key of ['image', 'username', 'bio', 'email', 'password']) {
+        if (this.props.user[key] !== nextProps.user[key]) {
+          this.setState({ redirectToHome: true })
+          break
+        }
+      }
     }
   }
 
@@ -31,10 +37,14 @@ class Settings extends Component {
 
   handleUpdate = e => {
     e.preventDefault()
-    debugger
-    const { image, username, bio, email, password } = this.state
-    const user = { image, username, bio, email, password }
+    const { image, username, bio, email } = this.state
+    const user = { image, username, bio, email }
     this.props.dispatch(updateUser(user))
+  }
+
+  handleLogOut = () => {
+    localStorage.removeItem('token')
+    this.setState({ redirectToHome: true })
   }
 
   render() {
@@ -85,7 +95,9 @@ class Settings extends Component {
           <Button onClick={this.handleUpdate}>Update Settings</Button>
         </p>
 
-        <Button type="danger">Or click here to logout.</Button>
+        <Button danger onClick={this.handleLogOut}>
+          Or click here to logout.
+        </Button>
       </Section>
     )
   }
