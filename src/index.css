@@ -1,32 +1,46 @@
-/* base css */
-:root {
-  --main-color: #5cb85c;
-  --gray: #aaa;
-  --center: 0 auto;
-  --container-padding: 0 15px;
+html {
+  font-size: 16px;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #373a3c;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 ul {
   list-style: none;
 }
 
+li {
+  display: inline;
+}
+
 a {
   text-decoration: none;
 }
 
-a:focus {
-  text-decoration: underline;
+/* base css */
+:root {
+  --green: #5cb85c;
+  --gray: #aaa;
+  --center: 0 auto;
+  --container-padding: 0 1rem;
 }
 
 .container {
+  max-width: 1000px;
   margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

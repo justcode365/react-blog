@@ -1,20 +1,21 @@
-import React, { Component } from 'react'
-import { HashRouter, BrowserRouter, Route } from 'react-router-dom'
-import asyncload from 'utils/asyncload'
-import Header from 'containers/Header'
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-const Router = process.env.NODE_ENV === 'development' ? BrowserRouter : HashRouter
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+      </div>
+    );
+  }
+}
 
-export default () => (
-  <Router>
-    <div>
-      <Header />
-      <Route path="/" exact component={asyncload(() => import('containers/Home'))} />
-      <Route path="/login" component={asyncload(() => import('containers/Sign/SignIn'))} />
-      <Route path="/register" component={asyncload(() => import('containers/Sign/SignUp'))} />
-      <Route path="/@:username" component={asyncload(() => import('components/Profile'))} />
-      <Route path="/article/:title" component={asyncload(() => import('components/Article'))} />
-      <Route path="/settings" component={asyncload(() => import('containers/Settings'))} />
-    </div>
-  </Router>
-)
+export default App;

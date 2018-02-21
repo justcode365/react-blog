@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import Button from 'components/Button'
 import Input from 'components/Input'
-import Section from './Style.js'
+// import Section from './Style.js'
 
 export default class SignIn extends Component {
   state = { email: '', password: '', redirectToHome: false }

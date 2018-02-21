@@ -1,0 +1,23 @@
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header-brand {
+  color: var(--green);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.Header-link li {
+  margin-left: 1rem;
+}
+
+.Header-link a {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.Header-link a:hover {
+  color: rgba(0, 0, 0, 0.6);
+}

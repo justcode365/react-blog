@@ -8,4 +8,11 @@
   padding: 10px 20px;
   display: inline-block;
   cursor: pointer;
+  color: #aaa;
+  border-bottom: none;
+}
+
+.Tabs li.active {
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
 }
