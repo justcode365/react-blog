@@ -1,1 +1,2 @@
 - [real world](https://github.com/gothinkster/realworld)
+- `react`  "16.3.0"
