@@ -10,7 +10,7 @@ export default class SignUp extends Component {
         <h1>Sign Up</h1>
         <Consumer>
           {context => (
-            <a href="/signin" onClick={context.route}>
+            <a href="/signin" onClick={context.linkClick}>
               Have an account?
             </a>
           )}
@@ -24,8 +24,8 @@ export default class SignUp extends Component {
         <p>
           <input type="text" placeholder="Password" name="password" onChange={this.handleChange} />
         </p>
-        <p className="signin">
-          <input type="submit" placeholder="Password" name="password" value="Sign up" />
+        <p>
+          <input type="submit" name="password" value="Sign up" />
         </p>
       </form>
     )

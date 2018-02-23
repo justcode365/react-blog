@@ -33,15 +33,21 @@ export default class Home extends Component {
     this.setState({ articles, articlesCount, page_no, tabs, activeTabIndex })
   }
 
+  fetchFeed = async () => {
+    fetch(`${process.env.REACT_APP_API}/articles/feed?limit=5&offset=0`)
+  }
+
   render() {
     const { tabs, activeTabIndex, articles, articlesCount, page_no } = this.state
 
     return (
       <div>
-        <section className="Home-banner">
-          <h1>conduit</h1>
-          <p>A place to share your knowledge.</p>
-        </section>
+        {!localStorage.getItem('token') && (
+          <section className="Home-banner">
+            <h1>conduit</h1>
+            <p>A place to share your knowledge.</p>
+          </section>
+        )}
 
         <main className="Home-main container">
           <div className="Home-articles">

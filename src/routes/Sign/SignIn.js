@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 import { Consumer } from 'routes'
 import './Sign.css'
 
-export default class SignIn extends Component {
-  state = { email: '', password: '', redirectToHome: false }
-  handleSubmit = async event => {
-    event.preventDefault()
+class SignIn extends Component {
+  state = { email: '', password: '' }
+  handleSubmit = async e => {
+    e.preventDefault()
     const { email, password } = this.state
 
     const url = 'https://conduit.productionready.io/api/users/login'
@@ -21,7 +21,7 @@ export default class SignIn extends Component {
 
     localStorage.setItem('token', 'Token ' + user.token)
 
-    this.setState({ redirectToHome: true })
+    this.props.redirect('/')
   }
 
   handleChange = event => {
@@ -30,35 +30,41 @@ export default class SignIn extends Component {
   }
 
   render() {
-    const { email, password, redirectToHome } = this.state
+    const { email, password } = this.state
 
-    // if (redirectToHome) return <Redirect to="/" />
     return (
       <form className="Sign" onSubmit={this.handleSubmit}>
         <h1>Sign In</h1>
-        <Consumer>
-          {context => (
-            <a href="/signup" onClick={context.route}>
-              Need an account?
-            </a>
-          )}
-        </Consumer>
+        <a href="/signup" onClick={this.props.linkClick}>
+          Need an account?
+        </a>
+
         <p>
-          <input type="text" placeholder="Email" name="email" onChange={this.handleChange} />
-        </p>
-        <p>
-          <input type="text" placeholder="Password" name="password" onChange={this.handleChange} />
+          <input
+            type="text"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
         </p>
         <p>
           <input
-            type="submit"
+            type="text"
             placeholder="Password"
             name="password"
+            value={password}
             onChange={this.handleChange}
-            value="Sign in"
           />
+        </p>
+        <p>
+          <input type="submit" name="password" value="Sign in" />
         </p>
       </form>
     )
   }
 }
+
+export default () => (
+  <Consumer>{({ linkClick, redirect }) => <SignIn {...{ linkClick, redirect }} />}</Consumer>
+)

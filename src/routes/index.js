@@ -42,15 +42,16 @@ class Router extends Component {
     }
   }
 
-  handleClick = e => {
+  linkClick = e => {
     // 阻止页面跳转刷新
     e.preventDefault()
     const { pathname } = e.target
-    console.warn(pathname)
+    this.redirect(pathname)
+  }
 
+  redirect = pathname => {
     this.setState({ route: pathname })
-    // 改变 地址
-    window.history.pushState({ pathname }, '', pathname)
+    window.history.pushState({ pathname }, '', pathname) // 改变 地址
   }
 
   matchRouter = route => {
@@ -76,7 +77,7 @@ class Router extends Component {
   render() {
     const { route } = this.state
     return (
-      <Provider value={{ route: this.handleClick }}>
+      <Provider value={{ linkClick: this.linkClick, redirect: this.redirect }}>
         <Header />
         {this.matchRouter(route)}
       </Provider>
