@@ -1,0 +1,56 @@
+.Sign {
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.Sign a {
+  color: var(--green);
+}
+
+.Sign p:last-child {
+  text-align: right;
+}
+
+.Sign input[type='text'] {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 60px;
+  width: 100%;
+  padding: 5px 20px;
+  color: #55595c;
+  font-size: 22px;
+}
+
+.Sign input[type='text']:focus {
+  border-color: #66afe9;
+  outline: none;
+}
+
+.Sign input[type='submit'] {
+  --red: #b85c5c;
+  border: none;
+  color: #fff;
+  padding: 15px 23px;
+  border-radius: 5px;
+  font-size: 18px;
+  background-color: var(--green);
+  cursor: pointer;
+}
+
+.Sign input[type='submit']:hover {
+  background-color: #449d44;
+}
+
+/* ${props =>
+    props.danger &&
+    css`
+      background-color: #fff;
+      color: var(--red);
+      border: 1px solid var(--red);
+      &:hover {
+        background-color: var(--red);
+        color: #fff;
+      }
+    `}; */

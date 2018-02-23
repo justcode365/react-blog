@@ -4,8 +4,9 @@ import Header from 'components/Header'
 
 const router = {
   '/': Home,
-  '/home': Home
-  // '/login': asyncload(() => import('./SignIn'))
+  '/home': Home,
+  '/signin': asyncload(() => import('./Sign/SignIn')),
+  '/signup': asyncload(() => import('./Sign/SignUp'))
   // '/one': One,
   // '/async': asyncload(() => import('./components/Async')),
   // '/@:user': User
@@ -53,7 +54,6 @@ class Router extends Component {
   }
 
   matchRouter = route => {
-    console.log(routeConfig)
     const C = routeConfig[route]
 
     if (C) {
@@ -76,7 +76,7 @@ class Router extends Component {
   render() {
     const { route } = this.state
     return (
-      <Provider value={{ router: this.handleClick }}>
+      <Provider value={{ route: this.handleClick }}>
         <Header />
         {this.matchRouter(route)}
       </Provider>
