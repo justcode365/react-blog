@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Consumer } from 'routes'
-import './Sign.css'
 
-class SignIn extends Component {
+class Editor extends Component {
   state = { email: '', password: '', error: '' }
   handleSubmit = async e => {
     e.preventDefault()
@@ -40,40 +39,53 @@ class SignIn extends Component {
 
     return (
       <form className="Sign Form" onSubmit={this.handleSubmit}>
-        <header>
-          <h1>Sign In</h1>
-
-          <a href="/signup" onClick={this.props.linkClick}>
-            Need an account?
-          </a>
-        </header>
-
         {error && <li className="Form-error">{error}</li>}
 
         <p>
           <input
-            type="email"
-            placeholder="Email"
-            name="email"
+            type="text"
+            placeholder="Article Title"
+            name="title"
             value={email}
             onChange={this.handleChange}
           />
         </p>
+
         <p>
           <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
+            type="text"
+            placeholder="What's this article about?"
+            name="title"
+            value={email}
             onChange={this.handleChange}
           />
         </p>
+
         <p>
-          <input type="submit" value="Sign in" />
+          <textarea
+            placeholder="Write your article (in markdown)"
+            name="title"
+            value={email}
+            onChange={this.handleChange}
+          />
+        </p>
+
+        <p>
+          <input
+            type="text"
+            placeholder="Enter tags"
+            name="title"
+            value={email}
+            onChange={this.handleChange}
+          />
+        </p>
+
+        <p>
+          <input type="submit" name="password" value="Publish Article" />
         </p>
       </form>
     )
   }
 }
 
-export default () => <Consumer>{context => <SignIn {...context} />}</Consumer>
+export default () => <Consumer>{context => <Editor {...context} />}</Consumer>

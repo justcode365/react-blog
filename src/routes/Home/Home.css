@@ -20,6 +20,7 @@
 .Home-main {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .Home-articles {
@@ -30,5 +31,5 @@
   width: 20%;
   padding: 10px;
   background-color: #f3f3f3;
-  border-radius: 4px;
+  border-radius: 5px;
 }

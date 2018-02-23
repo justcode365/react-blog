@@ -7,9 +7,9 @@ const router = {
   '/home': Home,
   '/signin': asyncload(() => import('./Sign/SignIn')),
   '/signup': asyncload(() => import('./Sign/SignUp')),
-  '/settings': asyncload(() => import('./Settings'))
-  // '/async': asyncload(() => import('./components/Async')),
-  // '/@:user': User
+  '/settings': asyncload(() => import('./Settings')),
+  '/editor': asyncload(() => import('./Editor')),
+  '/@:user': asyncload(() => import('./User'))
 }
 
 const routeConfig = {
@@ -43,7 +43,7 @@ class Router extends Component {
   linkClick = e => {
     // 阻止页面跳转刷新
     e.preventDefault()
-    const { pathname } = e.target
+    const { pathname } = e.currentTarget // 事件冒泡
     this.redirect(pathname)
   }
 

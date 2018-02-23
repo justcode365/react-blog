@@ -53,7 +53,7 @@ class Header extends Component {
             <Fragment>
               <li>
                 {/* <Edit color="#aaa" size={16} /> */}
-                <a href="/newPost" onClick={linkClick}>
+                <a href="/editor" onClick={linkClick}>
                   New Post
                 </a>
               </li>
@@ -64,9 +64,12 @@ class Header extends Component {
                   Settings
                 </a>
               </li>
+
               <li>
-                <img src={user.image} width={30} alt="avatar" />
-                <span>{user.username}</span>
+                <a href={`/@${user.username}`} onClick={linkClick}>
+                  <img src={user.image} width={30} alt="avatar" />
+                  <span>{user.username}</span>
+                </a>
               </li>
             </Fragment>
           )}

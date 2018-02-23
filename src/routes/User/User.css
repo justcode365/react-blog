@@ -1,0 +1,29 @@
+.User {
+  background-color: #f3f3f3;
+  text-align: center;
+  padding: 30px 100px;
+}
+
+.User img {
+  width: 100px;
+  border-radius: 50%;
+}
+
+.User button {
+  float: right;
+}
+
+.User div {
+  max-width: 800px;
+  overflow: hidden; /* BFC */
+}
+
+.User button {
+  border: 1px solid #999;
+  background-color: transparent;
+  color: #999;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  padding: 0 10px;
+}
