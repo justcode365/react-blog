@@ -12,23 +12,34 @@
   text-align: right;
 }
 
-.Sign input[type='text'] {
+.Form input[type='text'],
+.Form textarea {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
-  height: 60px;
+  height: 50px;
   width: 100%;
   padding: 5px 20px;
   color: #55595c;
-  font-size: 22px;
+  font-size: 20px;
 }
 
-.Sign input[type='text']:focus {
+.Form input[type='text']::placeholder,
+.Form textarea::placeholder {
+  color: #999;
+}
+
+.Form textarea {
+  height: 100px;
+}
+
+.Form input[type='text']:focus,
+.Form textarea {
   border-color: #66afe9;
   outline: none;
 }
 
-.Sign input[type='submit'] {
+.Form input[type='submit'] {
   --red: #b85c5c;
   border: none;
   color: #fff;
@@ -39,18 +50,17 @@
   cursor: pointer;
 }
 
-.Sign input[type='submit']:hover {
+.Form input[type='submit']:hover {
   background-color: #449d44;
 }
 
-/* ${props =>
-    props.danger &&
-    css`
-      background-color: #fff;
-      color: var(--red);
-      border: 1px solid var(--red);
-      &:hover {
-        background-color: var(--red);
-        color: #fff;
-      }
-    `}; */
+.Form input.danger[type='submit'] {
+  background-color: #fff;
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.Form input.danger[type='submit']:hover {
+  background-color: var(--red);
+  color: #fff;
+}

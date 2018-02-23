@@ -6,8 +6,8 @@ const router = {
   '/': Home,
   '/home': Home,
   '/signin': asyncload(() => import('./Sign/SignIn')),
-  '/signup': asyncload(() => import('./Sign/SignUp'))
-  // '/one': One,
+  '/signup': asyncload(() => import('./Sign/SignUp')),
+  '/settings': asyncload(() => import('./Settings'))
   // '/async': asyncload(() => import('./components/Async')),
   // '/@:user': User
 }
@@ -17,13 +17,7 @@ const routeConfig = {
   params: Object.keys(router).filter(v => v.includes(':'))
 }
 
-const store = {
-  text: 'hello world!'
-}
-
-const ctx = createContext(store)
-
-const { Provider, Consumer } = ctx
+const { Provider, Consumer } = createContext({})
 
 export { Consumer }
 
@@ -32,7 +26,7 @@ class Router extends Component {
     super()
 
     const { pathname } = window.location
-    this.state = { route: pathname }
+    this.state = { route: pathname, user: null }
   }
 
   componentDidMount() {
@@ -41,6 +35,8 @@ class Router extends Component {
       this.setState({ route: e.state.pathname })
     }
   }
+
+  setUser = user => this.setState({ user })
 
   linkClick = e => {
     // 阻止页面跳转刷新
@@ -75,9 +71,11 @@ class Router extends Component {
   }
 
   render() {
-    const { route } = this.state
+    const { route, user } = this.state
     return (
-      <Provider value={{ linkClick: this.linkClick, redirect: this.redirect }}>
+      <Provider
+        value={{ linkClick: this.linkClick, redirect: this.redirect, user, setUser: this.setUser }}
+      >
         <Header />
         {this.matchRouter(route)}
       </Provider>
