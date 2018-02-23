@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-// import { Link, Redirect } from 'react-router-dom'
 import { Consumer } from 'routes'
 import './Sign.css'
 
 class SignIn extends Component {
-  state = { email: '', password: '' }
+  state = { email: '', password: '', error: '' }
   handleSubmit = async e => {
     e.preventDefault()
     const { email, password } = this.state
@@ -16,12 +15,19 @@ class SignIn extends Component {
       body: JSON.stringify({ user: { email, password } })
     }
 
-    const res = await fetch(url, options)
-    const { user } = await res.json()
+    try {
+      const res = await fetch(url, options)
+      const info = await res.json()
+      if (info.errors) {
+        this.setState({ error: 'email or password is invalid' })
+        return
+      }
 
-    localStorage.setItem('token', 'Token ' + user.token)
-
-    this.props.redirect('/')
+      localStorage.setItem('token', 'Token ' + info.user.token)
+      this.props.redirect('/')
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   handleChange = event => {
@@ -30,18 +36,23 @@ class SignIn extends Component {
   }
 
   render() {
-    const { email, password } = this.state
+    const { email, password, error } = this.state
 
     return (
-      <form className="Sign" onSubmit={this.handleSubmit}>
-        <h1>Sign In</h1>
-        <a href="/signup" onClick={this.props.linkClick}>
-          Need an account?
-        </a>
+      <form className="Sign Form" onSubmit={this.handleSubmit}>
+        <header>
+          <h1>Sign In</h1>
+
+          <a href="/signup" onClick={this.props.linkClick}>
+            Need an account?
+          </a>
+        </header>
+
+        {error && <li className="Form-error">{error}</li>}
 
         <p>
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             name="email"
             value={email}
@@ -50,7 +61,7 @@ class SignIn extends Component {
         </p>
         <p>
           <input
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
             value={password}
@@ -65,6 +76,4 @@ class SignIn extends Component {
   }
 }
 
-export default () => (
-  <Consumer>{({ linkClick, redirect }) => <SignIn {...{ linkClick, redirect }} />}</Consumer>
-)
+export default () => <Consumer>{context => <SignIn {...context} />}</Consumer>

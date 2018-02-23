@@ -1,7 +1,6 @@
 .Sign {
   width: 600px;
   margin: 0 auto;
-  text-align: center;
 }
 
 .Sign a {
@@ -12,7 +11,18 @@
   text-align: right;
 }
 
+.Form {
+  --red: #b85c5c;
+}
+
+.Form header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .Form input[type='text'],
+.Form input[type='password'],
+.Form input[type='email'],
 .Form textarea {
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -25,6 +35,8 @@
 }
 
 .Form input[type='text']::placeholder,
+.Form input[type='password']::placeholder,
+.Form input[type='email']::placeholder,
 .Form textarea::placeholder {
   color: #999;
 }
@@ -40,7 +52,6 @@
 }
 
 .Form input[type='submit'] {
-  --red: #b85c5c;
   border: none;
   color: #fff;
   padding: 15px 23px;
@@ -63,4 +74,11 @@
 .Form input.danger[type='submit']:hover {
   background-color: var(--red);
   color: #fff;
+}
+
+.Form-error {
+  display: list-item;
+  margin-left: 20px;
+  color: var(--red);
+  font-weight: bold;
 }

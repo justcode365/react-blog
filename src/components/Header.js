@@ -76,8 +76,4 @@ class Header extends Component {
   }
 }
 
-export default () => (
-  <Consumer>
-    {({ linkClick, user, setUser }) => <Header {...{ linkClick, user, setUser }} />}
-  </Consumer>
-)
+export default () => <Consumer>{context => <Header {...context} />}</Consumer>

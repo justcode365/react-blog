@@ -6,7 +6,7 @@ export default class SignUp extends Component {
   handleChange = () => {}
   render() {
     return (
-      <form className="Sign">
+      <form className="Sign Form">
         <h1>Sign Up</h1>
         <Consumer>
           {context => (
@@ -19,13 +19,18 @@ export default class SignUp extends Component {
           <input type="text" placeholder="Username" name="username" onChange={this.handleChange} />
         </p>
         <p>
-          <input type="text" placeholder="Email" name="email" onChange={this.handleChange} />
+          <input type="email" placeholder="Email" name="email" onChange={this.handleChange} />
         </p>
         <p>
-          <input type="text" placeholder="Password" name="password" onChange={this.handleChange} />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={this.handleChange}
+          />
         </p>
         <p>
-          <input type="submit" name="password" value="Sign up" />
+          <input type="submit" value="Sign up" />
         </p>
       </form>
     )

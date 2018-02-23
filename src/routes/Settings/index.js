@@ -6,12 +6,11 @@ import '../Sign/Sign.css'
 class Settings extends Component {
   constructor(props) {
     super(props)
-    this.state = { image: '', username: '', bio: '', email: '' }
+    this.state = { image: '', username: '', bio: '', email: '', password: '' }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.warn(nextProps)
-    if (nextProps.user) {
+    if (nextProps.user && !prevState.username) {
       const { image, username, bio, email } = nextProps.user
       return { image, username, bio, email }
     }
@@ -24,20 +23,34 @@ class Settings extends Component {
     this.setState({ [name]: value })
   }
 
-  handleUpdate = e => {
+  handleUpdate = async e => {
     e.preventDefault()
     const { image, username, bio, email } = this.state
     const user = { image, username, bio, email }
-    // this.props.dispatch(updateUser(user))
+
+    const res = await fetch(`${process.env.REACT_APP_API}/user`, {
+      method: 'PUT',
+      headers: {
+        authorization: localStorage.getItem('token'),
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ user })
+    })
+
+    const info = await res.json()
+    this.props.setUser(info.user)
+    this.props.redirect('/')
   }
 
   handleLogOut = () => {
+    const { setUser, redirect } = this.props
     localStorage.removeItem('token')
-    this.setState({ redirectToHome: true })
+    setUser(null)
+    redirect('/')
   }
 
   render() {
-    const { image, username, bio, email } = this.state
+    const { image, username, bio, email, password } = this.state
     return (
       <form className="Settings container Form">
         <h1>Your Settings</h1>
@@ -70,20 +83,22 @@ class Settings extends Component {
         </p>
         <p>
           <input
-            type="text"
+            type="email"
             name="email"
             autoComplete="email"
             onChange={this.handleChange}
             placeholder="Email"
             value={email}
+            required
+            pattern=".+@.+.com"
           />
         </p>
         <p>
           <input
             name="password"
-            type="text"
+            type="password"
             onChange={this.handleChange}
-            // value={user.password}
+            value={password}
             placeholder="New Password"
           />
         </p>
@@ -103,4 +118,4 @@ class Settings extends Component {
   }
 }
 
-export default () => <Consumer>{({ user }) => <Settings user={user} />}</Consumer>
+export default () => <Consumer>{context => <Settings {...context} />}</Consumer>

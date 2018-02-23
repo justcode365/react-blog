@@ -36,7 +36,9 @@ class Router extends Component {
     }
   }
 
-  setUser = user => this.setState({ user })
+  setUser = user => {
+    this.setState({ user })
+  }
 
   linkClick = e => {
     // 阻止页面跳转刷新
