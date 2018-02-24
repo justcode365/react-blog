@@ -23,10 +23,6 @@
   align-items: flex-start;
 }
 
-.Home-articles {
-  flex: 1;
-}
-
 .Home-taglist {
   width: 20%;
   padding: 10px;

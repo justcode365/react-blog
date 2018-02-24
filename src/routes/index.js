@@ -26,7 +26,7 @@ class Router extends Component {
     super()
 
     const { pathname } = window.location
-    this.state = { route: pathname, user: null }
+    this.state = { route: pathname, user: undefined }
   }
 
   componentDidMount() {
@@ -64,7 +64,7 @@ class Router extends Component {
           const D = routeConfig[param]
           const value = match[1]
           const key = param.split(':')[1].split('/')[0]
-          return <D params={{ [key]: value }} />
+          return <D matchParams={{ [key]: value }} />
         } else {
           throw new Error('路由有错误')
         }
@@ -76,7 +76,12 @@ class Router extends Component {
     const { route, user } = this.state
     return (
       <Provider
-        value={{ linkClick: this.linkClick, redirect: this.redirect, user, setUser: this.setUser }}
+        value={{
+          linkClick: this.linkClick,
+          redirect: this.redirect,
+          setUser: this.setUser,
+          user
+        }}
       >
         <Header />
         {this.matchRouter(route)}

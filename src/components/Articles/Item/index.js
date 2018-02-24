@@ -1,7 +1,6 @@
 import React from 'react'
 import unknow from './unknow.jpg'
 import Like from './Like'
-import './Item.css'
 
 export default ({ post }) => (
   <section className="Item">

@@ -1,7 +1,8 @@
 .User {
   background-color: #f3f3f3;
   text-align: center;
-  padding: 30px 100px;
+  padding: 30px 100px 20px;
+  margin-bottom: 30px;
 }
 
 .User img {
@@ -11,6 +12,13 @@
 
 .User button {
   float: right;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.User button:hover {
+  background-color: #ccc;
 }
 
 .User div {
@@ -26,4 +34,9 @@
   line-height: 30px;
   border-radius: 3px;
   padding: 0 10px;
+}
+
+.User-articles {
+  max-width: 800px;
+  margin: 0 auto;
 }

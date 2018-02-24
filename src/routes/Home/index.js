@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Tabs from 'components/Tabs'
+import Articles from 'components/Articles'
 import Taglist from './Taglist'
-import Articles from './Articles'
 import './Home.css'
 
 export default class Home extends Component {

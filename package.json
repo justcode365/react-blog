@@ -1,16 +1,16 @@
 {
-  "name": "blog",
+  "name": "react-blog",
   "version": "0.1.0",
-  "homepage": "https://justcode365.github.io/react-blog",
   "private": true,
   "dependencies": {
     "react": "^16.3.0-alpha.1",
     "react-dom": "^16.3.0-alpha.1",
+    "react-feather": "^1.0.8",
     "react-scripts": "1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp ./build/index.html ./build/200.html",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

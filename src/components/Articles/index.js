@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import Item from 'components/Item'
+import Item from './Item'
+import './Articles.css'
 
 export default class TagList extends Component {
   render() {
     const { articles, articlesCount, page_no, fetchArticles } = this.props
 
     return (
-      <div className="Home-article">
+      <div className="Articles">
         {articles.map((post, i) => <Item key={i} post={post} />)}
         <p>
           <a

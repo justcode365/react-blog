@@ -1,3 +1,7 @@
+.Articles {
+  flex: 1;
+}
+
 .Item {
   border-top: 1px solid #ddd;
   padding: 20px 0;
@@ -39,4 +43,31 @@
   border-radius: 20px;
   border: 1px solid #ccc;
   color: #ccc;
+}
+
+.Articles-like {
+  width: 40px;
+  height: 28px;
+  border-radius: 4px;
+  color: var(--green);
+  border: 1px solid var(--green);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.Articles-like svg {
+  fill: var(--green);
+  color: var(--green);
+  margin-right: 3px;
+}
+
+.Articles-like:hover {
+  background-color: var(--green);
+  color: #fff;
+}
+
+.Articles-like:hover svg {
+  fill: #fff;
+  color: #fff;
 }

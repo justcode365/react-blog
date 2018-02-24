@@ -5139,6 +5139,10 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "http://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
+react-feather@^1.0.8:
+  version "1.0.8"
+  resolved "http://registry.npm.taobao.org/react-feather/download/react-feather-1.0.8.tgz#69b13d5c729949f194d33201dee91bab67fa31a2"
+
 react-scripts@1.1.1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/react-scripts/download/react-scripts-1.1.1.tgz#279d449f7311fed910506987a1ade014027788a8"
