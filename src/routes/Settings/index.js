@@ -4,10 +4,7 @@ import './Settings.css'
 import '../Sign/Sign.css'
 
 class Settings extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { image: '', username: '', bio: '', email: '', password: '' }
-  }
+  state = { image: '', username: '', bio: '', email: '', password: '' }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.user && !prevState.username) {

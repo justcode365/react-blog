@@ -64,7 +64,14 @@ class Router extends Component {
           const D = routeConfig[param]
           const value = match[1]
           const key = param.split(':')[1].split('/')[0]
-          return <D matchParams={{ [key]: value }} />
+          return (
+            <D
+              match={{
+                params: { [key]: value },
+                path: route
+              }}
+            />
+          )
         } else {
           throw new Error('路由有错误')
         }

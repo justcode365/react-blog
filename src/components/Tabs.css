@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.Tabs li {
+.Tabs a {
   padding: 10px 20px;
   display: inline-block;
   cursor: pointer;
@@ -12,7 +12,11 @@
   border-bottom: none;
 }
 
-.Tabs li.active {
+.Tabs a:hover {
+  color: #555;
+}
+
+.Tabs .active a {
   color: var(--green);
   border-bottom: 2px solid var(--green);
 }

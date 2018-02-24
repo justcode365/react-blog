@@ -1,22 +1,33 @@
 import React, { Component, Fragment } from 'react'
 import { Consumer } from 'routes'
-import Tabs from 'components/Tabs'
+import Tabs, { Tab } from 'components/Tabs'
 import Articles from 'components/Articles'
 import { Settings } from 'react-feather'
 
 import './User.css'
 
 class User extends Component {
-  state = {
-    articles: [],
-    articlesCount: 0,
-    tabs: ['My Articles', 'Favorited Articles'],
-    activeTabIndex: 0,
-    page_no: 0
+  constructor(props) {
+    super(props)
+    console.log(props.match)
+    this.state = {
+      articles: [],
+      articlesCount: 0,
+      tabs: ['My Articles', 'Favorited Articles'],
+      activeTabIndex: 1,
+      page_no: 0
+    }
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return null
+  }
+
   componentDidMount() {
     console.log('User mount')
-    this.fetchArticles('My Articles')
+    const { activeTabIndex, tabs } = this.state
+
+    this.fetchArticles(tabs[activeTabIndex])
   }
 
   fetchArticles = async (tagname, page_no = 0) => {
@@ -27,7 +38,7 @@ class User extends Component {
       activeTabIndex = 1
       queryName = 'favorited'
     }
-    const { matchParams: { user: username } } = this.props
+    const { params: { user: username } } = this.props.match
 
     const url = `${process.env.REACT_APP_API}/articles?${queryName}=${username}&limit=5&offset=0`
     const res = await fetch(url)
@@ -37,8 +48,8 @@ class User extends Component {
 
   render() {
     const { articles, tabs, activeTabIndex, articlesCount, page_no } = this.state
-    const { user = {} } = this.props
-    console.log()
+    const { user = {}, match, redirect } = this.props
+    console.log(match.params)
 
     return (
       <Fragment>
@@ -47,8 +58,8 @@ class User extends Component {
           <h2>{user.username}</h2>
           <p style={{ color: '#aaa' }}>{user.bio}</p>
           <div className="container">
-            {user.username === this.props.matchParams.user ? (
-              <button>
+            {user.username === match.params.user ? (
+              <button onClick={() => redirect('/settings')}>
                 <Settings size="14" style={{ marginRight: 5 }} /> Edit Profile Settings
               </button>
             ) : (
@@ -58,7 +69,13 @@ class User extends Component {
         </section>
 
         <section className="User-articles">
-          <Tabs {...{ tabs, activeTabIndex, fetchArticles: this.fetchArticles }} />
+          <Tabs>
+            {tabs.map((tab, i) => (
+              <Tab key={i} active={i === activeTabIndex}>
+                <a>{tab}</a>
+              </Tab>
+            ))}
+          </Tabs>
           <Articles articles={articles} articlesCount={articlesCount} page_no={page_no} />
         </section>
       </Fragment>
@@ -66,6 +83,4 @@ class User extends Component {
   }
 }
 
-export default ({ matchParams }) => (
-  <Consumer>{context => <User {...context} matchParams={matchParams} />}</Consumer>
-)
+export default ({ match }) => <Consumer>{context => <User {...context} match={match} />}</Consumer>
