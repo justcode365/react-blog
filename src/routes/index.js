@@ -9,7 +9,8 @@ const router = {
   '/signup': asyncload(() => import('./Sign/SignUp')),
   '/settings': asyncload(() => import('./Settings')),
   '/editor': asyncload(() => import('./Editor')),
-  '/@:user': asyncload(() => import('./User'))
+  '/@:user': asyncload(() => import('./User')),
+  '/article': asyncload(() => import('./Article'))
 }
 
 const routeConfig = {

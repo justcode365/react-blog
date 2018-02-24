@@ -1,0 +1,11 @@
+.Article-banner {
+  background-color: #333;
+  height: 100px;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+.Article-banner h1 {
+  font-size: 40px;
+  color: #fff;
+}

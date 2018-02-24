@@ -1,11 +1,10 @@
 import React from 'react'
-import unknow from './unknow.jpg'
 import Like from './Like'
 
 export default ({ post }) => (
   <section className="Item">
     <div className="Item-info">
-      <img src={post.author.image || unknow} alt="avatar" />
+      <img src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
       <div className="Item-user">
         <a href={'@' + post.author.username}>{post.author.username}</a>
         <p>{new Date(post.createdAt).toDateString()}</p>
