@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import './Article.css'
 import { Consumer } from '..'
+import Comment from './Comment'
 
 class Article extends Component {
   render() {
@@ -34,6 +35,8 @@ class Article extends Component {
         <section>body</section>
 
         <hr />
+
+        <Comment />
       </div>
     )
   }
