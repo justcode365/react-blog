@@ -12,32 +12,28 @@ class Article extends Component {
         <section className="Article-banner">
           <h1>Hello</h1>
 
-          <div style={{ display: 'flex' }}>
-            <img
-              width={30}
-              height={30}
-              src={user.image || process.env.PUBLIC_URL + '/img/unknow.png'}
-              alt="avatar"
-              style={{ marginRight: 5 }}
-            />
-            <div>
+          <div className="Article-userinfo">
+            <img src={user.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
+            <div style={{ marginRight: 10 }}>
               <a style={{ color: '#fff' }} href={'@' + user.username}>
                 {user.username}
               </a>
-              <p style={{ color: '#bbb', fontSize: '.8rem', margin: 0 }}>
-                {new Date(user.createdAt).toDateString()}
-              </p>
+              <p>{new Date(user.createdAt).toDateString()}</p>
             </div>
             <button>
-              <Edit2 />
+              <Edit2 size={16} />
               Edit Article
             </button>
-            <button>
-              <Trash2 />
+            <button className="danger">
+              <Trash2 size={16} />
               Delete Article
             </button>
           </div>
         </section>
+
+        <section>body</section>
+
+        <hr />
       </div>
     )
   }
