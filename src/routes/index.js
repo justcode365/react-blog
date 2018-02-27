@@ -5,8 +5,8 @@ import Header from 'components/Header'
 const router = {
   '/': Home,
   '/home': Home,
-  '/signin': asyncload(() => import('./Sign/SignIn')),
-  '/signup': asyncload(() => import('./Sign/SignUp')),
+  '/signin': asyncload(() => import('./SignIn')),
+  '/signup': asyncload(() => import('./SignUp')),
   '/settings': asyncload(() => import('./Settings')),
   '/editor': asyncload(() => import('./Editor')),
   '/@:user': asyncload(() => import('./User')),

@@ -38,8 +38,8 @@ class Editor extends Component {
     const { email, password, error } = this.state
 
     return (
-      <form className="Sign Form" onSubmit={this.handleSubmit}>
-        {error && <li className="Form-error">{error}</li>}
+      <form className="sign form" onSubmit={this.handleSubmit}>
+        {error && <li className="form-error">{error}</li>}
 
         <p>
           <input

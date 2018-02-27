@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Consumer } from 'routes'
 import './Settings.css'
-import '../Sign/Sign.css'
 
 class Settings extends Component {
   state = { image: '', username: '', bio: '', email: '', password: '' }
@@ -49,7 +48,7 @@ class Settings extends Component {
   render() {
     const { image, username, bio, email, password } = this.state
     return (
-      <form className="Settings container Form">
+      <form className="Settings container form">
         <h1>Your Settings</h1>
         <p>
           <input

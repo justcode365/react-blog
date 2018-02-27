@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Consumer } from 'routes'
-import './Sign.css'
 
 class SignIn extends Component {
   state = { email: '', password: '', error: '' }
@@ -39,7 +38,7 @@ class SignIn extends Component {
     const { email, password, error } = this.state
 
     return (
-      <form className="Sign Form" onSubmit={this.handleSubmit}>
+      <form className="sign form" onSubmit={this.handleSubmit}>
         <header>
           <h1>Sign In</h1>
 

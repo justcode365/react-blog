@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import { Consumer } from 'routes'
-import './Sign.css'
 
 export default class SignUp extends Component {
   handleChange = () => {}
   render() {
     return (
-      <form className="Sign Form">
-        <h1>Sign Up</h1>
-        <Consumer>
-          {context => (
-            <a href="/signin" onClick={context.linkClick}>
-              Have an account?
-            </a>
-          )}
-        </Consumer>
+      <form className="sign form">
+        <header>
+          <h1>Sign Up</h1>
+          <Consumer>
+            {context => (
+              <a href="/signin" onClick={context.linkClick}>
+                Have an account?
+              </a>
+            )}
+          </Consumer>
+        </header>
         <p>
           <input type="text" placeholder="Username" name="username" onChange={this.handleChange} />
         </p>

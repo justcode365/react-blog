@@ -1,29 +1,16 @@
-.Sign {
-  width: 600px;
-  margin: 0 auto;
-}
-
-.Sign a {
-  color: var(--green);
-}
-
-.Sign p:last-child {
-  text-align: right;
-}
-
-.Form {
+.form {
   --red: #b85c5c;
 }
 
-.Form header {
+.form header {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.Form input[type='text'],
-.Form input[type='password'],
-.Form input[type='email'],
-.Form textarea {
+.form input[type='text'],
+.form input[type='password'],
+.form input[type='email'],
+.form textarea {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -34,24 +21,24 @@
   font-size: 20px;
 }
 
-.Form input[type='text']::placeholder,
-.Form input[type='password']::placeholder,
-.Form input[type='email']::placeholder,
-.Form textarea::placeholder {
+.form input[type='text']::placeholder,
+.form input[type='password']::placeholder,
+.form input[type='email']::placeholder,
+.form textarea::placeholder {
   color: #999;
 }
 
-.Form textarea {
+.form textarea {
   height: 100px;
 }
 
-.Form input[type='text']:focus,
-.Form textarea {
+.form input[type='text']:focus,
+.form textarea {
   border-color: #66afe9;
   outline: none;
 }
 
-.Form input[type='submit'] {
+.form input[type='submit'] {
   border: none;
   color: #fff;
   padding: 15px 23px;
@@ -61,22 +48,22 @@
   cursor: pointer;
 }
 
-.Form input[type='submit']:hover {
+.form input[type='submit']:hover {
   background-color: #449d44;
 }
 
-.Form input.danger[type='submit'] {
+.form input.danger[type='submit'] {
   background-color: #fff;
   color: var(--red);
   border: 1px solid var(--red);
 }
 
-.Form input.danger[type='submit']:hover {
+.form input.danger[type='submit']:hover {
   background-color: var(--red);
   color: #fff;
 }
 
-.Form-error {
+.form-error {
   display: list-item;
   margin-left: 20px;
   color: var(--red);
