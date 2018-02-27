@@ -64,23 +64,40 @@ class Article extends Component {
         </section>
 
         <section style={{ width: '50%', margin: '0 auto' }}>
-          {/* <Comment /> */}
+          {localStorage.getItem('token') ? (
+            <Card
+              content={<textarea />}
+              footer={
+                <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
+                  <img
+                    src={article.author.image}
+                    width={24}
+                    style={{ borderRadius: '50%', marginRight: 5 }}
+                  />
 
-          <p>
-            <a href="/signin" onClick={linkClick}>
-              Sign in
-            </a>{' '}
-            or{' '}
-            <a href="/signup" onClick={linkClick}>
-              sign up
-            </a>{' '}
-            to add comments on this article.
-          </p>
+                  <button style={{ marginLeft: 10, color: '#bbb', fontSize: '.8rem' }}>
+                    Post Comment
+                  </button>
+                </p>
+              }
+            />
+          ) : (
+            <p>
+              <a href="/signin" onClick={linkClick}>
+                Sign in
+              </a>{' '}
+              or{' '}
+              <a href="/signup" onClick={linkClick}>
+                sign up
+              </a>{' '}
+              to add comments on this article.
+            </p>
+          )}
 
           {comments.map(comment => (
             <Card
               key={comment.id}
-              content={<p>{comment.body}</p>}
+              content={<p style={{ margin: 0 }}>{comment.body}</p>}
               footer={
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
                   <img

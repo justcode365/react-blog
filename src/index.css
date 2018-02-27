@@ -28,6 +28,13 @@ li {
 
 a {
   text-decoration: none;
+  color: var(--green);
+}
+
+a:focus,
+a:hover {
+  color: #3d8b3d;
+  text-decoration: underline;
 }
 
 /* base css */

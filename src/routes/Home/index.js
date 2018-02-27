@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Tabs, { Tab } from 'components/Tabs'
 import Articles from 'components/Articles'
 import Taglist from './Taglist'
+import { Consumer } from 'routes'
 import './Home.css'
 
 export default class Home extends Component {
@@ -64,12 +65,23 @@ export default class Home extends Component {
             <Tabs>
               {tabs.map((tab, i) => (
                 <Tab key={i} active={i === activeTabIndex}>
-                  <a>{tab}</a>
+                  <a
+                    onClick={tab => {
+                      if (tab !== 'Global Feed') {
+                        this.fetchArticles('Global Feed')
+                      } else {
+                        this.fetchFeed()
+                      }
+                    }}
+                  >
+                    {tab}
+                  </a>
                 </Tab>
               ))}
             </Tabs>
             <Articles articles={articles} articlesCount={articlesCount} page_no={page_no} />
           </div>
+
           <Taglist fetchArticles={this.fetchArticles} />
         </main>
       </div>

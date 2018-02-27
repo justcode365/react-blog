@@ -42,8 +42,7 @@ class Router extends Component {
   }
 
   linkClick = e => {
-    // 阻止页面跳转刷新
-    e.preventDefault()
+    e.preventDefault() // 阻止页面跳转刷新
     const { pathname } = e.currentTarget // 事件冒泡
     this.redirect(pathname)
   }
