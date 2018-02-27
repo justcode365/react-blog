@@ -34,3 +34,18 @@
   background-color: #f3f3f3;
   border-radius: 5px;
 }
+
+.Home-taglist a {
+  color: #fff;
+  font-size: 0.8rem;
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 10rem;
+  background-color: #818a91;
+  margin-top: 0.4rem;
+  margin-right: 3px;
+}
+
+.Home-taglist a:hover {
+  background-color: #687077;
+}

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Tag from 'components/Tag'
 
 export default class TagList extends Component {
   state = { tags: [] }
@@ -19,9 +18,9 @@ export default class TagList extends Component {
         {tags ? (
           <div>
             {tags.map(tag => (
-              <Tag key={tag} onClick={() => this.props.fetchArticles(tag)}>
+              <a href="/" key={tag} className="Tag" onClick={() => this.props.fetchArticles(tag)}>
                 {tag}
-              </Tag>
+              </a>
             ))}
           </div>
         ) : (
