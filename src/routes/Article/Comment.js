@@ -5,6 +5,10 @@ export default class Comment extends Component {
   state = { text: '' }
 
   render() {
-    return <form className="Comment">sdfsdf</form>
+    return (
+      <form className="Comment">
+        <textarea />
+      </form>
+    )
   }
 }

@@ -21,7 +21,7 @@ class Header extends Component {
       })
       const { user } = await res.json()
 
-      console.log('取得 userinfo')
+      console.log('get userinfo')
       this.props.setUser(user)
     }
   }

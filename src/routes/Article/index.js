@@ -1,38 +1,47 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import './Article.css'
 import { Consumer } from '..'
 import Comment from './Comment'
+import Card from './Card'
 
 class Article extends Component {
-  state = { article: {} }
+  state = { article: { tagList: [], author: {} }, comments: [] }
 
   componentDidMount() {
     this.fetchArticle()
   }
 
   fetchArticle = async () => {
-    const res = await fetch(
-      'https://conduit.productionready.io/api/articles/how-to-train-your-dragon'
-    )
-    const { article } = await res.json()
-    this.setState({ article })
+    const { match } = this.props
+    const [articlePromise, commentsPromise] = await Promise.all([
+      fetch(`${process.env.REACT_APP_API}/articles/${match.params.title}`),
+      fetch(`${process.env.REACT_APP_API}/articles/${match.params.title}/comments`)
+    ])
+
+    const { article } = await articlePromise.json()
+    const { comments } = await commentsPromise.json()
+    this.setState({ article, comments })
   }
   render() {
-    const { user = {} } = this.props
+    const { user = {}, linkClick } = this.props
+    const { article, comments } = this.state
 
     return (
       <div className="Article">
         <section className="Article-banner">
-          <h1>Hello</h1>
+          <h1 className="container">{article.title}</h1>
 
-          <div className="Article-userinfo">
-            <img src={user.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
+          <div className="Article-userinfo container">
+            <img
+              src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+              alt="avatar"
+            />
             <div style={{ marginRight: 10 }}>
               <a style={{ color: '#fff' }} href={'@' + user.username}>
-                {user.username}
+                {article.author.username}
               </a>
-              <p>{new Date(user.createdAt).toDateString()}</p>
+              <p>{new Date(article.updatedAt).toDateString()}</p>
             </div>
             <button>
               <Edit2 size={16} />
@@ -45,14 +54,56 @@ class Article extends Component {
           </div>
         </section>
 
-        <section>body</section>
+        <section className="container">
+          <h1> {article.body}</h1>
+          <div className="Item-tags ">
+            {article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}
+          </div>
 
-        <hr />
+          <hr />
+        </section>
 
-        <Comment />
+        <section style={{ width: '50%', margin: '0 auto' }}>
+          {/* <Comment /> */}
+
+          <p>
+            <a href="/signin" onClick={linkClick}>
+              Sign in
+            </a>{' '}
+            or{' '}
+            <a href="/signup" onClick={linkClick}>
+              sign up
+            </a>{' '}
+            to add comments on this article.
+          </p>
+
+          {comments.map(comment => (
+            <Card
+              key={comment.id}
+              content={<p>{comment.body}</p>}
+              footer={
+                <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
+                  <img
+                    src={comment.author.image}
+                    width={24}
+                    style={{ borderRadius: '50%', marginRight: 5 }}
+                  />
+                  <a href={`/@${comment.author.username}`} style={{ color: 'var(--green)' }}>
+                    {comment.author.username}
+                  </a>
+                  <span style={{ marginLeft: 10, color: '#bbb', fontSize: '.8rem' }}>
+                    {new Date(article.updatedAt).toDateString()}
+                  </span>
+                </p>
+              }
+            />
+          ))}
+        </section>
       </div>
     )
   }
 }
 
-export default () => <Consumer>{context => <Article {...context} />}</Consumer>
+export default ({ match }) => (
+  <Consumer>{context => <Article {...context} match={match} />}</Consumer>
+)

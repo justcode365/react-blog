@@ -9,7 +9,6 @@ import './User.css'
 class User extends Component {
   constructor(props) {
     super(props)
-    console.log(props.match)
     this.state = {
       articles: [],
       articlesCount: 0,
@@ -49,7 +48,6 @@ class User extends Component {
   render() {
     const { articles, tabs, activeTabIndex, articlesCount, page_no } = this.state
     const { user = {}, match, redirect } = this.props
-    console.log(match.params)
 
     return (
       <Fragment>

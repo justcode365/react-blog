@@ -61,8 +61,6 @@ export default class Home extends Component {
 
         <main className="Home-main container">
           <div className="Home-articles">
-            {/* <Tabs {...{ tabs, activeTabIndex, fetchArticles: this.fetchArticles }} /> */}
-
             <Tabs>
               {tabs.map((tab, i) => (
                 <Tab key={i} active={i === activeTabIndex}>
