@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heart } from 'react-feather'
-import { Consumer } from '../../routes'
+import { Consumer } from 'routes'
 import './Item.css'
 
 export default ({ post }) => (

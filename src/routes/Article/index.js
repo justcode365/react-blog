@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import './Article.css'
-import { Consumer } from '..'
+import { Consumer } from 'routes'
 import Comment from './Comment'
 import Card from './Card'
 

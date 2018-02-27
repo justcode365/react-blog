@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Consumer } from '../index'
+import { Consumer } from 'routes'
 import './Settings.css'
 import '../Sign/Sign.css'
 
