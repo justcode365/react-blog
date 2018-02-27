@@ -5,12 +5,13 @@ import './Articles.css'
 
 export default class Articles extends Component {
   render() {
-    const { articles, articlesCount, page_no, fetchArticles } = this.props
+    const { articles, articlesCount, page_no, setPage } = this.props
+    console.warn(setPage)
 
     return (
       <div className="Articles">
         {articles.map((post, i) => <Item key={i} post={post} />)}
-        <Pagination page={1} />
+        <Pagination current={page_no + 1} onChange={setPage} />
       </div>
     )
   }

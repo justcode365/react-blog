@@ -79,7 +79,14 @@ export default class Home extends Component {
                 </Tab>
               ))}
             </Tabs>
-            <Articles articles={articles} articlesCount={articlesCount} page_no={page_no} />
+            <Articles
+              setPage={page => {
+                this.fetchArticles(tabs[activeTabIndex], page)
+              }}
+              articles={articles}
+              articlesCount={articlesCount}
+              page_no={page_no}
+            />
           </div>
 
           <Taglist fetchArticles={this.fetchArticles} />
