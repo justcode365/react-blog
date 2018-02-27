@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Tabs from 'components/Tabs'
+import Tabs, { Tab } from 'components/Tabs'
 import Articles from 'components/Articles'
 import Taglist from './Taglist'
 import './Home.css'
@@ -51,7 +51,15 @@ export default class Home extends Component {
 
         <main className="Home-main container">
           <div className="Home-articles">
-            <Tabs {...{ tabs, activeTabIndex, fetchArticles: this.fetchArticles }} />
+            {/* <Tabs {...{ tabs, activeTabIndex, fetchArticles: this.fetchArticles }} /> */}
+
+            <Tabs>
+              {tabs.map((tab, i) => (
+                <Tab key={i} active={i === activeTabIndex}>
+                  <a>{tab}</a>
+                </Tab>
+              ))}
+            </Tabs>
             <Articles articles={articles} articlesCount={articlesCount} page_no={page_no} />
           </div>
           <Taglist fetchArticles={this.fetchArticles} />
