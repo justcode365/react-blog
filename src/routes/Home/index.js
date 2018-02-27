@@ -14,7 +14,11 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.fetchArticles('Global Feed')
+    if (localStorage.getItem('token')) {
+      this.fetchFeed()
+    } else {
+      this.fetchArticles('Global Feed')
+    }
   }
 
   fetchArticles = async (tagname, page_no = 0) => {
@@ -33,8 +37,14 @@ export default class Home extends Component {
     this.setState({ articles, articlesCount, page_no, tabs, activeTabIndex })
   }
 
-  fetchFeed = async () => {
-    fetch(`${process.env.REACT_APP_API}/articles/feed?limit=5&offset=0`)
+  fetchFeed = async (page_no = 0) => {
+    const res = await fetch(`${process.env.REACT_APP_API}/articles/feed?limit=5&offset=0`, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+    const { articles, articlesCount } = await res.json()
+    const tabs = ['Your Feed', 'Global Feed']
+    const activeTabIndex = 0
+    this.setState({ articles, articlesCount, page_no, tabs, activeTabIndex })
   }
 
   render() {

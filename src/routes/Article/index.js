@@ -5,6 +5,19 @@ import { Consumer } from '..'
 import Comment from './Comment'
 
 class Article extends Component {
+  state = { article: {} }
+
+  componentDidMount() {
+    this.fetchArticle()
+  }
+
+  fetchArticle = async () => {
+    const res = await fetch(
+      'https://conduit.productionready.io/api/articles/how-to-train-your-dragon'
+    )
+    const { article } = await res.json()
+    this.setState({ article })
+  }
   render() {
     const { user = {} } = this.props
 

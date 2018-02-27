@@ -2,49 +2,6 @@
   flex: 1;
 }
 
-.Item {
-  border-top: 1px solid #ddd;
-  padding: 20px 0;
-}
-
-.Item-info {
-  display: flex;
-  justify-content: space-between;
-}
-
-.Item-info a {
-  color: var(--green);
-}
-
-.Item-info p {
-  color: #bbb;
-  font-size: 10px;
-  margin-top: 3px;
-}
-
-.Item-user {
-  flex: 1;
-}
-
-.Item img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-.Item .tagList > span {
-  display: inline-block;
-  height: 20px;
-  padding: 3px 10px;
-  font-size: 14px;
-  line-height: 20px;
-  margin-left: 5px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  color: #ccc;
-}
-
 .Articles-like {
   width: 40px;
   height: 28px;

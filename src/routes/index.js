@@ -10,7 +10,7 @@ const router = {
   '/settings': asyncload(() => import('./Settings')),
   '/editor': asyncload(() => import('./Editor')),
   '/@:user': asyncload(() => import('./User')),
-  '/article': asyncload(() => import('./Article'))
+  '/article/:title': asyncload(() => import('./Article'))
 }
 
 const routeConfig = {
@@ -65,19 +65,11 @@ class Router extends Component {
           const D = routeConfig[param]
           const value = match[1]
           const key = param.split(':')[1].split('/')[0]
-          return (
-            <D
-              match={{
-                params: { [key]: value },
-                path: route
-              }}
-            />
-          )
-        } else {
-          throw new Error('路由有错误')
+          return <D match={{ params: { [key]: value }, path: route }} />
         }
       }
     }
+    if (!C) throw new Error('路由有错误')
   }
 
   render() {

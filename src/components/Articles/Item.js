@@ -1,5 +1,6 @@
 import React from 'react'
-import Like from './Like'
+import { Heart } from 'react-feather'
+import './Item.css'
 
 export default ({ post }) => (
   <section className="Item">
@@ -9,14 +10,17 @@ export default ({ post }) => (
         <a href={'@' + post.author.username}>{post.author.username}</a>
         <p>{new Date(post.createdAt).toDateString()}</p>
       </div>
-      <Like liked={post.favorited} count={post.favoritesCount} />
+      <button className={`Articles-like ${post.favorited ? 'liked' : ''}`}>
+        <Heart size={12} />
+        {post.favoritesCount}
+      </button>
     </div>
 
     <a className="Item-content" href={'/article/' + post.slug}>
       <h2>{post.title}</h2>
       <p>{post.description}</p>
     </a>
-    <div>
+    <div className="Item-link">
       <a href={'/article/' + post.slug}>Read more...</a>
       <div className="Item-tags">{post.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</div>
     </div>
