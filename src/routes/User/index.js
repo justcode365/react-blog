@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { Consumer } from 'routes'
-import Tabs, { Tab } from 'components/Tabs'
 import Articles from 'components/Articles'
 import { Settings } from 'react-feather'
 
@@ -12,17 +11,15 @@ class User extends Component {
     this.state = {
       articles: [],
       articlesCount: 0,
-      tabs: ['My Articles', 'Favorited Articles'],
-      activeTabIndex: 0,
+      activeTab: 'My Articles',
       page_no: 0
     }
   }
 
   componentDidMount() {
     console.log('User mount')
-    const { activeTabIndex, tabs } = this.state
-
-    this.fetchArticles(tabs[activeTabIndex])
+    const { activeTab } = this.state
+    this.fetchArticles(activeTab)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,11 +32,9 @@ class User extends Component {
   }
 
   fetchArticles = async (tagname, page_no = 0) => {
-    let activeTabIndex = 0
     let queryName = 'author'
 
     if (tagname === 'Favorited Articles') {
-      activeTabIndex = 1
       queryName = 'favorited'
     }
     const { params: { user: username } } = this.props.match
@@ -47,11 +42,11 @@ class User extends Component {
     const url = `${process.env.REACT_APP_API}/articles?${queryName}=${username}&limit=5&offset=0`
     const res = await fetch(url)
     const { articles, articlesCount } = await res.json()
-    this.setState({ articles, articlesCount, page_no, activeTabIndex })
+    this.setState({ articles, articlesCount, page_no, activeTab: tagname })
   }
 
   render() {
-    const { articles, tabs, activeTabIndex, articlesCount, page_no } = this.state
+    const { articles, activeTab, articlesCount, page_no } = this.state
     const { user = {}, match, redirect, linkClick } = this.props
 
     return (
@@ -72,18 +67,15 @@ class User extends Component {
         </section>
 
         <section className="User-articles">
-          <Tabs>
-            {tabs.map((tab, i) => (
-              <Tab key={i} active={i === activeTabIndex}>
-                <a
-                  href={`/@${user.username}${tab === 'Favorited Articles' ? '/favorites' : ''}`}
-                  onClick={linkClick}
-                >
-                  {tab}
-                </a>
-              </Tab>
-            ))}
-          </Tabs>
+          <ul className="tabs">
+            <li className={activeTab === 'My Articles' ? 'active' : ''}>
+              <a>My Articles</a>
+            </li>
+            <li className={activeTab === 'Favorited Articles' ? 'active' : ''}>
+              <a>Favorited Articles</a>
+            </li>
+          </ul>
+
           <Articles articles={articles} articlesCount={articlesCount} page_no={page_no} />
         </section>
       </Fragment>

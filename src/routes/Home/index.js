@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Tabs, { Tab } from 'components/Tabs'
 import Articles from 'components/Articles'
 import Taglist from './Taglist'
 import { Consumer } from 'routes'
@@ -7,8 +6,7 @@ import './Home.css'
 
 export default class Home extends Component {
   state = {
-    tabs: ['Global Feed'],
-    activeTabIndex: 0,
+    activeTab: 'Global Feed',
     articles: [],
     articlesCount: 0,
     page: 1
@@ -24,18 +22,13 @@ export default class Home extends Component {
 
   fetchArticles = async (tagname, page = 1) => {
     let tagQuery = ''
-    let tabs = ['Global Feed']
-    let activeTabIndex = 0
     if (tagname !== 'Global Feed') {
       tagQuery = `tag=${tagname}&`
-      tabs = ['Global Feed', tagname]
-      activeTabIndex = 1
     }
     const queryString = `?${tagQuery}limit=5&offset=${page - 1}`
-
     const res = await fetch(`${process.env.REACT_APP_API}/articles${queryString}`)
     const { articles, articlesCount } = await res.json()
-    this.setState({ articles, articlesCount, page, tabs, activeTabIndex })
+    this.setState({ articles, articlesCount, page, activeTab: tagname })
   }
 
   fetchFeed = async (page = 1) => {
@@ -45,14 +38,11 @@ export default class Home extends Component {
       headers: { authorization: localStorage.getItem('token') }
     })
     const { articles, articlesCount } = await res.json()
-    const tabs = ['Your Feed', 'Global Feed']
-    const activeTabIndex = 0
-    this.setState({ articles, articlesCount, page, tabs, activeTabIndex })
+    this.setState({ articles, articlesCount, page })
   }
 
   render() {
-    const { tabs, activeTabIndex, articles, articlesCount, page } = this.state
-
+    const { activeTab, articles, articlesCount, page } = this.state
     return (
       <div>
         {!localStorage.getItem('token') && (
@@ -64,30 +54,28 @@ export default class Home extends Component {
 
         <main className="Home-main container">
           <div className="Home-articles">
-            <Tabs>
-              {tabs.map((tab, i) => (
-                <Tab key={i} active={i === activeTabIndex}>
-                  <a
-                    onClick={tab => {
-                      if (tab !== 'Global Feed') {
-                        this.fetchArticles('Global Feed')
-                      } else {
-                        this.fetchFeed()
-                      }
-                    }}
-                  >
-                    {tab}
-                  </a>
-                </Tab>
-              ))}
-            </Tabs>
+            <ul className="tabs">
+              {localStorage.getItem('token') && (
+                <li className={activeTab === 'Your Feed' ? 'active' : ''}>
+                  <a>Your Feed</a>
+                </li>
+              )}
+
+              <li className={activeTab === 'Global Feed' ? 'active' : ''}>
+                <a>Global Feed</a>
+              </li>
+
+              {activeTab !== 'Global Feed' && (
+                <li className="active">
+                  <a># {activeTab}</a>
+                </li>
+              )}
+            </ul>
             <Articles
               setPage={page => {
-                if (tabs[activeTabIndex] === 'Your Feed') {
-                  this.fetchFeed(page)
-                } else {
-                  this.fetchArticles(tabs[activeTabIndex], page)
-                }
+                activeTab === 'Your Feed'
+                  ? this.fetchFeed(page)
+                  : this.fetchArticles(activeTab, page)
               }}
               articles={articles}
               articlesCount={articlesCount}
