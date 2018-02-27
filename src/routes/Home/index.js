@@ -11,7 +11,7 @@ export default class Home extends Component {
     activeTabIndex: 0,
     articles: [],
     articlesCount: 0,
-    page_no: 0
+    page: 1
   }
 
   componentDidMount() {
@@ -22,7 +22,7 @@ export default class Home extends Component {
     }
   }
 
-  fetchArticles = async (tagname, page_no = 0) => {
+  fetchArticles = async (tagname, page = 1) => {
     let tagQuery = ''
     let tabs = ['Global Feed']
     let activeTabIndex = 0
@@ -31,25 +31,27 @@ export default class Home extends Component {
       tabs = ['Global Feed', tagname]
       activeTabIndex = 1
     }
-    const queryString = `?${tagQuery}limit=5&offset=${page_no}`
+    const queryString = `?${tagQuery}limit=5&offset=${page - 1}`
 
     const res = await fetch(`${process.env.REACT_APP_API}/articles${queryString}`)
     const { articles, articlesCount } = await res.json()
-    this.setState({ articles, articlesCount, page_no, tabs, activeTabIndex })
+    this.setState({ articles, articlesCount, page, tabs, activeTabIndex })
   }
 
-  fetchFeed = async (page_no = 0) => {
-    const res = await fetch(`${process.env.REACT_APP_API}/articles/feed?limit=5&offset=0`, {
+  fetchFeed = async (page = 1) => {
+    const queryString = `?limit=5&offset=${page - 1}`
+
+    const res = await fetch(`${process.env.REACT_APP_API}/articles/feed${queryString}`, {
       headers: { authorization: localStorage.getItem('token') }
     })
     const { articles, articlesCount } = await res.json()
     const tabs = ['Your Feed', 'Global Feed']
     const activeTabIndex = 0
-    this.setState({ articles, articlesCount, page_no, tabs, activeTabIndex })
+    this.setState({ articles, articlesCount, page, tabs, activeTabIndex })
   }
 
   render() {
-    const { tabs, activeTabIndex, articles, articlesCount, page_no } = this.state
+    const { tabs, activeTabIndex, articles, articlesCount, page } = this.state
 
     return (
       <div>
@@ -81,11 +83,15 @@ export default class Home extends Component {
             </Tabs>
             <Articles
               setPage={page => {
-                this.fetchArticles(tabs[activeTabIndex], page)
+                if (tabs[activeTabIndex] === 'Your Feed') {
+                  this.fetchFeed(page)
+                } else {
+                  this.fetchArticles(tabs[activeTabIndex], page)
+                }
               }}
               articles={articles}
               articlesCount={articlesCount}
-              page_no={page_no}
+              page={page}
             />
           </div>
 

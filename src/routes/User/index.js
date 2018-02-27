@@ -13,13 +13,9 @@ class User extends Component {
       articles: [],
       articlesCount: 0,
       tabs: ['My Articles', 'Favorited Articles'],
-      activeTabIndex: 1,
+      activeTabIndex: 0,
       page_no: 0
     }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return null
   }
 
   componentDidMount() {
@@ -27,6 +23,15 @@ class User extends Component {
     const { activeTabIndex, tabs } = this.state
 
     this.fetchArticles(tabs[activeTabIndex])
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      !prevProps.match.path.includes('favorites') &&
+      this.props.match.path.includes('favorites')
+    ) {
+      this.fetchArticles('Favorited Articles')
+    }
   }
 
   fetchArticles = async (tagname, page_no = 0) => {
@@ -47,7 +52,7 @@ class User extends Component {
 
   render() {
     const { articles, tabs, activeTabIndex, articlesCount, page_no } = this.state
-    const { user = {}, match, redirect } = this.props
+    const { user = {}, match, redirect, linkClick } = this.props
 
     return (
       <Fragment>
@@ -70,7 +75,12 @@ class User extends Component {
           <Tabs>
             {tabs.map((tab, i) => (
               <Tab key={i} active={i === activeTabIndex}>
-                <a>{tab}</a>
+                <a
+                  href={`/@${user.username}${tab === 'Favorited Articles' ? '/favorites' : ''}`}
+                  onClick={linkClick}
+                >
+                  {tab}
+                </a>
               </Tab>
             ))}
           </Tabs>
