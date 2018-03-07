@@ -1,109 +1,22 @@
 import React, { Component, createContext } from 'react'
 import Home from './Home'
+import Settings from './Settings'
 import Header from 'components/Header'
+import { hot } from 'react-hot-loader'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-const router = {
-  '/': Home,
-  '/home': Home,
-  '/signin': asyncload(() => import('./SignIn')),
-  '/signup': asyncload(() => import('./SignUp')),
-  '/settings': asyncload(() => import('./Settings')),
-  '/editor': asyncload(() => import('./Editor')),
-  '/@:user': asyncload(() => import('./User')),
-  '/article/:title': asyncload(() => import('./Article'))
-}
+const { Provider, Consumer } = createContext()
 
-const routeConfig = {
-  ...router,
-  params: Object.keys(router).filter(v => v.includes(':'))
-}
+const App = () => (
+  <Router>
+    <div>
+      <Header />
 
-const { Provider, Consumer } = createContext({})
+      <Route exact path="/" component={Home} />
+      <Route path="/about" component={Settings} />
+    </div>
+  </Router>
+)
 
+export default hot(module)(App)
 export { Consumer }
-
-class Router extends Component {
-  constructor() {
-    super()
-
-    const { pathname } = window.location
-    this.state = { route: pathname, user: undefined }
-  }
-
-  componentDidMount() {
-    // 浏览器 前进 后退
-    window.onpopstate = e => {
-      this.setState({ route: e.state.pathname })
-    }
-  }
-
-  setUser = user => {
-    this.setState({ user })
-  }
-
-  linkClick = e => {
-    e.preventDefault() // 阻止页面跳转刷新
-    const { pathname } = e.currentTarget // 事件冒泡
-    this.redirect(pathname)
-  }
-
-  redirect = pathname => {
-    this.setState({ route: pathname })
-    window.history.pushState({ pathname }, '', pathname) // 改变 地址
-  }
-
-  matchRouter = route => {
-    const C = routeConfig[route]
-
-    if (C) {
-      return <C />
-    } else {
-      for (const param of routeConfig.params) {
-        const match = route.match(new RegExp(param.replace(/:[^\s/]+/g, '([\\w-]+)')))
-        if (match) {
-          const D = routeConfig[param]
-          const value = match[1]
-          const key = param.split(':')[1].split('/')[0]
-          return <D match={{ params: { [key]: value }, path: route }} />
-        }
-      }
-    }
-    if (!C) throw new Error('路由有错误')
-  }
-
-  render() {
-    const { route, user } = this.state
-    return (
-      <Provider
-        value={{
-          linkClick: this.linkClick,
-          redirect: this.redirect,
-          setUser: this.setUser,
-          user
-        }}
-      >
-        <Header />
-        {this.matchRouter(route)}
-      </Provider>
-    )
-  }
-}
-
-function asyncload(importComponent) {
-  return class extends Component {
-    state = { component: null }
-
-    async componentDidMount() {
-      const { default: component } = await importComponent()
-      this.setState({ component })
-    }
-
-    render() {
-      const C = this.state.component
-
-      return C ? <C {...this.props} /> : null
-    }
-  }
-}
-
-export default Router

@@ -3,7 +3,9 @@ import { Heart } from 'react-feather'
 import { Consumer } from 'routes'
 import './Item.css'
 
-export default ({ post }) => (
+export default ({ post }) => <div>hello</div>
+
+const a = ({ post }) => (
   <Consumer>
     {({ linkClick }) => (
       <section className="Item">

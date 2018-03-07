@@ -1,2 +1,3 @@
 - [real world](https://github.com/gothinkster/realworld)
-- `react`  "16.3.0"
+- [create react app](https://github.com/facebook/create-react-app)
+- [react-hot-loader](https://github.com/gaearon/react-hot-loader)

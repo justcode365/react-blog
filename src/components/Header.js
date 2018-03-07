@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Consumer } from 'routes'
+import { Consumer } from '../App'
 import { Edit, Settings } from 'react-feather'
+import { Link } from 'react-router-dom'
+
 import './Header.css'
 
-class Header extends Component {
+export default class Header extends Component {
   componentDidMount() {
     console.log('Header mount')
     this.fetchUser()
@@ -82,5 +84,3 @@ class Header extends Component {
     )
   }
 }
-
-export default () => <Consumer>{context => <Header {...context} />}</Consumer>
