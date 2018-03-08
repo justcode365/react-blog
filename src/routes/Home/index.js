@@ -62,7 +62,7 @@ export default class Home extends Component {
               )}
 
               <li className={activeTab === 'Global Feed' ? 'active' : ''}>
-                <a>Global Feed</a>
+                <a onClick={() => this.fetchArticles('Global Feed')}>Global Feed</a>
               </li>
 
               {activeTab !== 'Global Feed' && (

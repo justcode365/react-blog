@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { Consumer } from 'routes'
+import { Consumer } from '../App'
 import Articles from 'components/Articles'
 import { Settings } from 'react-feather'
-
-import './User.css'
+import styled from 'styled-components'
 
 class User extends Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class User extends Component {
 
     return (
       <Fragment>
-        <section className="User">
+        <Section>
           <img src={user.image} alt="" />
           <h2>{user.username}</h2>
           <p style={{ color: '#aaa' }}>{user.bio}</p>
@@ -64,9 +63,9 @@ class User extends Component {
               <button> + Follow {user.username}</button>
             )}
           </div>
-        </section>
+        </Section>
 
-        <section className="User-articles">
+        <section style={{ maxWidth: 800, margin: '0 auto' }}>
           <ul className="tabs">
             <li className={activeTab === 'My Articles' ? 'active' : ''}>
               <a>My Articles</a>
@@ -82,5 +81,43 @@ class User extends Component {
     )
   }
 }
+
+const Section = styled.section`
+  background-color: #f3f3f3;
+  text-align: center;
+  padding: 30px 100px 20px;
+  margin-bottom: 30px;
+
+  img {
+    width: 100px;
+    border-radius: 50%;
+  }
+
+  button {
+    float: right;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #ccc;
+  }
+
+  div {
+    max-width: 800px;
+    overflow: hidden; /* BFC */
+  }
+
+  button {
+    border: 1px solid #999;
+    background-color: transparent;
+    color: #999;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    padding: 0 10px;
+  }
+`
 
 export default ({ match }) => <Consumer>{context => <User {...context} match={match} />}</Consumer>

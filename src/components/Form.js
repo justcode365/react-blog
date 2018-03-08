@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default ({ children }) => <Form>{children}</Form>
+export default ({ children, ...props }) => <Form {...props}>{children}</Form>
 
 const Form = styled.form`
   --red: #b85c5c;

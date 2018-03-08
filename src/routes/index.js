@@ -1,11 +1,15 @@
 import React from 'react'
-import Home from './Home'
-import Settings from './Settings'
-import SignIn from './SignIn'
-import SignUp from './SignUp'
-import Header from 'components/Header'
 import { hot } from 'react-hot-loader'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Header from 'components/Header'
+import Home from './Home'
+import SignIn from './SignIn'
+import SignUp from './SignUp'
+import Settings from './Settings'
+import Editor from './Editor'
+import User from './User'
+import Article from './Article'
 
 const App = () => (
   <Router>
@@ -15,7 +19,10 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/about" component={Settings} />
+      <Route path="/settings" component={Settings} />
+      <Route path="/editor" component={Editor} />
+      <Route path="/@:user" component={User} />
+      <Route path="/article" component={Article} />
     </div>
   </Router>
 )

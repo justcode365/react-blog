@@ -6,7 +6,13 @@ export default class Comment extends Component {
 
   render() {
     return (
-      <form className="Comment">
+      <form
+        style={{
+          width: 100,
+          height: 60,
+          border: '1px solid #e5e5e5'
+        }}
+      >
         <textarea />
       </form>
     )

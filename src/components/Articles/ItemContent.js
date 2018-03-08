@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-const linkClick = () => {}
+import { Link } from 'react-router-dom'
 
 export default ({ post }) => (
   <div>
@@ -9,9 +9,7 @@ export default ({ post }) => (
       <p>{post.description}</p>
     </Content>
     <ItemLink>
-      <a href={'/article/' + post.slug} onClick={linkClick}>
-        Read more...
-      </a>
+      <Link to={'/article/' + post.slug}>Read more...</Link>
       <Tags>{post.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</Tags>
     </ItemLink>
   </div>

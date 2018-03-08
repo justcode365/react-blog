@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react'
 import { Edit, Settings } from 'react-feather'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Consumer } from '../App'
 
-export default class Header extends Component {
+class Header extends Component {
   componentDidMount() {
     console.log('Header mount')
     this.fetchUser()
@@ -21,7 +22,6 @@ export default class Header extends Component {
       })
       const { user } = await res.json()
 
-      console.log('get userinfo')
       this.props.setUser(user)
     }
   }
@@ -49,24 +49,24 @@ export default class Header extends Component {
           ) : (
             <Fragment>
               <li>
-                <a href="/editor" onClick={linkClick}>
+                <Link to="/editor">
                   <Edit color="#aaa" size={16} className="Header-logo" />
                   New Post
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href="/settings" onClick={linkClick}>
+                <Link to="/settings">
                   <Settings color="#aaa" size={16} className="Header-logo" />
                   Settings
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a href={`/@${user.username}`} onClick={linkClick}>
+                <Link to={`/@${user.username}`}>
                   <img src={user.image} width={26} alt="avatar" style={{ marginRight: 3 }} />
                   <span>{user.username}</span>
-                </a>
+                </Link>
               </li>
             </Fragment>
           )}
@@ -75,6 +75,8 @@ export default class Header extends Component {
     )
   }
 }
+
+export default () => <Consumer>{context => <Header {...context} />}</Consumer>
 
 const Nav = styled.nav`
   display: flex;

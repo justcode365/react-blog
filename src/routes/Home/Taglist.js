@@ -19,7 +19,7 @@ export default class TagList extends Component {
         {tags ? (
           <div>
             {tags.map(tag => (
-              <a href="/" key={tag} className="Tag" onClick={() => this.props.fetchArticles(tag)}>
+              <a key={tag} onClick={() => this.props.fetchArticles(tag)}>
                 {tag}
               </a>
             ))}
@@ -47,6 +47,7 @@ const Taglist = styled.div`
     background-color: #818a91;
     margin-top: 0.4rem;
     margin-right: 3px;
+    cursor: pointer;
   }
 
   a:hover {

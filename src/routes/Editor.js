@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import { Consumer } from '../App'
 import Form from '../components/Form'
-import { Link, Redirect } from 'react-router-dom'
 import { SignWrapper } from './SignUp'
 
-export default class SignIn extends Component {
-  state = { email: '', password: '', error: '', redirect: false }
+class Editor extends Component {
+  state = { email: '', password: '', error: '' }
   handleSubmit = async e => {
     e.preventDefault()
     const { email, password } = this.state
@@ -25,7 +25,7 @@ export default class SignIn extends Component {
       }
 
       localStorage.setItem('token', 'Token ' + info.user.token)
-      this.setState({ redirect: true })
+      this.props.redirect('/')
     } catch (err) {
       console.error(err)
     }
@@ -37,44 +37,59 @@ export default class SignIn extends Component {
   }
 
   render() {
-    const { email, password, error, redirect } = this.state
-
-    if (redirect) return <Redirect to="/" />
+    const { email, password, error } = this.state
 
     return (
       <SignWrapper>
         <Form onSubmit={this.handleSubmit}>
-          <header>
-            <h1>Sign In</h1>
-
-            <Link to="/signup">Need an account?</Link>
-          </header>
-
-          {error && <li className="Form-error">{error}</li>}
+          {error && <li className="form-error">{error}</li>}
 
           <p>
             <input
-              type="email"
-              placeholder="Email"
-              name="email"
+              type="text"
+              placeholder="Article Title"
+              name="title"
               value={email}
               onChange={this.handleChange}
             />
           </p>
+
           <p>
             <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={password}
+              type="text"
+              placeholder="What's this article about?"
+              name="title"
+              value={email}
               onChange={this.handleChange}
             />
           </p>
+
           <p>
-            <input type="submit" value="Sign in" />
+            <textarea
+              placeholder="Write your article (in markdown)"
+              name="title"
+              value={email}
+              onChange={this.handleChange}
+            />
+          </p>
+
+          <p>
+            <input
+              type="text"
+              placeholder="Enter tags"
+              name="title"
+              value={email}
+              onChange={this.handleChange}
+            />
+          </p>
+
+          <p>
+            <input type="submit" name="password" value="Publish Article" />
           </p>
         </Form>
       </SignWrapper>
     )
   }
 }
+
+export default () => <Consumer>{context => <Editor {...context} />}</Consumer>
