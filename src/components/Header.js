@@ -4,40 +4,17 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Consumer } from '../App'
 
-class Header extends Component {
-  componentDidMount() {
-    console.log('Header mount')
-    this.fetchUser()
-  }
+export default () => (
+  <Nav className="container">
+    <Link to="/">conduit</Link>
+    <UL>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
 
-  componentDidUpdate() {
-    this.fetchUser()
-  }
-
-  fetchUser = async () => {
-    const token = localStorage.getItem('token')
-    if (token && !this.props.user) {
-      const res = await fetch(`${process.env.REACT_APP_API}/user`, {
-        headers: { authorization: token }
-      })
-      const { user } = await res.json()
-
-      this.props.setUser(user)
-    }
-  }
-
-  render() {
-    const { user } = this.props
-    return (
-      <Nav className="container">
-        <Link to="/">conduit</Link>
-
-        <UL>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-
-          {!user ? (
+      <Consumer>
+        {({ user }) =>
+          !user ? (
             <Fragment>
               <li>
                 <Link to="/signin">Sign in</Link>
@@ -69,14 +46,12 @@ class Header extends Component {
                 </Link>
               </li>
             </Fragment>
-          )}
-        </UL>
-      </Nav>
-    )
-  }
-}
-
-export default () => <Consumer>{context => <Header {...context} />}</Consumer>
+          )
+        }
+      </Consumer>
+    </UL>
+  </Nav>
+)
 
 const Nav = styled.nav`
   display: flex;

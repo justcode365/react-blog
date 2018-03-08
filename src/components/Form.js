@@ -4,8 +4,6 @@ import styled from 'styled-components'
 export default ({ children, ...props }) => <Form {...props}>{children}</Form>
 
 const Form = styled.form`
-  --red: #b85c5c;
-
   header {
     text-align: center;
     margin-bottom: 20px;

@@ -1,14 +1,13 @@
 import React from 'react'
 import Like from './Like'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export default ({ post }) => (
   <ItemInfo>
     <img src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
     <ItemUser>
-      <a href={'@' + post.author.username} onClick={() => {}}>
-        {post.author.username}
-      </a>
+      <Link to={'@' + post.author.username}>{post.author.username}</Link>
       <p>{new Date(post.createdAt).toDateString()}</p>
     </ItemUser>
 

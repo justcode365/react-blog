@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Consumer } from '../App'
 import Form from '../components/Form'
 import { SignWrapper } from './SignUp'
+import { Redirect } from 'react-router-dom'
 
 class Editor extends Component {
-  state = { email: '', password: '', error: '' }
+  state = { email: '', password: '', error: '', redirect: false }
   handleSubmit = async e => {
     e.preventDefault()
     const { email, password } = this.state
@@ -25,7 +26,7 @@ class Editor extends Component {
       }
 
       localStorage.setItem('token', 'Token ' + info.user.token)
-      this.props.redirect('/')
+      this.setState({ redirect: true })
     } catch (err) {
       console.error(err)
     }
@@ -37,7 +38,9 @@ class Editor extends Component {
   }
 
   render() {
-    const { email, password, error } = this.state
+    const { email, password, error, redirect } = this.state
+
+    if (redirect) return <Redirect to="/" />
 
     return (
       <SignWrapper>

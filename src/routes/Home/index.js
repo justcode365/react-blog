@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ItemList from 'components/ItemList'
-import Tabs from 'components/Tabs'
+import Tabs, { Tab } from 'components/Tabs'
 import Taglist from './Taglist'
 import styled from 'styled-components'
 
@@ -43,9 +43,11 @@ export default class Home extends Component {
 
   render() {
     const { activeTab, articles, articlesCount, page } = this.state
+
+    const has_token = localStorage.getItem('token')
     return (
       <div>
-        {!localStorage.getItem('token') && (
+        {!has_token && (
           <Banner>
             <h1>conduit</h1>
             <p>A place to share your knowledge.</p>
@@ -53,22 +55,22 @@ export default class Home extends Component {
         )}
 
         <Main className="container">
-          <div style={{ flex: 1, marginRight: 10 }}>
+          <div style={{ flex: 1, marginRight: 20 }}>
             <Tabs>
-              {localStorage.getItem('token') && (
-                <li className={activeTab === 'Your Feed' ? 'active' : ''}>
+              {has_token && (
+                <Tab active={activeTab === 'Your Feed'}>
                   <a>Your Feed</a>
-                </li>
+                </Tab>
               )}
 
-              <li className={activeTab === 'Global Feed' ? 'active' : ''}>
+              <Tab active={activeTab === 'Global Feed'}>
                 <a onClick={() => this.fetchArticles('Global Feed')}>Global Feed</a>
-              </li>
+              </Tab>
 
               {activeTab !== 'Global Feed' && (
-                <li className="active">
+                <Tab>
                   <a># {activeTab}</a>
-                </li>
+                </Tab>
               )}
             </Tabs>
             <ItemList
@@ -114,8 +116,3 @@ const Main = styled.main`
   justify-content: space-between;
   align-items: flex-start;
 `
-
-// const Articles = styled.div`
-//   flex: 1;
-//   margin-right: 20px;
-// `

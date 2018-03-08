@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Consumer } from '../App'
-import Articles from 'components/Articles'
+import ItemList from 'components/ItemList'
 import { Settings } from 'react-feather'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
@@ -79,7 +79,7 @@ class User extends Component {
             </li>
           </ul>
 
-          <Articles articles={articles} articlesCount={articlesCount} page_no={page_no} />
+          <ItemList articles={articles} articlesCount={articlesCount} page_no={page_no} />
         </section>
       </Fragment>
     )

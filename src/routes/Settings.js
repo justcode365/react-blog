@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Form from 'components/Form'
 import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
 
 export default class Settings extends Component {
-  state = { image: '', username: '', bio: '', email: '', password: '' }
+  state = { image: '', username: '', bio: '', email: '', password: '', redirect: false }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.user && !prevState.username) {
@@ -35,18 +36,19 @@ export default class Settings extends Component {
 
     const info = await res.json()
     this.props.setUser(info.user)
-    this.props.redirect('/')
+    this.setState({ redirect: true })
   }
 
   handleLogOut = () => {
-    const { setUser, redirect } = this.props
     localStorage.removeItem('token')
-    setUser(null)
-    redirect('/')
+    this.props.setUser(null)
+    this.setState({ redirect: true })
   }
 
   render() {
-    const { image, username, bio, email, password } = this.state
+    const { image, username, bio, email, password, redirect } = this.state
+    if (redirect) return <Redirect to="/" />
+
     return (
       <div style={{ width: 600 }} className="container">
         <Form>

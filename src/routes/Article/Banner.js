@@ -1,6 +1,7 @@
 import React from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export default ({ article, user }) => (
   <Banner>
@@ -9,9 +10,9 @@ export default ({ article, user }) => (
     <UserInfo className="container">
       <img src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
       <div style={{ marginRight: 10 }}>
-        <a style={{ color: '#fff' }} href={'@' + user.username}>
+        <Link to={'@' + user.username} style={{ color: '#fff' }}>
           {article.author.username}
-        </a>
+        </Link>
         <p>{new Date(article.updatedAt).toDateString()}</p>
       </div>
       <Button>
@@ -61,13 +62,13 @@ const Button = styled.button`
 `
 
 const DangerButton = Button.extend`
-  border-color: #b85c5c;
-  color: #b85c5c;
+  border-color: var(--red);
+  color: var(--red);
 
   &:hover {
     color: #fff;
-    background-color: #b85c5c;
-    border-color: #b85c5c;
+    background-color: var(--red);
+    border-color: var(--red);
   }
 `
 

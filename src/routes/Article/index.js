@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
 import { Consumer } from '../../App'
 import Card from './Card'
 import Banner from './Banner'
@@ -60,14 +62,8 @@ class Article extends Component {
             />
           ) : (
             <p>
-              <a href="/signin" onClick={linkClick}>
-                Sign in
-              </a>{' '}
-              or{' '}
-              <a href="/signup" onClick={linkClick}>
-                sign up
-              </a>{' '}
-              to add comments on this article.
+              <Link to="/signin">Sign in</Link> or <Link to="/signup">Sign up</Link> to add comments
+              on this article.
             </p>
           )}
 
@@ -83,9 +79,11 @@ class Article extends Component {
                     width={24}
                     style={{ borderRadius: '50%', marginRight: 5 }}
                   />
-                  <a href={`/@${comment.author.username}`} style={{ color: 'var(--green)' }}>
+
+                  <Link to={`/@${comment.author.username}`} style={{ color: 'var(--green)' }}>
                     {comment.author.username}
-                  </a>
+                  </Link>
+
                   <span style={{ marginLeft: 10, color: '#bbb', fontSize: '.8rem' }}>
                     {new Date(article.updatedAt).toDateString()}
                   </span>

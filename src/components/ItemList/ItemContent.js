@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 
 export default ({ post }) => (
   <div>
-    <Content href={'/article/' + post.slug}>
+    <Content to={'/article/' + post.slug}>
       <h2>{post.title}</h2>
       <p>{post.description}</p>
     </Content>
-    <ItemLink>
+    <Item>
       <Link to={'/article/' + post.slug}>Read more...</Link>
       <Tags>{post.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</Tags>
-    </ItemLink>
+    </Item>
   </div>
 )
 
@@ -27,7 +27,7 @@ const Tags = styled.div`
   }
 `
 
-const Content = styled.a`
+const Content = styled(Link)`
   color: inherit;
   & > p {
     font-weight: 300;
@@ -37,7 +37,7 @@ const Content = styled.a`
   }
 `
 
-const ItemLink = styled.div`
+const Item = styled.div`
   display: flex;
   justify-content: space-between;
   & > a {
