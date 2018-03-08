@@ -9,7 +9,7 @@ export default class Articles extends Component {
     const { articles, page, setPage } = this.props
 
     return (
-      <div style={{ flex: 1 }}>
+      <div>
         {articles.map((post, i) => (
           <Section key={i}>
             <ItemInfo post={post} />

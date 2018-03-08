@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Consumer } from 'routes'
+import Form from '../components/Form'
+import { Link } from 'react-router-dom'
+import { SignWrapper } from './SignUp'
 
-class SignIn extends Component {
+export default class SignIn extends Component {
   state = { email: '', password: '', error: '' }
   handleSubmit = async e => {
     e.preventDefault()
@@ -38,41 +40,39 @@ class SignIn extends Component {
     const { email, password, error } = this.state
 
     return (
-      <form className="sign form" onSubmit={this.handleSubmit}>
-        <header>
-          <h1>Sign In</h1>
+      <SignWrapper>
+        <Form>
+          <header>
+            <h1>Sign In</h1>
 
-          <a href="/signup" onClick={this.props.linkClick}>
-            Need an account?
-          </a>
-        </header>
+            <Link to="/signup">Need an account?</Link>
+          </header>
 
-        {error && <li className="Form-error">{error}</li>}
+          {error && <li className="Form-error">{error}</li>}
 
-        <p>
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-        </p>
-        <p>
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-        </p>
-        <p>
-          <input type="submit" value="Sign in" />
-        </p>
-      </form>
+          <p>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
+            <input type="submit" value="Sign in" />
+          </p>
+        </Form>
+      </SignWrapper>
     )
   }
 }
-
-export default () => <Consumer>{context => <SignIn {...context} />}</Consumer>

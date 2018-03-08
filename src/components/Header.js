@@ -32,24 +32,18 @@ export default class Header extends Component {
       <Nav className="container">
         <Link to="/">conduit</Link>
 
-        <HeaderUL>
+        <UL>
           <li>
-            <a href="/home" onClick={linkClick}>
-              Home
-            </a>
+            <Link to="/">Home</Link>
           </li>
 
           {!user ? (
             <Fragment>
               <li>
-                <a href="/signin" onClick={linkClick}>
-                  Sign in
-                </a>
+                <Link to="/signin">Sign in</Link>
               </li>
               <li>
-                <a href="/signup" onClick={linkClick}>
-                  Sign up
-                </a>
+                <Link to="/signup">Sign up</Link>
               </li>
             </Fragment>
           ) : (
@@ -76,7 +70,7 @@ export default class Header extends Component {
               </li>
             </Fragment>
           )}
-        </HeaderUL>
+        </UL>
       </Nav>
     )
   }
@@ -94,7 +88,7 @@ const Nav = styled.nav`
   }
 `
 
-const HeaderUL = styled.ul`
+const UL = styled.ul`
   display: flex;
   align-items: center;
 

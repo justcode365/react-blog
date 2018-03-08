@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Articles from 'components/Articles'
+import Tabs from 'components/Tabs'
 import Taglist from './Taglist'
 import styled from 'styled-components'
 
@@ -52,8 +53,8 @@ export default class Home extends Component {
         )}
 
         <Main className="container">
-          <div className="Home-articles">
-            <ul className="tabs">
+          <div style={{ flex: 1, marginRight: 10 }}>
+            <Tabs>
               {localStorage.getItem('token') && (
                 <li className={activeTab === 'Your Feed' ? 'active' : ''}>
                   <a>Your Feed</a>
@@ -69,7 +70,7 @@ export default class Home extends Component {
                   <a># {activeTab}</a>
                 </li>
               )}
-            </ul>
+            </Tabs>
             <Articles
               setPage={page => {
                 activeTab === 'Your Feed'
