@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Consumer } from '../App'
 import ItemList from 'components/ItemList'
+import Tabs, { Tab } from 'components/Tabs'
 import { Settings } from 'react-feather'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
@@ -70,14 +71,14 @@ class User extends Component {
         </Section>
 
         <section style={{ maxWidth: 800, margin: '0 auto' }}>
-          <ul className="tabs">
-            <li className={activeTab === 'My Articles' ? 'active' : ''}>
+          <Tabs activeKey="My Articles">
+            <Tab key="My Articles">
               <a>My Articles</a>
-            </li>
-            <li className={activeTab === 'Favorited Articles' ? 'active' : ''}>
+            </Tab>
+            <Tab key="Favorited Articles">
               <a>Favorited Articles</a>
-            </li>
-          </ul>
+            </Tab>
+          </Tabs>
 
           <ItemList articles={articles} articlesCount={articlesCount} page_no={page_no} />
         </section>

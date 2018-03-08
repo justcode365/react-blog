@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 export default class Home extends Component {
   state = {
-    activeTab: 'Global Feed',
+    activeTab: localStorage.getItem('token') ? 'Your Feed' : 'Global Feed',
     articles: [],
     articlesCount: 0,
     page: 1
@@ -56,23 +56,25 @@ export default class Home extends Component {
 
         <Main className="container">
           <div style={{ flex: 1, marginRight: 20 }}>
-            <Tabs>
+            <Tabs activeKey={activeTab}>
               {has_token && (
-                <Tab active={activeTab === 'Your Feed'}>
-                  <a>Your Feed</a>
+                <Tab key="Your Feed">
+                  <a onClick={() => this.fetchFeed(page)}>Your Feed</a>
                 </Tab>
               )}
 
-              <Tab active={activeTab === 'Global Feed'}>
+              <Tab key="Global Feed">
                 <a onClick={() => this.fetchArticles('Global Feed')}>Global Feed</a>
               </Tab>
 
-              {activeTab !== 'Global Feed' && (
-                <Tab>
-                  <a># {activeTab}</a>
-                </Tab>
-              )}
+              {activeTab !== 'Global Feed' &&
+                activeTab !== 'Your Feed' && (
+                  <Tab key="tag Feed">
+                    <a># {activeTab}</a>
+                  </Tab>
+                )}
             </Tabs>
+
             <ItemList
               setPage={page => {
                 activeTab === 'Your Feed'

@@ -1,13 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default ({ children }) => <Tabs>{children}</Tabs>
-
 const Tabs = styled.ul`
   margin: 0;
   margin-bottom: -1px;
   padding: 0;
 `
+
+export default ({ children, activeKey }) => (
+  <Tabs>
+    {React.Children.map(children, (child, index) => {
+      if (child === null) return null
+
+      return React.cloneElement(child, { active: activeKey === child.key })
+    })}
+  </Tabs>
+)
 
 export const Tab = styled.li`
   a {
