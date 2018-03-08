@@ -3,6 +3,7 @@ import { Consumer } from '../App'
 import Articles from 'components/Articles'
 import { Settings } from 'react-feather'
 import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
 
 class User extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class User extends Component {
       articles: [],
       articlesCount: 0,
       activeTab: 'My Articles',
-      page_no: 0
+      page_no: 0,
+      redirect: false
     }
   }
 
@@ -45,8 +47,10 @@ class User extends Component {
   }
 
   render() {
-    const { articles, activeTab, articlesCount, page_no } = this.state
-    const { user = {}, match, redirect, linkClick } = this.props
+    const { articles, activeTab, articlesCount, page_no, redirect } = this.state
+    const { user = {}, match } = this.props
+
+    if (redirect) return <Redirect to="/settings" />
 
     return (
       <Fragment>
@@ -56,7 +60,7 @@ class User extends Component {
           <p style={{ color: '#aaa' }}>{user.bio}</p>
           <div className="container">
             {user.username === match.params.user ? (
-              <button onClick={() => redirect('/settings')}>
+              <button onClick={() => this.setState({ redirect: true })}>
                 <Settings size="14" style={{ marginRight: 5 }} /> Edit Profile Settings
               </button>
             ) : (

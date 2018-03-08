@@ -27,7 +27,7 @@ class Header extends Component {
   }
 
   render() {
-    const { user, linkClick } = this.props
+    const { user } = this.props
     return (
       <Nav className="container">
         <Link to="/">conduit</Link>

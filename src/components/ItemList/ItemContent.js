@@ -37,7 +37,7 @@ const Content = styled.a`
   }
 `
 
-const ItemLink = styled.a`
+const ItemLink = styled.div`
   display: flex;
   justify-content: space-between;
   & > a {

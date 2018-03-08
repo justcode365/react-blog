@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Articles from 'components/Articles'
+import ItemList from 'components/ItemList'
 import Tabs from 'components/Tabs'
 import Taglist from './Taglist'
 import styled from 'styled-components'
@@ -71,7 +71,7 @@ export default class Home extends Component {
                 </li>
               )}
             </Tabs>
-            <Articles
+            <ItemList
               setPage={page => {
                 activeTab === 'Your Feed'
                   ? this.fetchFeed(page)

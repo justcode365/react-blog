@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Edit2, Trash2 } from 'react-feather'
-import './Article.css'
 import { Consumer } from '../../App'
-// import Comment from './Comment'
 import Card from './Card'
+import Banner from './Banner'
+// import Comment from './Comment'
 
 class Article extends Component {
   state = { article: { tagList: [], author: {} }, comments: [] }
@@ -29,30 +28,7 @@ class Article extends Component {
 
     return (
       <div className="Article">
-        <section className="Article-banner">
-          <h1 className="container">{article.title}</h1>
-
-          <div className="Article-userinfo container">
-            <img
-              src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
-              alt="avatar"
-            />
-            <div style={{ marginRight: 10 }}>
-              <a style={{ color: '#fff' }} href={'@' + user.username}>
-                {article.author.username}
-              </a>
-              <p>{new Date(article.updatedAt).toDateString()}</p>
-            </div>
-            <button>
-              <Edit2 size={16} />
-              Edit Article
-            </button>
-            <button className="danger">
-              <Trash2 size={16} />
-              Delete Article
-            </button>
-          </div>
-        </section>
+        <Banner article={article} user={user} />
 
         <section className="container">
           <h1> {article.body}</h1>
@@ -70,6 +46,7 @@ class Article extends Component {
               footer={
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
                   <img
+                    alt="logo"
                     src={article.author.image}
                     width={24}
                     style={{ borderRadius: '50%', marginRight: 5 }}
@@ -101,6 +78,7 @@ class Article extends Component {
               footer={
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
                   <img
+                    alt="logo"
                     src={comment.author.image}
                     width={24}
                     style={{ borderRadius: '50%', marginRight: 5 }}

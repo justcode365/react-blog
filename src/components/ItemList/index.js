@@ -4,7 +4,7 @@ import ItemInfo from './ItemInfo'
 import ItemContent from './ItemContent'
 import styled from 'styled-components'
 
-export default class Articles extends Component {
+export default class ItemList extends Component {
   render() {
     const { articles, page, setPage } = this.props
 

@@ -22,7 +22,7 @@ const App = () => (
       <Route path="/settings" component={Settings} />
       <Route path="/editor" component={Editor} />
       <Route path="/@:user" component={User} />
-      <Route path="/article" component={Article} />
+      <Route path="/article/:title" component={Article} />
     </div>
   </Router>
 )
