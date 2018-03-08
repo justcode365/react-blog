@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Consumer } from 'routes'
 import './Settings.css'
 
-class Settings extends Component {
+export default class Settings extends Component {
   state = { image: '', username: '', bio: '', email: '', password: '' }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -113,5 +112,3 @@ class Settings extends Component {
     )
   }
 }
-
-export default () => <Consumer>{context => <Settings {...context} />}</Consumer>

@@ -5,7 +5,7 @@ import './Articles.css'
 
 export default class Articles extends Component {
   render() {
-    const { articles, articlesCount, page, setPage } = this.props
+    const { articles, page, setPage } = this.props
 
     return (
       <div className="Articles">

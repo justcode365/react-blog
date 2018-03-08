@@ -1,12 +1,11 @@
 import React from 'react'
 import { Heart } from 'react-feather'
-import { Consumer } from 'routes'
 import './Item.css'
 
 export default ({ post }) => <div>hello</div>
 
 const a = ({ post }) => (
-  <Consumer>
+  <h1>
     {({ linkClick }) => (
       <section className="Item">
         <div className="Item-info">
@@ -37,5 +36,5 @@ const a = ({ post }) => (
         </div>
       </section>
     )}
-  </Consumer>
+  </h1>
 )

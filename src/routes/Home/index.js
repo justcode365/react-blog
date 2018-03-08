@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Articles from 'components/Articles'
 import Taglist from './Taglist'
-import { Consumer } from 'routes'
 import './Home.css'
 
 export default class Home extends Component {

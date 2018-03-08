@@ -1,11 +1,9 @@
-import React, { Component, createContext } from 'react'
+import React from 'react'
 import Home from './Home'
 import Settings from './Settings'
 import Header from 'components/Header'
 import { hot } from 'react-hot-loader'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-
-const { Provider, Consumer } = createContext()
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const App = () => (
   <Router>
@@ -19,4 +17,3 @@ const App = () => (
 )
 
 export default hot(module)(App)
-export { Consumer }
