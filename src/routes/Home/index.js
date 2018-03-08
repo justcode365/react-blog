@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Articles from 'components/Articles'
 import Taglist from './Taglist'
-import './Home.css'
+import styled from 'styled-components'
 
 export default class Home extends Component {
   state = {
@@ -45,13 +45,13 @@ export default class Home extends Component {
     return (
       <div>
         {!localStorage.getItem('token') && (
-          <section className="Home-banner">
+          <Banner>
             <h1>conduit</h1>
             <p>A place to share your knowledge.</p>
-          </section>
+          </Banner>
         )}
 
-        <main className="Home-main container">
+        <Main className="container">
           <div className="Home-articles">
             <ul className="tabs">
               {localStorage.getItem('token') && (
@@ -83,8 +83,38 @@ export default class Home extends Component {
           </div>
 
           <Taglist fetchArticles={this.fetchArticles} />
-        </main>
+        </Main>
       </div>
     )
   }
 }
+
+const Banner = styled.section`
+  background-color: var(--green);
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+`
+
+const Main = styled.main`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`
+
+// const Articles = styled.div`
+//   flex: 1;
+//   margin-right: 20px;
+// `

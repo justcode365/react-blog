@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
 export default class TagList extends Component {
   state = { tags: [] }
@@ -13,7 +14,7 @@ export default class TagList extends Component {
     const { tags } = this.state
 
     return (
-      <div className="Home-taglist">
+      <Taglist>
         <h4>Popular Tags</h4>
         {tags ? (
           <div>
@@ -26,7 +27,29 @@ export default class TagList extends Component {
         ) : (
           <div>loading...</div>
         )}
-      </div>
+      </Taglist>
     )
   }
 }
+
+const Taglist = styled.div`
+  width: 24%;
+  padding: 10px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+
+  a {
+    color: #fff;
+    font-size: 0.8rem;
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    border-radius: 10rem;
+    background-color: #818a91;
+    margin-top: 0.4rem;
+    margin-right: 3px;
+  }
+
+  a:hover {
+    background-color: #687077;
+  }
+`
