@@ -13,10 +13,14 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('token')) {
-      this.fetchFeed()
-    } else {
-      this.fetchArticles('Global Feed')
+    try {
+      if (localStorage.getItem('token')) {
+        this.fetchFeed()
+      } else {
+        this.fetchArticles('Global Feed')
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 

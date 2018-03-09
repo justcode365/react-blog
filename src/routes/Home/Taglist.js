@@ -4,10 +4,16 @@ import styled from 'styled-components'
 export default class TagList extends Component {
   state = { tags: [] }
 
-  async componentDidMount() {
-    const res = await fetch(`${process.env.REACT_APP_API}/tags`)
-    const { tags } = await res.json()
-    this.setState({ tags })
+  componentDidMount() {
+    this.getTags()
+  }
+
+  getTags = () => {
+    fetch(`${process.env.REACT_APP_API}/tags`)
+      .then(res => res.json())
+      .then(({ tags }) => {
+        this.setState({ tags })
+      })
   }
 
   render() {

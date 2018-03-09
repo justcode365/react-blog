@@ -19,7 +19,6 @@ class User extends Component {
   }
 
   componentDidMount() {
-    console.log('User mount')
     const { activeTab } = this.state
     this.fetchArticles(activeTab)
   }
@@ -71,7 +70,7 @@ class User extends Component {
         </Section>
 
         <section style={{ maxWidth: 800, margin: '0 auto' }}>
-          <Tabs activeKey="My Articles">
+          <Tabs activeKey={activeTab}>
             <Tab key="My Articles">
               <a>My Articles</a>
             </Tab>

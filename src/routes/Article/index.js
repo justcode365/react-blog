@@ -25,7 +25,7 @@ class Article extends Component {
     this.setState({ article, comments })
   }
   render() {
-    const { user = {}, linkClick } = this.props
+    const { user = {} } = this.props
     const { article, comments } = this.state
 
     return (
