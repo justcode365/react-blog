@@ -25,7 +25,7 @@ class Editor extends Component {
         return
       }
 
-      localStorage.setItem('token', 'Token ' + info.user.token)
+      this.props.setUser(info.user)
       this.setState({ redirect: true })
     } catch (err) {
       console.error(err)

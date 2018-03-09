@@ -42,7 +42,7 @@ class Article extends Component {
         </section>
 
         <section style={{ width: '50%', margin: '0 auto' }}>
-          {localStorage.getItem('token') ? (
+          {user.token ? (
             <Card
               content={<textarea />}
               footer={

@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import Form from 'components/Form'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
+import { Consumer } from '../App'
 
-export default class Settings extends Component {
-  state = { image: '', username: '', bio: '', email: '', password: '', redirect: false }
+class Settings extends Component {
+  state = { image: '', username: '', bio: '', email: '', password: '', token: '', redirect: false }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.user && !prevState.username) {
-      const { image, username, bio, email } = nextProps.user
-      return { image, username, bio, email }
+      const { image, username, bio, email, token } = nextProps.user
+      return { image, username, bio, email, token }
     }
 
     return null
@@ -22,13 +23,13 @@ export default class Settings extends Component {
 
   handleUpdate = async e => {
     e.preventDefault()
-    const { image, username, bio, email } = this.state
+    const { image, username, bio, email, token } = this.state
     const user = { image, username, bio, email }
 
     const res = await fetch(`${process.env.REACT_APP_API}/user`, {
       method: 'PUT',
       headers: {
-        authorization: localStorage.getItem('token'),
+        authorization: token,
         'content-type': 'application/json'
       },
       body: JSON.stringify({ user })
@@ -40,8 +41,7 @@ export default class Settings extends Component {
   }
 
   handleLogOut = () => {
-    localStorage.removeItem('token')
-    this.props.setUser(null)
+    this.props.removeUser()
     this.setState({ redirect: true })
   }
 
@@ -117,6 +117,8 @@ export default class Settings extends Component {
     )
   }
 }
+
+export default () => <Consumer>{context => <Settings {...context} />}</Consumer>
 
 const Submit = styled.p`
   display: flex;

@@ -5,8 +5,10 @@ import Taglist from './Taglist'
 import styled from 'styled-components'
 
 export default class Home extends Component {
+  token = localStorage.getItem('token')
+
   state = {
-    activeTab: localStorage.getItem('token') ? 'Your Feed' : 'Global Feed',
+    activeTab: this.token ? 'Your Feed' : 'Global Feed',
     articles: [],
     articlesCount: 0,
     page: 1
@@ -14,7 +16,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     try {
-      if (localStorage.getItem('token')) {
+      if (this.token) {
         this.fetchFeed()
       } else {
         this.fetchArticles('Global Feed')
@@ -39,7 +41,7 @@ export default class Home extends Component {
     const queryString = `?limit=5&offset=${page - 1}`
 
     const res = await fetch(`${process.env.REACT_APP_API}/articles/feed${queryString}`, {
-      headers: { authorization: localStorage.getItem('token') }
+      headers: { authorization: this.token }
     })
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page })
@@ -48,10 +50,9 @@ export default class Home extends Component {
   render() {
     const { activeTab, articles, articlesCount, page } = this.state
 
-    const has_token = localStorage.getItem('token')
     return (
       <div>
-        {!has_token && (
+        {!this.token && (
           <Banner>
             <h1>conduit</h1>
             <p>A place to share your knowledge.</p>
@@ -61,7 +62,7 @@ export default class Home extends Component {
         <Main className="container">
           <div style={{ flex: 1, marginRight: 20 }}>
             <Tabs activeKey={activeTab}>
-              {has_token && (
+              {this.token && (
                 <Tab key="Your Feed">
                   <a onClick={() => this.fetchFeed(page)}>Your Feed</a>
                 </Tab>

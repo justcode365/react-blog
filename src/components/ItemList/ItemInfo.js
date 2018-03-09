@@ -6,7 +6,11 @@ import styled from 'styled-components'
 export default ({ post }) => (
   <ItemInfo>
     <Link to={'@' + post.author.username}>
-      <img src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
+      <img
+        src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+        // onError="this.src='default-image.jpg'"
+        alt="avatar"
+      />
     </Link>
 
     <ItemUser>

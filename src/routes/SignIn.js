@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Form from '../components/Form'
 import { Link, Redirect } from 'react-router-dom'
 import { SignWrapper } from './SignUp'
+import { Consumer } from '../App'
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   state = { email: '', password: '', error: '', redirect: false }
   handleSubmit = async e => {
     e.preventDefault()
@@ -24,7 +25,7 @@ export default class SignIn extends Component {
         return
       }
 
-      localStorage.setItem('token', 'Token ' + info.user.token)
+      this.props.setUser(info.user)
       this.setState({ redirect: true })
     } catch (err) {
       console.error(err)
@@ -78,3 +79,5 @@ export default class SignIn extends Component {
     )
   }
 }
+
+export default () => <Consumer>{context => <SignIn {...context} />}</Consumer>

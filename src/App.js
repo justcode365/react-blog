@@ -26,12 +26,25 @@ export default class App extends Component {
     }
   }
 
-  setUser = user => this.setState({ user })
+  setUser = user => {
+    localStorage.setItem('token', 'Token ' + user.token)
+    this.setState({ user })
+  }
+
+  removeUser = () => {
+    localStorage.removeItem('token')
+    this.setState({ user: null })
+  }
 
   render() {
-    const { user } = this.state
     return (
-      <Provider value={{ setUser: this.setUser, user }}>
+      <Provider
+        value={{
+          user: this.state.user,
+          setUser: this.setUser,
+          removeUser: this.removeUser
+        }}
+      >
         <Router />
       </Provider>
     )
