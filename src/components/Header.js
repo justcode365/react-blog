@@ -66,10 +66,8 @@ const Nav = styled.nav`
 `
 
 const UL = styled.ul`
-  display: flex;
-  align-items: center;
-
-  li {
+  ${'' /* display: flex;
+  align-items: center; */} li {
     margin-left: 1rem;
   }
 
@@ -79,7 +77,8 @@ const UL = styled.ul`
     align-items: center;
   }
 
-  a:hover {
+  a:hover,
+  a:focus {
     color: rgba(0, 0, 0, 0.6);
   }
 `

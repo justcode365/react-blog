@@ -5,7 +5,10 @@ import styled from 'styled-components'
 
 export default ({ post }) => (
   <ItemInfo>
-    <img src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
+    <Link to={'@' + post.author.username}>
+      <img src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
+    </Link>
+
     <ItemUser>
       <Link to={'@' + post.author.username}>{post.author.username}</Link>
       <p>{new Date(post.createdAt).toDateString()}</p>

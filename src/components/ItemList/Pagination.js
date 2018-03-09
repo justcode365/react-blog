@@ -33,6 +33,8 @@ export default class Pagination extends Component {
 }
 
 const Ul = styled.ul`
+  text-align: right;
+
   li {
     margin-right: 8px;
   }

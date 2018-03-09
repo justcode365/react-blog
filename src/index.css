@@ -10,7 +10,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 /* p, */
 h1,
@@ -24,23 +25,21 @@ h6 {
 }
 
 ul {
-  /* list-style: none; */
+  list-style: none;
 }
 
 li {
-  display: inline;
+  display: inline-block;
 }
 
 a {
   text-decoration: none;
-  color: var(--green);
 }
 
-a:focus,
-a:hover {
+/* a:focus, */
+/* a:hover {
   color: #3d8b3d;
-  text-decoration: underline;
-}
+} */
 
 .container {
   max-width: 1000px;

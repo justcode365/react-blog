@@ -73,7 +73,7 @@ export default class Home extends Component {
 
               {activeTab !== 'Global Feed' &&
                 activeTab !== 'Your Feed' && (
-                  <Tab key="tag Feed">
+                  <Tab key={activeTab}>
                     <a># {activeTab}</a>
                   </Tab>
                 )}
@@ -121,4 +121,5 @@ const Main = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding-bottom: 50px;
 `

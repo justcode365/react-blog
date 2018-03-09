@@ -5,6 +5,7 @@ const Tabs = styled.ul`
   margin: 0;
   margin-bottom: -1px;
   padding: 0;
+  display: flex;
 `
 
 export default ({ children, activeKey }) => (
@@ -27,6 +28,6 @@ export const Tab = styled.li`
   }
 
   a:hover {
-    color: #555;
+    color: #478c47;
   }
 `
