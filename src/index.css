@@ -13,7 +13,7 @@ body {
   font-size: 1rem;
   font-family: 'Source Sans Pro', sans-serif;
 }
-/* p, */
+
 h1,
 h2,
 h3,
@@ -24,22 +24,9 @@ h6 {
   margin-bottom: 0;
 }
 
-ul {
-  list-style: none;
-}
-
-li {
-  display: inline-block;
-}
-
 a {
   text-decoration: none;
 }
-
-/* a:focus, */
-/* a:hover {
-  color: #3d8b3d;
-} */
 
 .container {
   max-width: 1000px;

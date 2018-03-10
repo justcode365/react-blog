@@ -1,10 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import Remarkable from 'remarkable'
 import { Consumer } from '../../App'
 import Card from './Card'
 import Banner from './Banner'
+import styled from 'styled-components'
+
 // import Comment from './Comment'
+
+const md = new Remarkable()
+
+const Tags = styled.div`
+  & > span {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 12px;
+    margin-left: 5px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    color: #aaa;
+  }
+`
 
 class Article extends Component {
   state = { article: { tagList: [], author: {} }, comments: [] }
@@ -35,8 +51,12 @@ class Article extends Component {
         <Banner article={article} user={user} />
 
         <section className="container">
-          <h1> {article.body}</h1>
-          <div>{article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</div>
+          <div
+            className="container"
+            dangerouslySetInnerHTML={{ __html: md.render(article.body) }}
+          />
+          {/* <h1> {article.body}</h1> */}
+          <Tags>{article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</Tags>
 
           <hr />
         </section>
@@ -44,7 +64,7 @@ class Article extends Component {
         <section style={{ width: '50%', margin: '0 auto' }}>
           {user.token ? (
             <Card
-              content={<textarea />}
+              content={<textarea placeholder="Write a comment..." />}
               footer={
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
                   <img
@@ -70,7 +90,7 @@ class Article extends Component {
           {comments.map(comment => (
             <Card
               key={comment.id}
-              content={<p style={{ margin: 0 }}>{comment.body}</p>}
+              content={<p style={{ margin: 0, wordBreak: 'break-all' }}>{comment.body}</p>}
               footer={
                 <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
                   <img

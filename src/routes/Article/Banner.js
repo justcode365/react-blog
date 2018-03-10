@@ -31,12 +31,14 @@ export default class Banner extends Component {
         <h1 className="container">{article.title}</h1>
 
         <UserInfo className="container">
-          <img
-            src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
-            alt="avatar"
-          />
+          <Link to={'/@' + user.username}>
+            <img
+              src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+              alt="avatar"
+            />
+          </Link>
           <div style={{ marginRight: 10 }}>
-            <Link to={'@' + user.username} style={{ color: '#fff' }}>
+            <Link to={'/@' + user.username} style={{ color: '#fff' }}>
               {article.author.username}
             </Link>
             <p>{new Date(article.updatedAt).toDateString()}</p>
@@ -57,7 +59,8 @@ export default class Banner extends Component {
 
 const BannerWrapper = styled.section`
   background-color: #333;
-  padding: 30px 80px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 
   h1 {
     font-size: 40px;
@@ -108,6 +111,7 @@ const UserInfo = styled.div`
     margin-right: 5px;
     width: 30px;
     height: 30px;
+    border-radius: 50%;
   }
 
   p {

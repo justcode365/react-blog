@@ -6,7 +6,7 @@ import { Redirect, Route } from 'react-router-dom'
 
 export default ({ match }) => (
   <div>
-    <Route path={`${match.url}/:title`} component={Editor} />
+    <Route path={`${match.url}/:slug`} component={Editor} />
     <Route exact path={match.url} component={Editor} />
   </div>
 )
@@ -15,9 +15,9 @@ class Editor extends Component {
   state = { title: '', description: '', body: '', tagList: [], redirectUrl: '' }
 
   componentDidMount() {
-    const { params } = this.props.match
-    if (params.title) {
-      fetch(`${process.env.REACT_APP_API}/articles/${params.title}`)
+    const { slug } = this.props.match.params
+    if (slug) {
+      fetch(`${process.env.REACT_APP_API}/articles/${slug}`)
         .then(res => res.json())
         .then(data => {
           const { title, description, body, tagList } = data.article
@@ -28,12 +28,13 @@ class Editor extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
+    const { slug } = this.props.match.params
     const { title, description, body, tagList } = this.state
     const article = { title, description, body, tagList }
 
-    const url = 'https://conduit.productionready.io/api/articles'
+    const url = `${process.env.REACT_APP_API}/articles${slug ? '/' + slug : ''}`
     const options = {
-      method: 'post',
+      method: slug ? 'put' : 'post',
       headers: {
         authorization: localStorage.getItem('token'),
         'content-type': 'application/json'

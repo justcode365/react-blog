@@ -66,6 +66,7 @@ const Nav = styled.nav`
 `
 
 const UL = styled.ul`
+  list-style: none;
   display: flex;
   align-items: center;
   li {
