@@ -3,7 +3,7 @@ import Like from './Like'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default ({ post }) => (
+export default ({ post, itemIndex, toggleLike }) => (
   <ItemInfo>
     <Link to={'@' + post.author.username}>
       <img
@@ -18,7 +18,7 @@ export default ({ post }) => (
       <p>{new Date(post.createdAt).toDateString()}</p>
     </ItemUser>
 
-    <Like post={post} />
+    <Like post={post} onClick={() => toggleLike(itemIndex)} />
   </ItemInfo>
 )
 

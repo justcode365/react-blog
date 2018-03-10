@@ -6,13 +6,20 @@ import styled from 'styled-components'
 
 export default class ItemList extends Component {
   render() {
-    const { articles, page, setPage } = this.props
+    const { articles, page, setPage, toggleLike } = this.props
+
+    if (articles.length === 0)
+      return (
+        <div style={{ borderTop: ' 1px solid #ddd', padding: '20px 0' }}>
+          <h4>No articles are here... yet.</h4>
+        </div>
+      )
 
     return (
       <div>
-        {articles.map((post, i) => (
-          <Section key={i}>
-            <ItemInfo post={post} />
+        {articles.map((post, index) => (
+          <Section key={index}>
+            <ItemInfo post={post} itemIndex={index} toggleLike={toggleLike} />
             <ItemContent post={post} />
           </Section>
         ))}

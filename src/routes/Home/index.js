@@ -47,6 +47,21 @@ export default class Home extends Component {
     this.setState({ articles, articlesCount, page })
   }
 
+  toggleLike = index => {
+    const { favorited, slug } = this.state.articles[index]
+    const options = {
+      method: favorited ? 'delete' : 'post',
+      headers: { authorization: this.token }
+    }
+    fetch(`${process.env.REACT_APP_API}/articles/${slug}/favorite`, options)
+      .then(res => res.json())
+      .then(data => {
+        const articles = [...this.state.articles]
+        articles[index] = data.article
+        this.setState({ articles })
+      })
+  }
+
   render() {
     const { activeTab, articles, articlesCount, page } = this.state
 
@@ -86,6 +101,7 @@ export default class Home extends Component {
                   ? this.fetchFeed(page)
                   : this.fetchArticles(activeTab, page)
               }}
+              toggleLike={this.toggleLike}
               articles={articles}
               articlesCount={articlesCount}
               page={page}

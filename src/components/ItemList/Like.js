@@ -1,9 +1,9 @@
 import React from 'react'
 import { Heart } from 'react-feather'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export default ({ post }) => (
-  <Button>
+export default ({ post, onClick }) => (
+  <Button favorited={post.favorited} onClick={onClick}>
     <Heart size={12} />
     {post.favoritesCount}
   </Button>
@@ -20,19 +20,34 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
 
-  &:hover {
-    background-color: var(--green);
-    color: #fff;
-  }
-
   svg {
     fill: var(--green);
     color: var(--green);
     margin-right: 3px;
   }
 
+  &:hover {
+    background-color: var(--green);
+    color: #fff;
+  }
+
   &:hover svg {
     fill: #fff;
     color: #fff;
   }
+
+  ${props =>
+    props.favorited &&
+    css`
+      background-color: var(--green);
+      color: #fff;
+      svg {
+        fill: #fff;
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #449d44;
+      }
+    `};
 `
