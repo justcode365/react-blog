@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Consumer } from '../App'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import { SignWrapper } from './SignUp'

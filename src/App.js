@@ -4,15 +4,11 @@ import Router from './routes'
 const { Provider, Consumer } = createContext()
 
 export default class App extends Component {
-  state = { user: undefined }
+  state = { user: {} }
 
   componentDidMount() {
     this.fetchUser()
   }
-
-  // componentDidUpdate() {
-  //   this.fetchUser()
-  // }
 
   fetchUser = async () => {
     const token = localStorage.getItem('token')
