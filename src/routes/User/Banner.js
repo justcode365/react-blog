@@ -9,8 +9,22 @@ export default class Banner extends Component {
 
   async componentDidMount() {
     const { username } = this.props
-    const res = await fetch(`${process.env.REACT_APP_API}/profiles/${username}`)
+    const token = localStorage.getItem('token')
 
+    const options = token ? { headers: { authorization: token } } : {}
+    const res = await fetch(`${process.env.REACT_APP_API}/profiles/${username}`, options)
+
+    const { profile } = await res.json()
+    this.setState({ profile })
+  }
+
+  handleFollow = async e => {
+    const { username } = this.props
+
+    const res = await fetch(`${process.env.REACT_APP_API}/profiles/${username}/follow`, {
+      method: this.state.profile.following ? 'delete' : 'post',
+      headers: { authorization: localStorage.getItem('token') }
+    })
     const { profile } = await res.json()
     this.setState({ profile })
   }
@@ -30,9 +44,12 @@ export default class Banner extends Component {
               user.username === profile.username ? (
                 <button onClick={() => this.setState({ redirect: true })}>
                   <Settings size="14" style={{ marginRight: 5 }} /> Edit Profile Settings
+                  {console.log(user)}
                 </button>
               ) : (
-                <button>+ Follow {profile.username}</button>
+                <button onClick={this.handleFollow}>
+                  + {profile.following ? 'Unfollow' : 'Follow'} {profile.username}
+                </button>
               )
             }
           </Consumer>

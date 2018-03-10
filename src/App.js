@@ -29,7 +29,7 @@ export default class App extends Component {
 
   removeUser = () => {
     localStorage.removeItem('token')
-    this.setState({ user: null })
+    this.setState({ user: {} })
   }
 
   render() {

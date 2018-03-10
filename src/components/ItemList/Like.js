@@ -10,7 +10,7 @@ export default ({ post }) => (
 )
 
 const Button = styled.button`
-  width: 40px;
+  width: 45px;
   height: 28px;
   border-radius: 4px;
   color: var(--green);
@@ -18,16 +18,17 @@ const Button = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: var(--green);
+    color: #fff;
+  }
 
   svg {
     fill: var(--green);
     color: var(--green);
     margin-right: 3px;
-  }
-
-  &:hover {
-    background-color: var(--green);
-    color: #fff;
   }
 
   &:hover svg {

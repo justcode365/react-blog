@@ -14,7 +14,7 @@ export default () => (
 
       <Consumer>
         {({ user }) =>
-          !user ? (
+          !user.username ? (
             <Fragment>
               <li>
                 <Link to="/signin">Sign in</Link>

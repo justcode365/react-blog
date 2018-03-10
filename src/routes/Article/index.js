@@ -25,7 +25,7 @@ class Article extends Component {
     this.setState({ article, comments })
   }
   render() {
-    const { user = {} } = this.props
+    const { user } = this.props
     const { article, comments } = this.state
 
     if (!article) return <h1 style={{ textAlign: 'center' }}>Not Found Article</h1>

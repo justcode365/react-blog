@@ -25,7 +25,7 @@ class Settings extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.user && !prevState.username) {
+    if (!prevState.username) {
       const { image, username, bio, email, token } = nextProps.user
       return { image, username, bio, email, token }
     }
