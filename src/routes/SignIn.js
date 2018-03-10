@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Form from '../components/Form'
+import Form from 'components/Form'
+import Button from 'components/Button'
 import { Link, Redirect } from 'react-router-dom'
 import { SignWrapper } from './SignUp'
 import { Consumer } from '../App'
@@ -51,7 +52,7 @@ class SignIn extends Component {
             <Link to="/signup">Need an account?</Link>
           </header>
 
-          {error && <li className="Form-error">{error}</li>}
+          {error && <li style={errorStyle}>{error}</li>}
 
           <p>
             <input
@@ -72,7 +73,9 @@ class SignIn extends Component {
             />
           </p>
           <p>
-            <input type="submit" value="Sign in" />
+            <Button size="big" type="submit">
+              Sign in
+            </Button>
           </p>
         </Form>
       </SignWrapper>
@@ -81,3 +84,10 @@ class SignIn extends Component {
 }
 
 export default () => <Consumer>{context => <SignIn {...context} />}</Consumer>
+
+const errorStyle = {
+  display: 'list-item',
+  marginLeft: 20,
+  color: 'var(--red)',
+  fontWeight: 'bold'
+}

@@ -27,22 +27,22 @@ export default () => (
             <Fragment>
               <li>
                 <Link to="/editor">
-                  <Edit color="#aaa" size={16} className="Header-logo" />
+                  <Edit color="#aaa" size={16} />
                   New Post
                 </Link>
               </li>
 
               <li>
                 <Link to="/settings">
-                  <Settings color="#aaa" size={16} className="Header-logo" />
+                  <Settings color="#aaa" size={16} />
                   Settings
                 </Link>
               </li>
 
               <li>
                 <Link to={`/@${user.username}`}>
-                  <img src={user.image} width={26} alt="avatar" style={{ marginRight: 3 }} />
-                  <span>{user.username}</span>
+                  <img src={user.image} width={26} alt="avatar" />
+                  {user.username}
                 </Link>
               </li>
             </Fragment>
@@ -66,15 +66,21 @@ const Nav = styled.nav`
 `
 
 const UL = styled.ul`
-  ${'' /* display: flex;
-  align-items: center; */} li {
+  display: flex;
+  align-items: center;
+  li {
     margin-left: 1rem;
   }
 
   a {
     color: rgba(0, 0, 0, 0.3);
-    display: inline-flex;
+    display: flex;
     align-items: center;
+  }
+
+  img,
+  svg {
+    margin-right: 3px;
   }
 
   a:hover,

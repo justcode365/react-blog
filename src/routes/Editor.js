@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
 import { Consumer } from '../App'
-import Form from '../components/Form'
+import Form from 'components/Form'
+import Button from 'components/Button'
 import { SignWrapper } from './SignUp'
 import { Redirect } from 'react-router-dom'
 
-class Editor extends Component {
-  state = { email: '', password: '', error: '', redirect: false }
+export default class Editor extends Component {
+  state = { title: '', description: '', body: '', tagList: [], redirectUrl: '' }
+
   handleSubmit = async e => {
     e.preventDefault()
-    const { email, password } = this.state
+    const { title, description, body, tagList } = this.state
+    const article = { title, description, body, tagList }
 
-    const url = 'https://conduit.productionready.io/api/users/login'
+    const url = 'https://conduit.productionready.io/api/articles'
     const options = {
       method: 'post',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ user: { email, password } })
+      headers: {
+        authorization: localStorage.getItem('token'),
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ article })
     }
 
     try {
@@ -25,8 +31,7 @@ class Editor extends Component {
         return
       }
 
-      this.props.setUser(info.user)
-      this.setState({ redirect: true })
+      this.setState({ redirectUrl: info.article.slug })
     } catch (err) {
       console.error(err)
     }
@@ -34,25 +39,27 @@ class Editor extends Component {
 
   handleChange = event => {
     const { name, value } = event.target
-    this.setState({ [name]: value })
+    if (name === 'tagList') {
+      this.setState({ [name]: value.split(' ') })
+    } else {
+      this.setState({ [name]: value })
+    }
   }
 
   render() {
-    const { email, password, error, redirect } = this.state
+    const { title, description, body, tagList, redirectUrl } = this.state
 
-    if (redirect) return <Redirect to="/" />
+    if (redirectUrl) return <Redirect to={`/article/${redirectUrl}`} />
 
     return (
       <SignWrapper>
         <Form onSubmit={this.handleSubmit}>
-          {error && <li className="form-error">{error}</li>}
-
           <p>
             <input
               type="text"
               placeholder="Article Title"
               name="title"
-              value={email}
+              value={title}
               onChange={this.handleChange}
             />
           </p>
@@ -61,8 +68,8 @@ class Editor extends Component {
             <input
               type="text"
               placeholder="What's this article about?"
-              name="title"
-              value={email}
+              name="description"
+              value={description}
               onChange={this.handleChange}
             />
           </p>
@@ -70,8 +77,8 @@ class Editor extends Component {
           <p>
             <textarea
               placeholder="Write your article (in markdown)"
-              name="title"
-              value={email}
+              name="body"
+              value={body}
               onChange={this.handleChange}
             />
           </p>
@@ -80,19 +87,19 @@ class Editor extends Component {
             <input
               type="text"
               placeholder="Enter tags"
-              name="title"
-              value={email}
+              name="tagList"
+              value={tagList.join(' ')}
               onChange={this.handleChange}
             />
           </p>
 
           <p>
-            <input type="submit" name="password" value="Publish Article" />
+            <Button size="big" type="submit">
+              Publish Article
+            </Button>
           </p>
         </Form>
       </SignWrapper>
     )
   }
 }
-
-export default () => <Consumer>{context => <Editor {...context} />}</Consumer>

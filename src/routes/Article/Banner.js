@@ -1,33 +1,57 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
-export default ({ article, user }) => (
-  <Banner>
-    <h1 className="container">{article.title}</h1>
+export default class Banner extends Component {
+  state = { redirectUrl: '' }
 
-    <UserInfo className="container">
-      <img src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'} alt="avatar" />
-      <div style={{ marginRight: 10 }}>
-        <Link to={'@' + user.username} style={{ color: '#fff' }}>
-          {article.author.username}
-        </Link>
-        <p>{new Date(article.updatedAt).toDateString()}</p>
-      </div>
-      <Button>
-        <Edit2 size={16} />
-        Edit Article
-      </Button>
-      <DangerButton>
-        <Trash2 size={16} />
-        Delete Article
-      </DangerButton>
-    </UserInfo>
-  </Banner>
-)
+  handledelete = async () => {
+    const res = await fetch(`${process.env.REACT_APP_API}/articles/${this.props.article.slug}`, {
+      method: 'delete',
+      headers: { authorization: localStorage.getItem('token') }
+    })
 
-const Banner = styled.section`
+    if (res.status === 200) {
+      this.setState({ redirectUrl: '/' })
+    }
+  }
+
+  render() {
+    const { article, user } = this.props
+    const { redirectUrl } = this.state
+    if (redirectUrl) return <Redirect to={redirectUrl} />
+
+    return (
+      <BannerWrapper>
+        <h1 className="container">{article.title}</h1>
+
+        <UserInfo className="container">
+          <img
+            src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+            alt="avatar"
+          />
+          <div style={{ marginRight: 10 }}>
+            <Link to={'@' + user.username} style={{ color: '#fff' }}>
+              {article.author.username}
+            </Link>
+            <p>{new Date(article.updatedAt).toDateString()}</p>
+          </div>
+          <Button>
+            <Edit2 size={16} />
+            Edit Article
+          </Button>
+          <DangerButton onClick={this.handledelete}>
+            <Trash2 size={16} />
+            Delete Article
+          </DangerButton>
+        </UserInfo>
+      </BannerWrapper>
+    )
+  }
+}
+
+const BannerWrapper = styled.section`
   background-color: #333;
   padding: 30px 80px;
 

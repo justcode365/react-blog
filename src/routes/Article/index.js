@@ -28,15 +28,15 @@ class Article extends Component {
     const { user = {} } = this.props
     const { article, comments } = this.state
 
+    if (!article) return <h1 style={{ textAlign: 'center' }}>Not Found Article</h1>
+
     return (
-      <div className="Article">
+      <div>
         <Banner article={article} user={user} />
 
         <section className="container">
           <h1> {article.body}</h1>
-          <div className="Item-tags ">
-            {article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}
-          </div>
+          <div>{article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</div>
 
           <hr />
         </section>

@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Form from '../components/Form'
+import Form from 'components/Form'
+import Button from 'components/Button'
 import styled from 'styled-components'
 
 export default class SignUp extends Component {
   handleChange = () => {}
+
+  handleSubmit = () => {}
   render() {
     return (
       <SignWrapper>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <header>
             <h1>Sign Up</h1>
             <Link to="/signin">Have an account?</Link>
@@ -33,7 +36,9 @@ export default class SignUp extends Component {
             />
           </p>
           <p>
-            <input type="submit" value="Sign up" />
+            <Button size="big" type="submit">
+              Sign up
+            </Button>
           </p>
         </Form>
       </SignWrapper>

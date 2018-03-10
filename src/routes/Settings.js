@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Form from 'components/Form'
+import Button from 'components/Button'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
 import { Consumer } from '../App'
@@ -21,7 +22,7 @@ class Settings extends Component {
     this.setState({ [name]: value })
   }
 
-  handleUpdate = async e => {
+  handleSubmit = async e => {
     e.preventDefault()
     const { image, username, bio, email, token } = this.state
     const user = { image, username, bio, email }
@@ -29,7 +30,7 @@ class Settings extends Component {
     const res = await fetch(`${process.env.REACT_APP_API}/user`, {
       method: 'PUT',
       headers: {
-        authorization: token,
+        authorization: 'Token ' + token,
         'content-type': 'application/json'
       },
       body: JSON.stringify({ user })
@@ -51,7 +52,7 @@ class Settings extends Component {
 
     return (
       <div style={{ width: 600 }} className="container">
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <h1 style={{ textAlign: 'center' }}>Your Settings</h1>
           <p>
             <input
@@ -103,16 +104,16 @@ class Settings extends Component {
           </p>
 
           <Submit>
-            <input type="submit" onClick={this.handleUpdate} value="Update Settings" />
+            <Button size="big" type="submit" name="update">
+              Update Settings
+            </Button>
           </Submit>
-
-          <input
-            className="danger"
-            type="submit"
-            onClick={this.handleLogOut}
-            value="Or click here to logout."
-          />
         </Form>
+        <p>
+          <Button danger onClick={this.handleLogOut}>
+            Or click here to logout
+          </Button>
+        </p>
       </div>
     )
   }

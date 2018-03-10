@@ -1,3 +1,3 @@
-- [real world](https://github.com/gothinkster/realworld)
+- [real world api](https://github.com/gothinkster/realworld/blob/master/api/README.md)
 - [create react app](https://github.com/facebook/create-react-app)
 - [react-hot-loader](https://github.com/gaearon/react-hot-loader)

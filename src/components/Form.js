@@ -31,44 +31,13 @@ const Form = styled.form`
   }
 
   textarea {
-    height: 100px;
+    height: 200px;
+    resize: vertical;
   }
 
   input[type='text']:focus,
   textarea {
     border-color: #66afe9;
     outline: none;
-  }
-
-  input[type='submit'] {
-    border: none;
-    color: #fff;
-    padding: 15px 23px;
-    border-radius: 5px;
-    font-size: 18px;
-    background-color: var(--green);
-    cursor: pointer;
-  }
-
-  input[type='submit']:hover {
-    background-color: #449d44;
-  }
-
-  input.danger[type='submit'] {
-    background-color: #fff;
-    color: var(--red);
-    border: 1px solid var(--red);
-  }
-
-  input.danger[type='submit']:hover {
-    background-color: var(--red);
-    color: #fff;
-  }
-
-  .form-error {
-    display: list-item;
-    margin-left: 20px;
-    color: var(--red);
-    font-weight: bold;
   }
 `
