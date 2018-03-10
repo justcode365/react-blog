@@ -6,7 +6,7 @@ import { Link, Redirect } from 'react-router-dom'
 export default class Banner extends Component {
   state = { redirectUrl: '' }
 
-  handledelete = async () => {
+  handleDelete = async () => {
     const res = await fetch(`${process.env.REACT_APP_API}/articles/${this.props.article.slug}`, {
       method: 'delete',
       headers: { authorization: localStorage.getItem('token') }
@@ -15,6 +15,10 @@ export default class Banner extends Component {
     if (res.status === 200) {
       this.setState({ redirectUrl: '/' })
     }
+  }
+
+  handleEdit = () => {
+    this.setState({ redirectUrl: `/editor/${this.props.article.slug}` })
   }
 
   render() {
@@ -37,11 +41,11 @@ export default class Banner extends Component {
             </Link>
             <p>{new Date(article.updatedAt).toDateString()}</p>
           </div>
-          <Button>
+          <Button onClick={this.handleEdit}>
             <Edit2 size={16} />
             Edit Article
           </Button>
-          <DangerButton onClick={this.handledelete}>
+          <DangerButton onClick={this.handleDelete}>
             <Trash2 size={16} />
             Delete Article
           </DangerButton>

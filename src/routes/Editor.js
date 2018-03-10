@@ -3,10 +3,29 @@ import { Consumer } from '../App'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import { SignWrapper } from './SignUp'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 
-export default class Editor extends Component {
+export default ({ match }) => (
+  <div>
+    <Route path={`${match.url}/:title`} component={Editor} />
+    <Route exact path={match.url} component={Editor} />
+  </div>
+)
+
+class Editor extends Component {
   state = { title: '', description: '', body: '', tagList: [], redirectUrl: '' }
+
+  componentDidMount() {
+    const { params } = this.props.match
+    if (params.title) {
+      fetch(`${process.env.REACT_APP_API}/articles/${params.title}`)
+        .then(res => res.json())
+        .then(data => {
+          const { title, description, body, tagList } = data.article
+          this.setState({ title, description, body, tagList })
+        })
+    }
+  }
 
   handleSubmit = async e => {
     e.preventDefault()

@@ -5,8 +5,24 @@ import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
 import { Consumer } from '../App'
 
+const errorStyle = {
+  display: 'list-item',
+  marginLeft: 20,
+  color: 'var(--red)',
+  fontWeight: 'bold'
+}
+
 class Settings extends Component {
-  state = { image: '', username: '', bio: '', email: '', password: '', token: '', redirect: false }
+  state = {
+    image: '',
+    username: '',
+    bio: '',
+    email: '',
+    password: '',
+    token: '',
+    redirect: false,
+    error: ''
+  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.user && !prevState.username) {
@@ -24,8 +40,8 @@ class Settings extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    const { image, username, bio, email, token } = this.state
-    const user = { image, username, bio, email }
+    const { image, username, bio, email, token, password } = this.state
+    const user = { image, username, bio, email, password }
 
     const res = await fetch(`${process.env.REACT_APP_API}/user`, {
       method: 'PUT',
@@ -37,6 +53,12 @@ class Settings extends Component {
     })
 
     const info = await res.json()
+
+    if (info.errors) {
+      this.setState({ error: 'password ' + info.errors.password })
+      return
+    }
+
     this.props.setUser(info.user)
     this.setState({ redirect: true })
   }
@@ -47,13 +69,15 @@ class Settings extends Component {
   }
 
   render() {
-    const { image, username, bio, email, password, redirect } = this.state
+    const { image, username, bio, email, password, redirect, error } = this.state
     if (redirect) return <Redirect to="/" />
 
     return (
       <div style={{ width: 600 }} className="container">
         <Form onSubmit={this.handleSubmit}>
           <h1 style={{ textAlign: 'center' }}>Your Settings</h1>
+          {error && <li style={errorStyle}>{error}</li>}
+
           <p>
             <input
               name="image"
