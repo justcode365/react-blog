@@ -1,28 +1,12 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Remarkable from 'remarkable'
-import { Consumer } from '../../App'
-import Card from './Card'
 import Banner from './Banner'
 import styled from 'styled-components'
-
-// import Comment from './Comment'
+import Comments from './Comments'
 
 const md = new Remarkable()
 
-const Tags = styled.div`
-  & > span {
-    display: inline-block;
-    padding: 1px 6px;
-    font-size: 12px;
-    margin-left: 5px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    color: #aaa;
-  }
-`
-
-class Article extends Component {
+export default class Article extends Component {
   state = { article: { tagList: [], author: {} }, comments: [] }
 
   componentDidMount() {
@@ -40,15 +24,43 @@ class Article extends Component {
     const { comments } = await commentsPromise.json()
     this.setState({ article, comments })
   }
+
+  addComment = async text => {
+    const { title } = this.props.match.params
+
+    const res = await fetch(`${process.env.REACT_APP_API}/articles/${title}/comments`, {
+      method: 'post',
+      headers: { authorization: localStorage.getItem('token'), 'content-type': 'application/json' },
+      body: JSON.stringify({ comment: { body: text } })
+    })
+
+    const { comment } = await res.json()
+    this.setState(prevState => ({ comments: [comment, ...prevState.comments] }))
+  }
+
+  deleteComment = async id => {
+    const { title } = this.props.match.params
+
+    const res = await fetch(`${process.env.REACT_APP_API}/articles/${title}/comments/${id}`, {
+      method: 'delete',
+      headers: { authorization: localStorage.getItem('token') }
+    })
+
+    if (res.status === 200) {
+      this.setState(prevState => {
+        return { comments: [...prevState.comments].filter(comment => comment.id !== id) }
+      })
+    }
+  }
+
   render() {
-    const { user } = this.props
     const { article, comments } = this.state
 
     if (!article) return <h1 style={{ textAlign: 'center' }}>Not Found Article</h1>
 
     return (
       <div>
-        <Banner article={article} user={user} />
+        <Banner article={article} />
 
         <section className="container">
           <div
@@ -58,65 +70,28 @@ class Article extends Component {
           {/* <h1> {article.body}</h1> */}
           <Tags>{article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</Tags>
 
-          <hr />
+          <hr style={{ border: '.5px solid #eaeaea' }} />
         </section>
 
-        <section style={{ width: '50%', margin: '0 auto' }}>
-          {user.token ? (
-            <Card
-              content={<textarea placeholder="Write a comment..." />}
-              footer={
-                <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
-                  <img
-                    alt="logo"
-                    src={article.author.image}
-                    width={24}
-                    style={{ borderRadius: '50%', marginRight: 5 }}
-                  />
-
-                  <button style={{ marginLeft: 10, color: '#bbb', fontSize: '.8rem' }}>
-                    Post Comment
-                  </button>
-                </p>
-              }
-            />
-          ) : (
-            <p>
-              <Link to="/signin">Sign in</Link> or <Link to="/signup">Sign up</Link> to add comments
-              on this article.
-            </p>
-          )}
-
-          {comments.map(comment => (
-            <Card
-              key={comment.id}
-              content={<p style={{ margin: 0, wordBreak: 'break-all' }}>{comment.body}</p>}
-              footer={
-                <p style={{ margin: 0, display: 'flex', alignItems: 'center' }}>
-                  <img
-                    alt="logo"
-                    src={comment.author.image}
-                    width={24}
-                    style={{ borderRadius: '50%', marginRight: 5 }}
-                  />
-
-                  <Link to={`/@${comment.author.username}`} style={{ color: 'var(--green)' }}>
-                    {comment.author.username}
-                  </Link>
-
-                  <span style={{ marginLeft: 10, color: '#bbb', fontSize: '.8rem' }}>
-                    {new Date(article.updatedAt).toDateString()}
-                  </span>
-                </p>
-              }
-            />
-          ))}
-        </section>
+        <Comments
+          comments={comments}
+          article={article}
+          deleteComment={this.deleteComment}
+          addComment={this.addComment}
+        />
       </div>
     )
   }
 }
 
-export default ({ match }) => (
-  <Consumer>{context => <Article {...context} match={match} />}</Consumer>
-)
+const Tags = styled.div`
+  & > span {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 12px;
+    margin-left: 5px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    color: #aaa;
+  }
+`

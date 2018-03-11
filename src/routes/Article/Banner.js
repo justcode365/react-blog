@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import styled from 'styled-components'
 import { Link, Redirect } from 'react-router-dom'
+import { Consumer } from '../../App'
 
 export default class Banner extends Component {
   state = { redirectUrl: '' }
@@ -27,32 +28,36 @@ export default class Banner extends Component {
     if (redirectUrl) return <Redirect to={redirectUrl} />
 
     return (
-      <BannerWrapper>
-        <h1 className="container">{article.title}</h1>
+      <Consumer>
+        {({ user }) => (
+          <BannerWrapper>
+            <h1 className="container">{article.title}</h1>
 
-        <UserInfo className="container">
-          <Link to={'/@' + user.username}>
-            <img
-              src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
-              alt="avatar"
-            />
-          </Link>
-          <div style={{ marginRight: 10 }}>
-            <Link to={'/@' + user.username} style={{ color: '#fff' }}>
-              {article.author.username}
-            </Link>
-            <p>{new Date(article.updatedAt).toDateString()}</p>
-          </div>
-          <Button onClick={this.handleEdit}>
-            <Edit2 size={16} />
-            Edit Article
-          </Button>
-          <DangerButton onClick={this.handleDelete}>
-            <Trash2 size={16} />
-            Delete Article
-          </DangerButton>
-        </UserInfo>
-      </BannerWrapper>
+            <UserInfo className="container">
+              <Link to={'/@' + user.username}>
+                <img
+                  src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+                  alt="avatar"
+                />
+              </Link>
+              <div style={{ marginRight: 10 }}>
+                <Link to={'/@' + user.username} style={{ color: '#fff' }}>
+                  {article.author.username}
+                </Link>
+                <p>{new Date(article.updatedAt).toDateString()}</p>
+              </div>
+              <Button onClick={this.handleEdit}>
+                <Edit2 size={16} />
+                Edit Article
+              </Button>
+              <DangerButton onClick={this.handleDelete}>
+                <Trash2 size={16} />
+                Delete Article
+              </DangerButton>
+            </UserInfo>
+          </BannerWrapper>
+        )}
+      </Consumer>
     )
   }
 }
