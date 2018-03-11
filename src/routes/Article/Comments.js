@@ -19,7 +19,7 @@ export default class Comment extends Component {
   }
 
   render() {
-    const { article, comments, deleteComment } = this.props
+    const { comments, deleteComment } = this.props
     return (
       <Consumer>
         {({ user }) => (

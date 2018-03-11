@@ -25,7 +25,13 @@ export default class SignUp extends Component {
             />
           </p>
           <p>
-            <input type="email" placeholder="Email" name="email" onChange={this.handleChange} />
+            <input
+              type="email"
+              autoComplete="email"
+              placeholder="Email"
+              name="email"
+              onChange={this.handleChange}
+            />
           </p>
           <p>
             <input

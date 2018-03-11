@@ -31,20 +31,22 @@ export default class Home extends Component {
     if (tagname !== 'Global Feed') {
       tagQuery = `tag=${tagname}&`
     }
-    const queryString = `?${tagQuery}limit=5&offset=${page - 1}`
+    const queryString = `?${tagQuery}limit=10&offset=${page - 1}`
     const res = await fetch(`${process.env.REACT_APP_API}/articles${queryString}`)
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page, activeTab: tagname })
+    window.scrollTo(0, 0)
   }
 
   fetchFeed = async (page = 1) => {
-    const queryString = `?limit=5&offset=${page - 1}`
+    const queryString = `?limit=10&offset=${page - 1}`
 
     const res = await fetch(`${process.env.REACT_APP_API}/articles/feed${queryString}`, {
       headers: { authorization: this.token }
     })
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page })
+    window.scrollTo(0, 0)
   }
 
   toggleLike = index => {

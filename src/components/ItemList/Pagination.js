@@ -1,60 +1,52 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export default class Pagination extends Component {
   render() {
-    const { onChange, current } = this.props
+    const { onChange, current, total } = this.props
 
     return (
       <Ul>
-        <li>
-          <a className={current === 1 ? 'disabled' : ''} onClick={() => onChange(current - 1)}>
-            {'<'}
-          </a>
-        </li>
-        <li>
-          <a className={current === 1 ? 'active' : ''}>1</a>
-        </li>
-        <li>
-          <a className={current === 2 ? 'active' : ''}>2</a>
-        </li>
-        <li>
-          <a className="disabled">...</a>
-        </li>
-        <li>
-          <a>100</a>
-        </li>
-        <li>
-          <a onClick={() => onChange(current + 1)}>{'>'}</a>
-        </li>
+        {[...new Array(total).keys()].map(i => (
+          <li key={i}>
+            <A onClick={() => onChange(i + 1)} active={current === i + 1}>
+              {i + 1}
+            </A>
+          </li>
+        ))}
       </Ul>
     )
   }
 }
 
 const Ul = styled.ul`
-  text-align: right;
   list-style: none;
+  border-radius: 4px;
+  padding: 0;
 
   li {
-    margin-right: 8px;
     display: inline-block;
   }
+`
 
-  li a {
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-  }
+const A = styled.a`
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ddd;
+  margin-left: -1px;
+  margin-top: -1px;
+  cursor: pointer;
+  color: var(--green);
 
-  li a:hover {
+  &:hover {
     background-color: #eceeef;
   }
 
-  li a.active {
-    border: 1px solid var(--green);
-    background-color: var(--green);
-    color: #fff;
-  }
+  ${props =>
+    props.active &&
+    css`
+      border: 1px solid var(--green);
+      background-color: var(--green);
+      color: #fff;
+    `};
 `

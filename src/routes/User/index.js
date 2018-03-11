@@ -8,7 +8,7 @@ export default class Profile extends Component {
   state = { articles: [], articlesCount: 0, activeTab: 'My Articles', page_no: 0 }
 
   componentDidMount() {
-    const { match, location } = this.props
+    const { location } = this.props
     let tabname = 'author'
 
     if (location.pathname.includes('favorites')) {
@@ -21,12 +21,13 @@ export default class Profile extends Component {
   fetchArticle = async tabname => {
     const { user } = this.props.match.params
     const res = await fetch(
-      `${process.env.REACT_APP_API}/articles?${tabname}=${user}&limit=5&offset=0`
+      `${process.env.REACT_APP_API}/articles?${tabname}=${user}&limit=10&offset=0`
     )
     const activeTab = tabname === 'author' ? 'My Articles' : 'Favorited Articles'
 
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page_no: 0, activeTab })
+    window.scrollTo(0, 0)
   }
 
   render() {

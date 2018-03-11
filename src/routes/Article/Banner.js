@@ -23,7 +23,7 @@ export default class Banner extends Component {
   }
 
   render() {
-    const { article, user } = this.props
+    const { article } = this.props
     const { redirectUrl } = this.state
     if (redirectUrl) return <Redirect to={redirectUrl} />
 

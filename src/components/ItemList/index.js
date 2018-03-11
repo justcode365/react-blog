@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 export default class ItemList extends Component {
   render() {
-    const { articles, page, setPage, toggleLike } = this.props
+    const { articles, articlesCount, page, setPage, toggleLike } = this.props
 
     if (articles.length === 0)
       return (
@@ -23,7 +23,7 @@ export default class ItemList extends Component {
             <ItemContent post={post} />
           </Section>
         ))}
-        <Pagination current={page} onChange={setPage} />
+        <Pagination current={page} onChange={setPage} total={Math.round(articlesCount / 10)} />
       </div>
     )
   }

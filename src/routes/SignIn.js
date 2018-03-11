@@ -56,6 +56,7 @@ class SignIn extends Component {
 
           <p>
             <input
+              autoComplete="email"
               type="email"
               placeholder="Email"
               name="email"
