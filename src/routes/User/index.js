@@ -1,17 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import ItemList from 'components/ItemList'
 import Tabs, { Tab } from 'components/Tabs'
-import { Link } from 'react-router-dom'
+import { Link } from 'utils/react-simple-router'
 import Banner from './Banner'
 
 export default class Profile extends Component {
   state = { articles: [], articlesCount: 0, activeTab: 'My Articles', page_no: 0 }
 
   componentDidMount() {
-    const { location } = this.props
+    const { pathname } = window.location
     let tabname = 'author'
 
-    if (location.pathname.includes('favorites')) {
+    if (pathname.includes('favorites')) {
       tabname = 'favorited'
     }
 

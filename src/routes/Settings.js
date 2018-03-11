@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import styled from 'styled-components'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'utils/react-simple-router'
 import { Consumer } from '../App'
 
 const errorStyle = {

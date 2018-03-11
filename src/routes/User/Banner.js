@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Settings } from 'react-feather'
 import styled from 'styled-components'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'utils/react-simple-router'
 import { Consumer } from '../../App'
 
 export default class Banner extends Component {
@@ -44,7 +44,6 @@ export default class Banner extends Component {
               user.username === profile.username ? (
                 <button onClick={() => this.setState({ redirect: true })}>
                   <Settings size="14" style={{ marginRight: 5 }} /> Edit Profile Settings
-                  {console.log(user)}
                 </button>
               ) : (
                 <button onClick={this.handleFollow}>

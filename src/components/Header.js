@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Edit, Settings } from 'react-feather'
-import { Link } from 'react-router-dom'
+import { Link } from 'utils/react-simple-router'
 import styled from 'styled-components'
 import { Consumer } from '../App'
 

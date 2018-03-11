@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import { SignWrapper } from './SignUp'
-import { Redirect, Route } from 'react-router-dom'
+import { Redirect, Route } from 'utils/react-simple-router'
 
 export default ({ match }) => (
   <div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import styled from 'styled-components'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'utils/react-simple-router'
 import { Consumer } from '../../App'
 
 export default class Banner extends Component {

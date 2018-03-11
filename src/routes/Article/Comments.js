@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link } from 'utils/react-simple-router'
 import Button from 'components/Button'
 import { Trash2 } from 'react-feather'
 import { Consumer } from '../../App'

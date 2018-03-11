@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Form from 'components/Form'
 import Button from 'components/Button'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'utils/react-simple-router'
 import { SignWrapper } from './SignUp'
 import { Consumer } from '../App'
 

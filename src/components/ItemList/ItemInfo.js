@@ -1,6 +1,6 @@
 import React from 'react'
 import Like from './Like'
-import { Link } from 'react-router-dom'
+import { Link } from 'utils/react-simple-router'
 import styled from 'styled-components'
 
 export default ({ post, itemIndex, toggleLike }) => (

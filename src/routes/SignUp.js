@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'utils/react-simple-router'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import styled from 'styled-components'
