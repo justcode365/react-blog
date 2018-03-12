@@ -4,7 +4,6 @@ import Form from 'components/Form'
 import Button from 'components/Button'
 import styled from 'styled-components'
 import { Consumer } from '../App'
-import { error } from 'util'
 
 export default () => <Consumer>{context => <SignUp {...context} />}</Consumer>
 

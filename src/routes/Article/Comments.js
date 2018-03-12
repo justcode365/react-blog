@@ -23,7 +23,7 @@ export default class Comment extends Component {
     return (
       <Consumer>
         {({ user }) => (
-          <section style={{ width: '50%', margin: '0 auto' }}>
+          <section style={{ width: '60%', margin: '60px auto' }}>
             {localStorage.getItem('token') ? (
               <Card>
                 <CardContent>
@@ -40,8 +40,14 @@ export default class Comment extends Component {
               </Card>
             ) : (
               <p>
-                <Link to="/signin">Sign in</Link> or <Link to="/signup">Sign up</Link> to add
-                comments on this article.
+                <Link to="/signin" style={{ color: 'var(--green)' }}>
+                  Sign in
+                </Link>{' '}
+                or{' '}
+                <Link to="/signup" style={{ color: 'var(--green)' }}>
+                  Sign up{' '}
+                </Link>
+                to add comments on this article.
               </p>
             )}
 
@@ -105,6 +111,7 @@ const CardFooter = styled.div`
     border-radius: 50%;
     margin-right: 5px;
     width: 24px;
+    height: 24px;
   }
 `
 

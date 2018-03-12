@@ -67,18 +67,18 @@ export default class Article extends Component {
             className="container"
             dangerouslySetInnerHTML={{ __html: md.render(article.body) }}
           />
-          {/* <h1> {article.body}</h1> */}
+
           <Tags>{article.tagList.map((tag, i) => <span key={i}>{tag}</span>)}</Tags>
 
           <hr style={{ border: '.5px solid #eaeaea' }} />
-        </section>
 
-        <Comments
-          comments={comments}
-          article={article}
-          deleteComment={this.deleteComment}
-          addComment={this.addComment}
-        />
+          <Comments
+            comments={comments}
+            article={article}
+            deleteComment={this.deleteComment}
+            addComment={this.addComment}
+          />
+        </section>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Edit2, Trash2 } from 'react-feather'
 import styled from 'styled-components'
 import { Link, Redirect } from 'utils/react-simple-router'
@@ -46,14 +46,18 @@ export default class Banner extends Component {
                 </Link>
                 <p>{new Date(article.updatedAt).toDateString()}</p>
               </div>
-              <Button onClick={this.handleEdit}>
-                <Edit2 size={16} />
-                Edit Article
-              </Button>
-              <DangerButton onClick={this.handleDelete}>
-                <Trash2 size={16} />
-                Delete Article
-              </DangerButton>
+              {user.username === article.author.username && (
+                <Fragment>
+                  <Button onClick={this.handleEdit}>
+                    <Edit2 size={16} />
+                    Edit Article
+                  </Button>
+                  <DangerButton onClick={this.handleDelete}>
+                    <Trash2 size={16} />
+                    Delete Article
+                  </DangerButton>
+                </Fragment>
+              )}
             </UserInfo>
           </BannerWrapper>
         )}
