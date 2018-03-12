@@ -34,7 +34,7 @@ export default class Comment extends Component {
                   />
                 </CardContent>
                 <CardFooter>
-                  <img alt="logo" src={user.image} />
+                  <img alt="logo" src={user.image || process.env.PUBLIC_URL + '/img/unknow.jpg'} />
                   <PostButton onClick={this.handlePost}>Post Comment</PostButton>
                 </CardFooter>
               </Card>

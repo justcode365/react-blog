@@ -7,7 +7,7 @@ export default ({ post, itemIndex, toggleLike }) => (
   <ItemInfo>
     <Link to={'@' + post.author.username}>
       <img
-        src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+        src={post.author.image || process.env.PUBLIC_URL + '/img/unknow.jpg'}
         // onError="this.src='default-image.jpg'"
         alt="avatar"
       />

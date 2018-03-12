@@ -36,7 +36,7 @@ export default class Banner extends Component {
             <UserInfo className="container">
               <Link to={'/@' + user.username}>
                 <img
-                  src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.png'}
+                  src={article.author.image || process.env.PUBLIC_URL + '/img/unknow.jpg'}
                   alt="avatar"
                 />
               </Link>
