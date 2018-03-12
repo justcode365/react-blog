@@ -45,7 +45,7 @@ export default class Home extends Component {
       headers: { authorization: this.token }
     })
     const { articles, articlesCount } = await res.json()
-    this.setState({ articles, articlesCount, page })
+    this.setState({ articles, articlesCount, page, activeTab: 'Your Feed' })
     window.scrollTo(0, 0)
   }
 
