@@ -5,13 +5,6 @@ import styled from 'styled-components'
 import { Redirect } from 'utils/react-simple-router'
 import { Consumer } from '../App'
 
-const errorStyle = {
-  display: 'list-item',
-  marginLeft: 20,
-  color: 'var(--red)',
-  fontWeight: 'bold'
-}
-
 class Settings extends Component {
   state = {
     image: '',
@@ -21,7 +14,7 @@ class Settings extends Component {
     password: '',
     token: '',
     redirect: false,
-    error: ''
+    errors: null
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -55,7 +48,7 @@ class Settings extends Component {
     const info = await res.json()
 
     if (info.errors) {
-      this.setState({ error: 'password ' + info.errors.password })
+      this.setState({ errors: info.errors })
       return
     }
 
@@ -69,14 +62,23 @@ class Settings extends Component {
   }
 
   render() {
-    const { image, username, bio, email, password, redirect, error } = this.state
+    const { image, username, bio, email, password, redirect, errors } = this.state
     if (redirect) return <Redirect to="/" />
 
     return (
       <div style={{ width: 600 }} className="container">
         <Form onSubmit={this.handleSubmit}>
           <h1 style={{ textAlign: 'center' }}>Your Settings</h1>
-          {error && <li style={errorStyle}>{error}</li>}
+
+          {errors && (
+            <ul style={{ color: 'var(--red)', fontWeight: 'bold' }}>
+              {Object.keys(errors).map((key, i) => (
+                <li key={i}>
+                  {key} {errors[key].join(', ')}
+                </li>
+              ))}
+            </ul>
+          )}
 
           <p>
             <input
@@ -124,6 +126,7 @@ class Settings extends Component {
               onChange={this.handleChange}
               value={password}
               placeholder="New Password"
+              autoComplete="off"
             />
           </p>
 

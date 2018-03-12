@@ -41,7 +41,7 @@ export default () => (
 
               <li>
                 <Link to={`/@${user.username}`}>
-                  <img src={user.image} width={26} alt="avatar" />
+                  {user.image && <img src={user.image} width={26} alt="avatar" />}
                   {user.username}
                 </Link>
               </li>

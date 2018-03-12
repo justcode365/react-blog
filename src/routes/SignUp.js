@@ -1,14 +1,47 @@
 import React, { Component } from 'react'
-import { Link } from 'utils/react-simple-router'
+import { Link, Redirect } from 'utils/react-simple-router'
 import Form from 'components/Form'
 import Button from 'components/Button'
 import styled from 'styled-components'
+import { Consumer } from '../App'
+import { error } from 'util'
 
-export default class SignUp extends Component {
-  handleChange = () => {}
+export default () => <Consumer>{context => <SignUp {...context} />}</Consumer>
 
-  handleSubmit = () => {}
+class SignUp extends Component {
+  state = { username: '', email: '', password: '', errors: null, redirect: false }
+
+  handleChange = event => {
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault()
+    const { username, email, password } = this.state
+    const url = 'https://conduit.productionready.io/api/users'
+    const options = {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ user: { username, email, password } })
+    }
+
+    const res = await fetch(url, options)
+    const info = await res.json()
+    if (info.errors) {
+      this.setState({ errors: info.errors })
+      return
+    }
+
+    this.props.setUser(info.user)
+    this.setState({ redirect: true })
+  }
+
   render() {
+    const { username, email, password, errors, redirect } = this.state
+
+    if (redirect) return <Redirect to="/" />
+
     return (
       <SignWrapper>
         <Form onSubmit={this.handleSubmit}>
@@ -16,12 +49,24 @@ export default class SignUp extends Component {
             <h1>Sign Up</h1>
             <Link to="/signin">Have an account?</Link>
           </header>
+
+          {errors && (
+            <ul style={{ color: 'var(--red)', fontWeight: 'bold' }}>
+              {Object.keys(errors).map((key, i) => (
+                <li key={i}>
+                  {key} {errors[key].join(', ')}
+                </li>
+              ))}
+            </ul>
+          )}
+
           <p>
             <input
               type="text"
               placeholder="Username"
               name="username"
               onChange={this.handleChange}
+              value={username}
             />
           </p>
           <p>
@@ -31,6 +76,7 @@ export default class SignUp extends Component {
               placeholder="Email"
               name="email"
               onChange={this.handleChange}
+              value={email}
             />
           </p>
           <p>
@@ -39,6 +85,7 @@ export default class SignUp extends Component {
               placeholder="Password"
               name="password"
               onChange={this.handleChange}
+              value={password}
             />
           </p>
           <p>

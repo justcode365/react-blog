@@ -6,7 +6,7 @@ import { SignWrapper } from './SignUp'
 import { Consumer } from '../App'
 
 class SignIn extends Component {
-  state = { email: '', password: '', error: '', redirect: false }
+  state = { email: '', password: '', errors: null, redirect: false }
   handleSubmit = async e => {
     e.preventDefault()
     const { email, password } = this.state
@@ -22,7 +22,7 @@ class SignIn extends Component {
       const res = await fetch(url, options)
       const info = await res.json()
       if (info.errors) {
-        this.setState({ error: 'email or password is invalid' })
+        this.setState({ errors: info.errors })
         return
       }
 
@@ -39,7 +39,7 @@ class SignIn extends Component {
   }
 
   render() {
-    const { email, password, error, redirect } = this.state
+    const { email, password, errors, redirect } = this.state
 
     if (redirect) return <Redirect to="/" />
 
@@ -52,7 +52,15 @@ class SignIn extends Component {
             <Link to="/signup">Need an account?</Link>
           </header>
 
-          {error && <li style={errorStyle}>{error}</li>}
+          {errors && (
+            <ul style={{ color: 'var(--red)', fontWeight: 'bold' }}>
+              {Object.keys(errors).map((key, i) => (
+                <li key={i}>
+                  {key} {errors[key].join(', ')}
+                </li>
+              ))}
+            </ul>
+          )}
 
           <p>
             <input
@@ -85,10 +93,3 @@ class SignIn extends Component {
 }
 
 export default () => <Consumer>{context => <SignIn {...context} />}</Consumer>
-
-const errorStyle = {
-  display: 'list-item',
-  marginLeft: 20,
-  color: 'var(--red)',
-  fontWeight: 'bold'
-}

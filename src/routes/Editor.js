@@ -12,7 +12,7 @@ export default ({ match }) => (
 )
 
 class Editor extends Component {
-  state = { title: '', description: '', body: '', tagList: [], redirectUrl: '' }
+  state = { title: '', description: '', body: '', tagList: [], redirectUrl: '', errors: null }
 
   componentDidMount() {
     const { slug } = this.props.match.params
@@ -46,7 +46,7 @@ class Editor extends Component {
       const res = await fetch(url, options)
       const info = await res.json()
       if (info.errors) {
-        this.setState({ error: 'email or password is invalid' })
+        this.setState({ errors: info.errors })
         return
       }
 
@@ -66,13 +66,22 @@ class Editor extends Component {
   }
 
   render() {
-    const { title, description, body, tagList, redirectUrl } = this.state
+    const { title, description, body, tagList, redirectUrl, errors } = this.state
 
     if (redirectUrl) return <Redirect to={`/article/${redirectUrl}`} />
 
     return (
       <SignWrapper>
         <Form onSubmit={this.handleSubmit}>
+          {errors && (
+            <ul style={{ color: 'var(--red)', fontWeight: 'bold' }}>
+              {Object.keys(errors).map((key, i) => (
+                <li key={i}>
+                  {key} {errors[key].join(', ')}
+                </li>
+              ))}
+            </ul>
+          )}
           <p>
             <input
               type="text"
