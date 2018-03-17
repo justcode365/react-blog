@@ -16,8 +16,8 @@ export default class Article extends Component {
   fetchArticle = async () => {
     const { match } = this.props
     const [articlePromise, commentsPromise] = await Promise.all([
-      fetch(`${process.env.REACT_APP_API}/articles/${match.params.title}`),
-      fetch(`${process.env.REACT_APP_API}/articles/${match.params.title}/comments`)
+      fetch(`${window.API}/articles/${match.params.title}`),
+      fetch(`${window.API}/articles/${match.params.title}/comments`)
     ])
 
     const { article } = await articlePromise.json()
@@ -28,7 +28,7 @@ export default class Article extends Component {
   addComment = async text => {
     const { title } = this.props.match.params
 
-    const res = await fetch(`${process.env.REACT_APP_API}/articles/${title}/comments`, {
+    const res = await fetch(`${window.API}/articles/${title}/comments`, {
       method: 'post',
       headers: { authorization: localStorage.getItem('token'), 'content-type': 'application/json' },
       body: JSON.stringify({ comment: { body: text } })
@@ -41,7 +41,7 @@ export default class Article extends Component {
   deleteComment = async id => {
     const { title } = this.props.match.params
 
-    const res = await fetch(`${process.env.REACT_APP_API}/articles/${title}/comments/${id}`, {
+    const res = await fetch(`${window.API}/articles/${title}/comments/${id}`, {
       method: 'delete',
       headers: { authorization: localStorage.getItem('token') }
     })

@@ -20,9 +20,7 @@ export default class Profile extends Component {
 
   fetchArticle = async tabname => {
     const { user } = this.props.match.params
-    const res = await fetch(
-      `${process.env.REACT_APP_API}/articles?${tabname}=${user}&limit=10&offset=0`
-    )
+    const res = await fetch(`${window.API}/articles?${tabname}=${user}&limit=10&offset=0`)
     const activeTab = tabname === 'author' ? 'My Articles' : 'Favorited Articles'
 
     const { articles, articlesCount } = await res.json()

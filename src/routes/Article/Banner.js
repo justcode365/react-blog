@@ -8,7 +8,7 @@ export default class Banner extends Component {
   state = { redirectUrl: '' }
 
   handleDelete = async () => {
-    const res = await fetch(`${process.env.REACT_APP_API}/articles/${this.props.article.slug}`, {
+    const res = await fetch(`${window.API}/articles/${this.props.article.slug}`, {
       method: 'delete',
       headers: { authorization: localStorage.getItem('token') }
     })

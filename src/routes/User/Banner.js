@@ -12,7 +12,7 @@ export default class Banner extends Component {
     const token = localStorage.getItem('token')
 
     const options = token ? { headers: { authorization: token } } : {}
-    const res = await fetch(`${process.env.REACT_APP_API}/profiles/${username}`, options)
+    const res = await fetch(`${window.API}/profiles/${username}`, options)
 
     const { profile } = await res.json()
     this.setState({ profile })
@@ -21,7 +21,7 @@ export default class Banner extends Component {
   handleFollow = async e => {
     const { username } = this.props
 
-    const res = await fetch(`${process.env.REACT_APP_API}/profiles/${username}/follow`, {
+    const res = await fetch(`${window.API}/profiles/${username}/follow`, {
       method: this.state.profile.following ? 'delete' : 'post',
       headers: { authorization: localStorage.getItem('token') }
     })

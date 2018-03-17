@@ -13,7 +13,7 @@ export default class App extends Component {
   fetchUser = async () => {
     const token = localStorage.getItem('token')
     if (token && !this.props.user) {
-      const res = await fetch(`${process.env.REACT_APP_API}/user`, {
+      const res = await fetch(`${window.API}/user`, {
         headers: { authorization: token }
       })
       const { user } = await res.json()

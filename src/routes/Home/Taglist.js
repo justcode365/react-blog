@@ -9,7 +9,7 @@ export default class TagList extends Component {
   }
 
   getTags = () => {
-    fetch(`${process.env.REACT_APP_API}/tags`)
+    fetch(`${window.API}/tags`)
       .then(res => res.json())
       .then(({ tags }) => {
         this.setState({ tags })

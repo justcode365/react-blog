@@ -18,14 +18,13 @@ class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     const { username, email, password } = this.state
-    const url = 'https://conduit.productionready.io/api/users'
     const options = {
       method: 'post',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ user: { username, email, password } })
     }
 
-    const res = await fetch(url, options)
+    const res = await fetch(`${window.API}/users`, options)
     const info = await res.json()
     if (info.errors) {
       this.setState({ errors: info.errors })

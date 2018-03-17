@@ -11,7 +11,6 @@ class SignIn extends Component {
     e.preventDefault()
     const { email, password } = this.state
 
-    const url = 'https://conduit.productionready.io/api/users/login'
     const options = {
       method: 'post',
       headers: { 'content-type': 'application/json' },
@@ -19,7 +18,7 @@ class SignIn extends Component {
     }
 
     try {
-      const res = await fetch(url, options)
+      const res = await fetch(`${window.API}/users/login`, options)
       const info = await res.json()
       if (info.errors) {
         this.setState({ errors: info.errors })

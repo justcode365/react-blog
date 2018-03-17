@@ -32,7 +32,7 @@ export default class Home extends Component {
       tagQuery = `tag=${tagname}&`
     }
     const queryString = `?${tagQuery}limit=10&offset=${page - 1}`
-    const res = await fetch(`${process.env.REACT_APP_API}/articles${queryString}`)
+    const res = await fetch(`${window.API}/articles${queryString}`)
     const { articles, articlesCount } = await res.json()
     this.setState({ articles, articlesCount, page, activeTab: tagname })
     window.scrollTo(0, 0)
@@ -41,7 +41,7 @@ export default class Home extends Component {
   fetchFeed = async (page = 1) => {
     const queryString = `?limit=10&offset=${page - 1}`
 
-    const res = await fetch(`${process.env.REACT_APP_API}/articles/feed${queryString}`, {
+    const res = await fetch(`${window.API}/articles/feed${queryString}`, {
       headers: { authorization: this.token }
     })
     const { articles, articlesCount } = await res.json()
@@ -55,7 +55,7 @@ export default class Home extends Component {
       method: favorited ? 'delete' : 'post',
       headers: { authorization: this.token }
     }
-    fetch(`${process.env.REACT_APP_API}/articles/${slug}/favorite`, options)
+    fetch(`${window.API}/articles/${slug}/favorite`, options)
       .then(res => res.json())
       .then(data => {
         const articles = [...this.state.articles]

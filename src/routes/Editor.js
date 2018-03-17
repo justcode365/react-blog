@@ -17,7 +17,7 @@ class Editor extends Component {
   componentDidMount() {
     const { slug } = this.props.match.params
     if (slug) {
-      fetch(`${process.env.REACT_APP_API}/articles/${slug}`)
+      fetch(`${window.API}/articles/${slug}`)
         .then(res => res.json())
         .then(data => {
           const { title, description, body, tagList } = data.article
@@ -32,7 +32,7 @@ class Editor extends Component {
     const { title, description, body, tagList } = this.state
     const article = { title, description, body, tagList }
 
-    const url = `${process.env.REACT_APP_API}/articles${slug ? '/' + slug : ''}`
+    const url = `${window.API}/articles${slug ? '/' + slug : ''}`
     const options = {
       method: slug ? 'put' : 'post',
       headers: {

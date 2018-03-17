@@ -36,7 +36,7 @@ class Settings extends Component {
     const { image, username, bio, email, token, password } = this.state
     const user = { image, username, bio, email, password }
 
-    const res = await fetch(`${process.env.REACT_APP_API}/user`, {
+    const res = await fetch(`${window.API}/user`, {
       method: 'PUT',
       headers: {
         authorization: 'Token ' + token,
