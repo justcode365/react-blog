@@ -14,7 +14,7 @@ export default class App extends Component {
     const token = localStorage.getItem('token')
     if (token && !this.props.user) {
       const res = await fetch(`${window.API}/user`, {
-        headers: { authorization: token }
+        headers: { authorization: token },
       })
       const { user } = await res.json()
 
@@ -38,9 +38,8 @@ export default class App extends Component {
         value={{
           user: this.state.user,
           setUser: this.setUser,
-          removeUser: this.removeUser
-        }}
-      >
+          removeUser: this.removeUser,
+        }}>
         <Router />
       </Provider>
     )
